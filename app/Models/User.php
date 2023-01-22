@@ -18,6 +18,13 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    // Untuk format date yyyy-mm-dd hh:mm:ss
+    protected $dates = [
+        'updated_at',
+        'created_at',
+        'email_verified_at',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,4 +65,34 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // Relasi one to one
+    public function detail_user()
+    {
+        return $this->hasOne('App\Models\ManagementAccess\DetailUser', 'user_id');
+    }
+
+    // Relasi one to one
+    public function doctor()
+    {
+        return $this->hasOne('App\Models\Operational\Doctor', 'user_id');
+    }
+
+    // Relasi one to one
+    public function officer()
+    {
+        return $this->hasOne('App\Models\Operational\Officer', 'user_id');
+    }
+
+    // Relasi many to many
+    public function role()
+    {
+        return $this->belongsToMany('App\Models\MasterData\Role');
+    }
+
+    // Relasi one to many
+    public function role_user()
+    {
+        return $this->hasMany('App\Models\ManagementAccess\RoleUser', 'user_id');
+    }
 }
