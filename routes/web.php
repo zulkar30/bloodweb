@@ -20,6 +20,7 @@ use App\Http\Controllers\Backsite\PermissionController;
 use App\Http\Controllers\Backsite\ProfessionController;
 use App\Http\Controllers\Backsite\BloodSupplyController;
 use App\Http\Controllers\Backsite\BloodRequestController;
+use App\Http\Controllers\Backsite\BloodTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     // User Page
     Route::resource('user', UserController::class);
     
+    // Blood Type Page
+    Route::resource('blood_type', BloodTypeController::class);
+
     // Permission Page
     Route::resource('permission', PermissionController::class);
 

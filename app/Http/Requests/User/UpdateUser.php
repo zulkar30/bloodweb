@@ -2,7 +2,13 @@
 
 namespace App\Http\Requests\User;
 
+// Library
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+// Middleware
+use Gate;
 
 class UpdateUser extends FormRequest
 {
@@ -13,7 +19,9 @@ class UpdateUser extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
     }
 
     /**
@@ -24,7 +32,18 @@ class UpdateUser extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => [
+                'required', 'string', 'max:255'
+            ],
+            'email' => [
+                'required', 'email', 'max:255', Rule::unique('users')->ignore($this->user)
+            ],
+            'password' => [
+                'min:8', 'string', 'max:255', 'mixedCase'
+            ],
+            'photo' => [
+                'nullable', 'mimes:jpeg,svg,png', 'max:10000'
+            ],
         ];
     }
 }
