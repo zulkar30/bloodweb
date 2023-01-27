@@ -52,12 +52,14 @@
                                                 <table class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
+                                                            <th>No</th>
                                                             <th>Name</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @forelse($type_user as $key => $type_user_item)
                                                             <tr data-entry-id="{{ $type_user_item->id }}">
+                                                                <td>{{ $loop->iteration ?? '' }}</td>
                                                                 <td>{{ $type_user_item->name ?? '' }}</td>
                                                             </tr>
                                                         @empty
@@ -66,6 +68,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
+                                                            <th>No</th>
                                                             <th>Name</th>
                                                         </tr>
                                                     </tfoot>

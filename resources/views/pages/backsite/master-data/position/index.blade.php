@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Permission')
+@section('title', 'Position')
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -26,12 +26,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Permission</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Position</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item active">Permission</li>
+                                <li class="breadcrumb-item active">Position</li>
                             </ol>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
             </div>
 
             {{-- table card --}}
-            @can('permission_table')
+            @can('position_table')
                 <div class="content-body">
                     <section id="table-home">
                         <!-- Zero configuration table -->
@@ -47,7 +47,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Permission List</h4>
+                                        <h4 class="card-title">Position List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -65,13 +65,15 @@
                                                 <table class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Permission</th>
+                                                            <th>No</th>
+                                                            <th>Position</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @forelse($permission as $key => $permission_item)
-                                                            <tr data-entry-id="{{ $permission_item->id }}">
-                                                                <td>{{ $permission_item->name ?? '' }}</td>
+                                                        @forelse($position as $key => $position_item)
+                                                            <tr data-entry-id="{{ $position_item->id }}">
+                                                                <td>{{ $loop->iteration ?? '' }}</td>
+                                                                <td>{{ $position_item->name ?? '' }}</td>
                                                             </tr>
                                                         @empty
                                                             {{-- not found --}}
@@ -79,7 +81,8 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Permission</th>
+                                                            <th>No</th>
+                                                            <th>Position</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>

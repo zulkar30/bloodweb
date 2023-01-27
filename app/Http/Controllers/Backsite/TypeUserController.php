@@ -2,11 +2,33 @@
 
 namespace App\Http\Controllers\Backsite;
 
+// Default
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Library
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// Request
+
+// Everything Else
+use Auth;
+use Gate;
+
+// Model
+use App\Models\MasterData\TypeUser;
+
+// Third Party
+
 class TypeUserController extends Controller
 {
+    // Middleware Auth
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +36,12 @@ class TypeUserController extends Controller
      */
     public function index()
     {
-        //
+        // Middleware Gate
+        abort_if(Gate::denies('type_user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $type_user = TypeUser::orderBy('created_at', 'desc')->get();
+
+        return view('pages.backsite.master-data.type-user.index', compact('type_user'));
     }
 
     /**
@@ -24,7 +51,7 @@ class TypeUserController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +62,7 @@ class TypeUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -46,7 +73,7 @@ class TypeUserController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -57,7 +84,7 @@ class TypeUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -69,7 +96,7 @@ class TypeUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -80,6 +107,6 @@ class TypeUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 }

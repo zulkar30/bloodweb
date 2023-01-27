@@ -65,12 +65,14 @@
                                                 <table class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
+                                                            <th>No</th>
                                                             <th>Permission</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @forelse($permission as $key => $permission_item)
                                                             <tr data-entry-id="{{ $permission_item->id }}">
+                                                                <td>{{ $loop->iteration ?? '' }}</td>
                                                                 <td>{{ $permission_item->name ?? '' }}</td>
                                                             </tr>
                                                         @empty
@@ -79,6 +81,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
+                                                            <th>No</th>
                                                             <th>Permission</th>
                                                         </tr>
                                                     </tfoot>
