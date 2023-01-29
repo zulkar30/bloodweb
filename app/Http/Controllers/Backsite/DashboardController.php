@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 // Everything Else
 use Auth;
-// use Gate;
 
 // Model
 
@@ -35,9 +34,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // Middleware Gate
-        abort_if(Gate::denies('dashboard_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
         return view('pages.backsite.dashboard.index');
     }
 

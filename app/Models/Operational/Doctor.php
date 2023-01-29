@@ -53,14 +53,8 @@ class Doctor extends Model
     }
 
     // Relasi one to many
-    public function position()
-    {
-        return $this->belongsTo('App\Models\MasterData\Position', 'position_id', 'id');
-    }
-
-    // Relasi one to many
     public function blood_type()
     {
-        return $this->belongsTo('App\Models\MasterData\Blood_type', 'blood_type_id', 'id');
+        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
     }
 }

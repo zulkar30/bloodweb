@@ -28,10 +28,4 @@ class Position extends Model
     {
         return $this->hasMany('App\Models\MasterData\Officer', 'position_id');
     }
-
-    // Relasi one to many
-    public function doctor()
-    {
-        return $this->hasMany('App\Models\Operational\Doctor', 'position_id');
-    }
 }
