@@ -4,6 +4,12 @@ namespace App\Http\Requests\Aftap;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// Library
+use Symfony\Component\HttpFoundation\Response;
+
+// Middleware
+use Gate;
+
 class UpdateAftap extends FormRequest
 {
     /**
@@ -13,7 +19,9 @@ class UpdateAftap extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(Gate::denies('aftap_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
     }
 
     /**
@@ -24,7 +32,9 @@ class UpdateAftap extends FormRequest
     public function rules()
     {
         return [
-            //
+            'volume' => [
+                'required', 'string', 'max:255'
+            ]
         ];
     }
 }

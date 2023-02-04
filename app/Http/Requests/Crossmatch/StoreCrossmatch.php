@@ -4,6 +4,12 @@ namespace App\Http\Requests\Crossmatch;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// Library
+use Symfony\Component\HttpFoundation\Response;
+
+// Middleware
+use Gate;
+
 class StoreCrossmatch extends FormRequest
 {
     /**
@@ -13,7 +19,9 @@ class StoreCrossmatch extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(Gate::denies('crossmatch_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
     }
 
     /**
@@ -24,7 +32,24 @@ class StoreCrossmatch extends FormRequest
     public function rules()
     {
         return [
-            //
+            'officer_id' => [
+                'required', 'integer',
+            ],
+            'blood_type_id' => [
+                'required', 'integer'
+            ],
+            'fase1' => [
+                'required', 'string', 'max:255'
+            ],
+            'fase2' => [
+                'required', 'string', 'max:255'
+            ],
+            'fase3' => [
+                'required', 'string', 'max:255'
+            ],
+            'result' => [
+                'required', 'string', 'max:255'
+            ],
         ];
     }
 }

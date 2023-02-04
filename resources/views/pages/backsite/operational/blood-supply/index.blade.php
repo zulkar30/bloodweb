@@ -79,27 +79,24 @@
                                                     </div>
 
                                                     <div
-                                                        class="form-group row {{ $errors->has('blood_type') ? 'has-error' : '' }}">
+                                                        class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Blood Type <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="blood_type" id="blood_type"
+                                                            <select name="blood_type_id" id="blood_type_id"
                                                                 class="form-control select2" required>
-                                                                <option value="" disabled selected class="hidden">Choose
+                                                                <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
-                                                                <option value="A+">A+</option>
-                                                                <option value="A-">A-</option>
-                                                                <option value="B+">B+</option>
-                                                                <option value="B-">B-</option>
-                                                                <option value="AB+">AB+</option>
-                                                                <option value="AB-">AB-</option>
-                                                                <option value="O+">O+</option>
-                                                                <option value="O-">O-</option>
+                                                                @foreach ($blood_type as $key => $blood_type_item)
+                                                                    <option value="{{ $blood_type_item->id }}">
+                                                                        {{ $blood_type_item->name }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
 
-                                                            @if ($errors->has('blood_type'))
+                                                            @if ($errors->has('blood_type_id'))
                                                                 <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('blood_type') }}</p>
+                                                                    {{ $errors->first('blood_type_id') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -142,112 +139,112 @@
 
             {{-- table card --}}
             {{-- @can('blood_supply_table') --}}
-                <div class="content-body">
-                    <section id="table-home">
-                        <!-- Zero configuration table -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Blood Supply List</h4>
-                                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                                        <div class="heading-elements">
-                                            <ul class="list-inline mb-0">
-                                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                                <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
-                                            </ul>
-                                        </div>
+            <div class="content-body">
+                <section id="table-home">
+                    <!-- Zero configuration table -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Blood Supply List</h4>
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
+                                        </ul>
                                     </div>
+                                </div>
 
-                                    <div class="card-content collapse show">
-                                        <div class="card-body card-dashboard">
+                                <div class="card-content collapse show">
+                                    <div class="card-body card-dashboard">
 
-                                            <div class="table-responsive">
-                                                <table
-                                                    class="table table-striped table-bordered text-inputs-searching default-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Blood Type</th>
-                                                            <th>Volume</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @forelse($blood_supply as $key => $blood_supply_item)
-                                                            <tr data-entry-id="{{ $blood_supply_item->id }}">
-                                                                <td>{{ isset($blood_supply_item->created_at) ? date('d/m/Y H:i:s', strtotime($blood_supply_item->created_at)) : '' }}
-                                                                </td>
-                                                                <td>{{ $blood_supply_item->blood_type ?? '' }}</td>
-                                                                <td>{{ $blood_supply_item->volume . ' Kantong' ?? '' }}
-                                                                </td>
-                                                                <td class="text-center">
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table table-striped table-bordered text-inputs-searching default-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Blood Type</th>
+                                                        <th>Volume</th>
+                                                        <th style="text-align:center; width:150px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse($blood_supply as $key => $blood_supply_item)
+                                                        <tr data-entry-id="{{ $blood_supply_item->id }}">
+                                                            <td>{{ isset($blood_supply_item->created_at) ? date('d/m/Y H:i:s', strtotime($blood_supply_item->created_at)) : '' }}
+                                                            </td>
+                                                            <td>{{ $blood_supply_item->blood_type->name ?? '' }}</td>
+                                                            <td>{{ $blood_supply_item->volume . ' Kantong' ?? '' }}
+                                                            </td>
+                                                            <td class="text-center">
 
-                                                                    <div class="btn-group mr-1 mb-1">
-                                                                        <button type="button"
-                                                                            class="btn btn-info btn-sm dropdown-toggle"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">Action</button>
-                                                                        <div class="dropdown-menu">
+                                                                <div class="btn-group mr-1 mb-1">
+                                                                    <button type="button"
+                                                                        class="btn btn-info btn-sm dropdown-toggle"
+                                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                                        aria-expanded="false">Action</button>
+                                                                    <div class="dropdown-menu">
 
-                                                                            @can('blood_supply_show')
-                                                                                <a href="#mymodal"
-                                                                                    data-remote="{{ route('backsite.blood_supply.show', $blood_supply_item->id) }}"
-                                                                                    data-toggle="modal" data-target="#mymodal"
-                                                                                    data-title="Blood Supply Detail"
-                                                                                    class="dropdown-item">
-                                                                                    Show
-                                                                                </a>
-                                                                            @endcan
+                                                                        @can('blood_supply_show')
+                                                                            <a href="#mymodal"
+                                                                                data-remote="{{ route('backsite.blood_supply.show', $blood_supply_item->id) }}"
+                                                                                data-toggle="modal" data-target="#mymodal"
+                                                                                data-title="Blood Supply Detail"
+                                                                                class="dropdown-item">
+                                                                                Show
+                                                                            </a>
+                                                                        @endcan
 
-                                                                            @can('blood_supply_edit')
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('backsite.blood_supply.edit', $blood_supply_item->id) }}">
-                                                                                    Edit
-                                                                                </a>
-                                                                            @endcan
+                                                                        @can('blood_supply_edit')
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('backsite.blood_supply.edit', $blood_supply_item->id) }}">
+                                                                                Edit
+                                                                            </a>
+                                                                        @endcan
 
-                                                                            @can('blood_supply_delete')
-                                                                                <form
-                                                                                    action="{{ route('backsite.blood_supply.destroy', $blood_supply_item->id) }}"
-                                                                                    method="POST"
-                                                                                    onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                    <input type="hidden" name="_method"
-                                                                                        value="DELETE">
-                                                                                    <input type="hidden" name="_token"
-                                                                                        value="{{ csrf_token() }}">
-                                                                                    <input type="submit" class="dropdown-item"
-                                                                                        value="Delete">
-                                                                                </form>
-                                                                            @endcan
+                                                                        @can('blood_supply_delete')
+                                                                            <form
+                                                                                action="{{ route('backsite.blood_supply.destroy', $blood_supply_item->id) }}"
+                                                                                method="POST"
+                                                                                onsubmit="return confirm('Are you sure want to delete this data ?');">
+                                                                                <input type="hidden" name="_method"
+                                                                                    value="DELETE">
+                                                                                <input type="hidden" name="_token"
+                                                                                    value="{{ csrf_token() }}">
+                                                                                <input type="submit" class="dropdown-item"
+                                                                                    value="Delete">
+                                                                            </form>
+                                                                        @endcan
 
-                                                                        </div>
                                                                     </div>
-                                                                </td>
-                                                            </tr>
-                                                        @empty
-                                                            {{-- not found --}}
-                                                        @endforelse
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>Date</th>
-                                                            <th>Blood Type</th>
-                                                            <th>Volume</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                                </div>
+                                                            </td>
                                                         </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-
+                                                    @empty
+                                                        {{-- not found --}}
+                                                    @endforelse
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Blood Type</th>
+                                                        <th>Volume</th>
+                                                        <th style="text-align:center; width:150px;">Action</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
+            </div>
             {{-- @endcan --}}
 
         </div>

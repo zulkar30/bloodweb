@@ -19,7 +19,7 @@ class Screening extends Model
     // Kolom tabel yang boleh diisi
     protected $fillable = [
         'officer_id',
-        'blood_type',
+        'blood_type_id',
         'hiv',
         'hcv',
         'hbsag',
@@ -38,6 +38,6 @@ class Screening extends Model
     // Relasi one to many
     public function blood_type()
     {
-        return $this->belongsTo('App\Models\MasterData\Blood_type', 'blood_type_id', 'id');
+        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
     }
 }

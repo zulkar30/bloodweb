@@ -4,6 +4,12 @@ namespace App\Http\Requests\Screening;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// Library
+use Symfony\Component\HttpFoundation\Response;
+
+// Middleware
+use Gate;
+
 class StoreScreening extends FormRequest
 {
     /**
@@ -13,7 +19,9 @@ class StoreScreening extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(Gate::denies('screening_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
     }
 
     /**
@@ -24,7 +32,27 @@ class StoreScreening extends FormRequest
     public function rules()
     {
         return [
-            //
+            'officer_id' => [
+                'required', 'integer',
+            ],
+            'blood_type_id' => [
+                'required', 'integer'
+            ],
+            'hiv' => [
+                'required', 'string', 'max:255'
+            ],
+            'hcv' => [
+                'required', 'string', 'max:255'
+            ],
+            'hbsag' => [
+                'required', 'string', 'max:255'
+            ],
+            'vdrl' => [
+                'required', 'string', 'max:255'
+            ],
+            'result' => [
+                'required', 'string', 'max:255'
+            ],
         ];
     }
 }

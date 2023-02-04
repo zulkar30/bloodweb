@@ -75,29 +75,24 @@
                                                 <h4 class="form-section"><i class="fa fa-edit"></i> Form Blood Supply</h4>
 
                                                 <div
-                                                    class="form-group row {{ $errors->has('blood_type') ? 'has-error' : '' }}">
+                                                    class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                     <label class="col-md-3 label-control">Blood Type <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="blood_type" id="blood_type"
+                                                        <select name="blood_type_id" id="blood_type_id"
                                                             class="form-control select2" required>
-                                                            <option
-                                                                value="{{ old('blood_type', isset($blood_supply) ? $blood_supply->blood_type : '') }}">
-                                                                {{ $blood_supply->blood_type }}
+                                                            <option value="{{ old('blood_type_id', isset($blood_supply) ? $blood_supply->blood_type_id : '') }}" disabled selected>{{ $blood_supply->blood_type->name }}
                                                             </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
+                                                            @foreach ($blood_type as $key => $blood_type_item)
+                                                                <option value="{{ $blood_type_item->id }}">
+                                                                    {{ $blood_type_item->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
 
-                                                        @if ($errors->has('blood_type'))
+                                                        @if ($errors->has('blood_type_id'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type') }}</p>
+                                                                {{ $errors->first('blood_type_id') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>

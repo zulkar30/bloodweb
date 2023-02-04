@@ -37,6 +37,6 @@ class Crossmatch extends Model
     // Relasi one to many
     public function blood_type()
     {
-        return $this->belongsTo('App\Models\MasterData\Blood_type', 'blood_type_id', 'id');
+        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
     }
 }

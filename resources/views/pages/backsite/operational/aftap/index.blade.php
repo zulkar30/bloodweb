@@ -42,7 +42,7 @@
             </div>
 
             {{-- add card --}}
-            @can('blood_supply_create')
+            @can('aftap_create')
                 <div class="content-body">
                     <section id="add-home">
                         <div class="row">
@@ -78,27 +78,47 @@
                                                     </div>
 
                                                     <div
-                                                        class="form-group row {{ $errors->has('blood_type') ? 'has-error' : '' }}">
+                                                        class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Blood Type <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="blood_type" id="blood_type"
+                                                            <select name="blood_type_id" id="blood_type_id"
                                                                 class="form-control select2" required>
-                                                                <option value="" disabled selected class="hidden">Choose
+                                                                <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
-                                                                <option value="A+">A+</option>
-                                                                <option value="A-">A-</option>
-                                                                <option value="B+">B+</option>
-                                                                <option value="B-">B-</option>
-                                                                <option value="AB+">AB+</option>
-                                                                <option value="AB-">AB-</option>
-                                                                <option value="O+">O+</option>
-                                                                <option value="O-">O-</option>
+                                                                @foreach ($blood_type as $key => $blood_type_item)
+                                                                    <option value="{{ $blood_type_item->id }}">
+                                                                        {{ $blood_type_item->name }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
 
-                                                            @if ($errors->has('blood_type'))
+                                                            @if ($errors->has('blood_type_id'))
                                                                 <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('blood_type') }}</p>
+                                                                    {{ $errors->first('blood_type_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('pouch_type_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Pouch Type <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="pouch_type_id" id="pouch_type_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($pouch_type as $key => $pouch_type_item)
+                                                                    <option value="{{ $pouch_type_item->id }}">
+                                                                        {{ $pouch_type_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('pouch_type_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('pouch_type_id') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -121,6 +141,52 @@
                                                     </div>
                                                 </div>
 
+                                                <div
+                                                        class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Donor <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="donor_id" id="donor_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($donor as $key => $donor_item)
+                                                                    <option value="{{ $donor_item->id }}">
+                                                                        {{ $donor_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('donor_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('donor_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Officer <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="officer_id" id="officer_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($officer as $key => $officer_item)
+                                                                    <option value="{{ $officer_item->id }}">
+                                                                        {{ $officer_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('officer_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('officer_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                 <div class="form-actions text-right">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan"
                                                         onclick="return confirm('Are you sure want to save this data ?')">
@@ -140,7 +206,7 @@
             @endcan
 
             {{-- table card --}}
-            {{-- @can('blood_supply_table') --}}
+            {{-- @can('aftap_table') --}}
             <div class="content-body">
                 <section id="table-home">
                     <!-- Zero configuration table -->
@@ -168,9 +234,6 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Date</th>
-                                                        <th>Donor</th>
-                                                        <th>Officer</th>
-                                                        <th>Pouch Type</th>
                                                         <th>Blood Type</th>
                                                         <th>Volume</th>
                                                         <th style="text-align:center; width:150px;">Action</th>
@@ -181,10 +244,7 @@
                                                         <tr data-entry-id="{{ $aftap_item->id }}">
                                                             <td>{{ isset($aftap_item->created_at) ? date('d/m/Y H:i:s', strtotime($aftap_item->created_at)) : '' }}
                                                             </td>
-                                                            <td>{{ $aftap_item->donor->name ?? '' }}</td>
-                                                            <td>{{ $aftap_item->officer->name ?? '' }}</td>
-                                                            <td>{{ $aftap_item->pouch_type ?? '' }}</td>
-                                                            <td>{{ $aftap_item->blood_type ?? '' }}</td>
+                                                            <td>{{ $aftap_item->blood_type->name ?? '' }}</td>
                                                             <td>{{ $aftap_item->volume . ' Kantong' ?? '' }}
                                                             </td>
                                                             <td class="text-center">
@@ -196,7 +256,7 @@
                                                                         aria-expanded="false">Action</button>
                                                                     <div class="dropdown-menu">
 
-                                                                        @can('blood_supply_show')
+                                                                        @can('aftap_show')
                                                                             <a href="#mymodal"
                                                                                 data-remote="{{ route('backsite.aftap.show', $aftap_item->id) }}"
                                                                                 data-toggle="modal" data-target="#mymodal"
@@ -206,14 +266,14 @@
                                                                             </a>
                                                                         @endcan
 
-                                                                        @can('blood_supply_edit')
+                                                                        @can('aftap_edit')
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('backsite.aftap.edit', $aftap_item->id) }}">
                                                                                 Edit
                                                                             </a>
                                                                         @endcan
 
-                                                                        @can('blood_supply_delete')
+                                                                        @can('aftap_delete')
                                                                             <form
                                                                                 action="{{ route('backsite.aftap.destroy', $aftap_item->id) }}"
                                                                                 method="POST"
@@ -238,9 +298,6 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>Date</th>
-                                                        <th>Donor</th>
-                                                        <th>Officer</th>
-                                                        <th>Pouch Type</th>
                                                         <th>Blood Type</th>
                                                         <th>Volume</th>
                                                         <th style="text-align:center; width:150px;">Action</th>
