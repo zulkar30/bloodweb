@@ -4,6 +4,12 @@ namespace App\Http\Requests\Donor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// Library
+use Symfony\Component\HttpFoundation\Response;
+
+// Middleware
+use Gate;
+
 class StoreDonor extends FormRequest
 {
     /**
@@ -13,7 +19,9 @@ class StoreDonor extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(Gate::denies('donor_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
     }
 
     /**
@@ -24,7 +32,36 @@ class StoreDonor extends FormRequest
     public function rules()
     {
         return [
-            //
+            'profession_id' => [
+                'required', 'integer'
+            ],
+            'blood_type_id' => [
+                'required', 'integer'
+            ],
+            'name' => [
+                'required', 'string', 'max:255'
+            ],
+            'birth_place' => [
+                'required', 'string', 'max:255'
+            ],
+            'birth_date' => [
+                'required', 'string', 'max:255'
+            ],
+            'gender' => [
+                'required', 'string', 'max:255'
+            ],
+            'contact' => [
+                'required', 'string', 'max:255'
+            ],
+            'address' => [
+                'required', 'string', 'max:255'
+            ],
+            'age' => [
+                'required', 'string', 'max:255'
+            ],
+            'photo' => [
+                'nullable', 'mimes:jpeg,svg,png', 'max:10000'
+            ],
         ];
     }
 }

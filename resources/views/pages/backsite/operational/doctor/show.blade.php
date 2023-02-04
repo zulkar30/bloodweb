@@ -23,10 +23,12 @@
     <tr>
         <th>Gender</th>
         <td>
-            @if ($doctor->gender == 1)
-                <span>Laki-laki</span>
+            @if($blood_donor->gender == 1)
+                <span>{{ 'Laki-laki' }}</span>
+            @elseif($blood_donor->gender == 2)
+                <span>{{ 'Perempuan' }}</span>
             @else
-                <span>Perempuan</span>
+                <span>{{ 'N/A' }}</span>
             @endif
         </td>
     </tr>

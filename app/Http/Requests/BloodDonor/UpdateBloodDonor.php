@@ -4,6 +4,12 @@ namespace App\Http\Requests\BloodDonor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+// Library
+use Symfony\Component\HttpFoundation\Response;
+
+// Middleware
+use Gate;
+
 class UpdateBloodDonor extends FormRequest
 {
     /**
@@ -13,7 +19,9 @@ class UpdateBloodDonor extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(Gate::denies('blood_donor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
     }
 
     /**
@@ -24,7 +32,18 @@ class UpdateBloodDonor extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => [
+                'required', 'string', 'max:255'
+            ],
+            'hb' => [
+                'required', 'string', 'max:255'
+            ],
+            'tm' => [
+                'required', 'string', 'max:255'
+            ],
+            'bb' => [
+                'required', 'string', 'max:255'
+            ],
         ];
     }
 }

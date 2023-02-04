@@ -91,18 +91,51 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="birth_place">Birth Place
+                                                        <code style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="text" id="birth_place" name="birth_place"
+                                                            class="form-control" placeholder="example Bengkalis"
+                                                            value="{{ old('birth_place', isset($patient) ? $patient->birth_place : '') }}" autocomplete="off" required>
+
+                                                        @if ($errors->has('birth_place'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('birth_place') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="birth_date">Birth Date <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="date" id="birth_date" name="birth_date"
+                                                            class="form-control" value="{{ old('birth_date', isset($patient) ? $patient->birth_date : '') }}"
+                                                            autocomplete="off" required>
+
+                                                        @if ($errors->has('birth_date'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('birth_date') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
                                                     <label class="col-md-3 label-control">Gender <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="gender" id="gender" class="form-control select2"
                                                             required>
-                                                            <option
-                                                                value="{{ old('gender', isset($patient) ? $patient->gender : '') }}"
-                                                                disabled selected>Choose
-                                                                Gender
+                                                            <option value="{{ old('gender', isset($patient) ? $patient->gender : '') }}" disabled selected>
+                                                                @if ($patient->gender ==1)
+                                                                    <span>Laki-laki</span>
+                                                                @else
+                                                                    <span>Perempuan</span>
+                                                                @endif
                                                             </option>
-                                                            <option value="1">Laki -laki</option>
+                                                            <option value="1">Laki-laki</option>
                                                             <option value="2">Perempuan</option>
                                                         </select>
 
@@ -114,13 +147,44 @@
                                                 </div>
 
                                                 <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="contact">Contact <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="text" id="contact" name="contact"
+                                                            class="form-control" value="{{ old('contact', isset($patient) ? $patient->contact : '') }}"
+                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                            required>
+
+                                                        @if ($errors->has('contact'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('contact') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="address">Address <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="text" id="address" name="address"
+                                                            class="form-control" value="{{ old('address', isset($patient) ? $patient->address : '') }}"
+                                                            autocomplete="off"
+                                                            placeholder="example Jalan Pramuka Gang Haji Ilyas" required>
+
+                                                        @if ($errors->has('address'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('address') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
                                                     <label class="col-md-3 label-control" for="age">Age <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="age" name="age"
-                                                            class="form-control" placeholder="example 25 Tahun"
-                                                            value="{{ old('age', isset($patient) ? $patient->age : '') }}"
-                                                            autocomplete="off" required>
+                                                            class="form-control" value="{{ old('age', isset($patient) ? $patient->age : '') }}"
+                                                            autocomplete="off" placeholder="example 23 Tahun" required>
 
                                                         @if ($errors->has('age'))
                                                             <p style="font-style: bold; color: red;">
@@ -130,31 +194,65 @@
                                                 </div>
 
                                                 <div
-                                                    class="form-group row {{ $errors->has('blood_type') ? 'has-error' : '' }}">
+                                                    class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                     <label class="col-md-3 label-control">Blood Type <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="blood_type" id="blood_type"
+                                                        <select name="blood_type_id" id="blood_type_id"
                                                             class="form-control select2" required>
-                                                            <option
-                                                                value="{{ old('blood_type', isset($patient) ? $patient->blood_type : '') }}"
-                                                                disabled selected>Choose
-                                                                Blood Type
+                                                            <option value="{{ old('blood_type_id', isset($patient) ? $patient->blood_type_id : '') }}" disabled selected>{{ $patient->blood_type->name }}
                                                             </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
+                                                            @foreach ($blood_type as $key => $blood_type_item)
+                                                                <option value="{{ $blood_type_item->id }}">
+                                                                    {{ $blood_type_item->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
 
-                                                        @if ($errors->has('blood_type'))
+                                                        @if ($errors->has('blood_type_id'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type') }}</p>
+                                                                {{ $errors->first('blood_type_id') }}</p>
                                                         @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('room_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Room <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="room_id" id="room_id"
+                                                            class="form-control select2" required>
+                                                            <option value="{{ old('room_id', isset($patient) ? $patient->room_id : '') }}" disabled selected>{{ $patient->room->name }}
+                                                            </option>
+                                                            @foreach ($room as $key => $room_item)
+                                                                <option value="{{ $room_item->id }}">
+                                                                    {{ $room_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('room_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('room_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="photo">Photo <code style="color:green;">optional</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <div class="custom-file">
+                                                            <input type="file" accept="image/png, image/svg, image/jpeg" class="custom-file-input" id="photo" name="photo">
+                                                            <label class="custom-file-label" for="photo" aria-describedby="photo">Choose File</label>
+                                                        </div>
+
+                                                        <p class="text-muted"><small class="text-danger">Hanya dapat mengunggah 1 file</small><small> dan yang dapat digunakan JPEG, SVG, PNG & Maksimal ukuran file hanya 10 MegaBytes</small></p>
+
+                                                        @if($errors->has('photo'))
+                                                            <p style="font-style: bold; color: red;">{{ $errors->first('photo') }}</p>
+                                                        @endif
+
                                                     </div>
                                                 </div>
 

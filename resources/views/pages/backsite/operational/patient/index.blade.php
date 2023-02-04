@@ -92,17 +92,45 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="birth_place">Birth Place
+                                                            <code style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="birth_place" name="birth_place"
+                                                                class="form-control" placeholder="example Bengkalis"
+                                                                value="{{ old('birth_place') }}" autocomplete="off" required>
+
+                                                            @if ($errors->has('birth_place'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('birth_place') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="birth_date">Birth Date <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="date" id="birth_date" name="birth_date"
+                                                                class="form-control" value="{{ old('birth_date') }}"
+                                                                autocomplete="off" required>
+
+                                                            @if ($errors->has('birth_date'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('birth_date') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Gender <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="gender" id="gender" class="form-control select2"
                                                                 required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
-                                                                    Gender
                                                                 </option>
-                                                                <option value="1">Laki -laki</option>
+                                                                <option value="1">Laki-laki</option>
                                                                 <option value="2">Perempuan</option>
                                                             </select>
 
@@ -114,12 +142,44 @@
                                                     </div>
 
                                                     <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="contact">Contact <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="contact" name="contact"
+                                                                class="form-control" value="{{ old('contact') }}"
+                                                                autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                                required>
+
+                                                            @if ($errors->has('contact'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('contact') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="address">Address <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="address" name="address"
+                                                                class="form-control" value="{{ old('address') }}"
+                                                                autocomplete="off"
+                                                                placeholder="example Jalan Pramuka Gang Haji Ilyas" required>
+
+                                                            @if ($errors->has('address'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('address') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="age">Age <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="age" name="age"
-                                                                class="form-control" placeholder="example 25 Tahun"
-                                                                value="{{ old('age') }}" autocomplete="off" required>
+                                                                class="form-control" value="{{ old('age') }}"
+                                                                autocomplete="off" placeholder="example 23 Tahun" required>
 
                                                             @if ($errors->has('age'))
                                                                 <p style="font-style: bold; color: red;">
@@ -129,29 +189,74 @@
                                                     </div>
 
                                                     <div
-                                                        class="form-group row {{ $errors->has('blood_type') ? 'has-error' : '' }}">
+                                                        class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Blood Type <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="blood_type" id="blood_type"
+                                                            <select name="blood_type_id" id="blood_type_id"
                                                                 class="form-control select2" required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
-                                                                    Blood Type
                                                                 </option>
-                                                                <option value="A+">A+</option>
-                                                                <option value="A-">A-</option>
-                                                                <option value="B+">B+</option>
-                                                                <option value="B-">B-</option>
-                                                                <option value="AB+">AB+</option>
-                                                                <option value="AB-">AB-</option>
-                                                                <option value="O+">O+</option>
-                                                                <option value="O-">O-</option>
+                                                                @foreach ($blood_type as $key => $blood_type_item)
+                                                                    <option value="{{ $blood_type_item->id }}">
+                                                                        {{ $blood_type_item->name }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
 
-                                                            @if ($errors->has('blood_type'))
+                                                            @if ($errors->has('blood_type_id'))
                                                                 <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('blood_type') }}</p>
+                                                                    {{ $errors->first('blood_type_id') }}</p>
                                                             @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('room_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Room <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="room_id" id="room_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($room as $key => $room_item)
+                                                                    <option value="{{ $room_item->id }}">
+                                                                        {{ $room_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('room_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('room_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="photo">Photo <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <div class="custom-file">
+                                                                <input type="file"
+                                                                    accept="image/png, image/svg, image/jpeg"
+                                                                    class="custom-file-input" id="photo" name="photo"
+                                                                    required>
+                                                                <label class="custom-file-label" for="photo"
+                                                                    aria-describedby="photo">Choose File</label>
+                                                            </div>
+
+                                                            <p class="text-muted"><small class="text-danger">Hanya dapat
+                                                                    mengunggah 1 file</small><small> dan yang dapat digunakan
+                                                                    JPEG, SVG, PNG & Maksimal ukuran file hanya 10
+                                                                    MegaBytes</small></p>
+
+                                                            @if ($errors->has('photo'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('photo') }}</p>
+                                                            @endif
+
                                                         </div>
                                                     </div>
 
@@ -205,9 +310,8 @@
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Name</th>
-                                                            <th>Gender</th>
-                                                            <th>Age</th>
-                                                            <th>Blood Type</th>
+                                                            <th>Room</th>
+                                                            <th>Photo</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
                                                     </thead>
@@ -217,15 +321,10 @@
                                                                 <td>{{ isset($patient_item->created_at) ? date('d/m/Y H:i:s', strtotime($patient_item->created_at)) : '' }}
                                                                 </td>
                                                                 <td>{{ $patient_item->name ?? '' }}</td>
-                                                                <td>
-                                                                    @if ($patient_item->gender == 1)
-                                                                        <span>Laki - laki</span>
-                                                                    @else
-                                                                        <span>Perempuan</span>
-                                                                    @endif
-                                                                </td>
-                                                                <td>{{ $patient_item->age . ' Tahun' ?? '' }}</td>
-                                                                <td>{{ $patient_item->blood_type ?? '' }}</td>
+                                                                <td>{{ $patient_item->room->name ?? '' }}</td>
+                                                                <td><a data-fancybox="gallery"
+                                                                        data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $patient_item->photo }}"
+                                                                        class="blue accent-4">Show</a></td>
                                                                 <td class="text-center">
 
                                                                     <div class="btn-group mr-1 mb-1">
@@ -278,9 +377,8 @@
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Name</th>
-                                                            <th>Gender</th>
-                                                            <th>Age</th>
-                                                            <th>Blood Type</th>
+                                                            <th>Room</th>
+                                                            <th>Photo</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
                                                     </tfoot>
@@ -302,11 +400,28 @@
 
 @endsection
 
+@push('after-style')
+    <link rel="stylesheet" href="{{ url('https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css') }}">
+
+    <style>
+        .label {
+            cursor: pointer;
+        }
+
+        .img-container img {
+            max-width: 100%;
+        }
+    </style>
+@endpush
+
 @push('after-script')
     {{-- inputmask --}}
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/jquery.inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/bindings/inputmask.binding.js') }}"></script>
+
+    <script src="{{ url('https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js') }}" type="text/javascript">
+    </script>
 
     <script>
         jQuery(document).ready(function($) {
@@ -343,6 +458,11 @@
 
         $(function() {
             $(":input").inputmask();
+        });
+
+        // fancybox
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            infinite: false
         });
     </script>
 

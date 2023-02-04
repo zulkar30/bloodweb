@@ -2,11 +2,39 @@
 
 namespace App\Http\Controllers\Backsite;
 
+// Default
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Library
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// Request
+use App\Http\Requests\Donor\StoreDonor;
+use App\Http\Requests\Donor\UpdateDonor;
+
+// Everything Else
+use Auth;
+use Gate;
+use File;
+
+// Model
+use App\Models\User;
+use App\Models\Operational\Donor;
+use App\Models\MasterData\BloodType;
+use App\Models\MasterData\Profession;
+
+// Third Party
+
 class DonorController extends Controller
 {
+    // Middleware Auth
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +42,14 @@ class DonorController extends Controller
      */
     public function index()
     {
-        //
+        abort_if(Gate::denies('donor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Ditampilkan pada tabel
+        $donor = Donor::orderBy('created_at', 'desc')->get();
+        $profession = Profession::orderBy('name', 'asc')->get();
+        $blood_type = BloodType::orderBy('name', 'asc')->get();
+
+        return view('pages.backsite.operational.donor.index', compact('donor', 'profession', 'blood_type'));
     }
 
     /**
@@ -24,7 +59,7 @@ class DonorController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -33,9 +68,35 @@ class DonorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDonor $request)
     {
-        //
+        // Ambil semua data dari frontsite
+        $data = $request->all();
+
+        $data['age'] = str_replace(' Tahun', '', $data['age']);
+
+        // upload process here
+        $path = public_path('app/public/assets/file-donor');
+        if(!File::isDirectory($path)){
+            $response = Storage::makeDirectory('public/assets/file-donor');
+        }
+
+        // change file locations
+        if(isset($data['photo'])){
+            $data['photo'] = $request->file('photo')->store(
+                'assets/file-donor', 'public'
+            );
+        }else{
+            $data['photo'] = "";
+        }
+
+        // Kirim data ke database
+        $donor = Donor::create($data);
+
+        // Sweetalert
+        alert()->success('Success Create Message', 'Successfully added new Donor');
+        // Tempat akan ditampilkannya Sweetalert
+        return redirect()->route('backsite.donor.index');
     }
 
     /**
@@ -44,9 +105,11 @@ class DonorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Donor $donor)
     {
-        //
+        abort_if(Gate::denies('donor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('pages.backsite.operational.donor.show', compact('donor'));
     }
 
     /**
@@ -55,9 +118,15 @@ class DonorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Donor $donor)
     {
-        //
+        abort_if(Gate::denies('donor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Ditampilkan pada form sebagai pilihan
+        $profession = Profession::orderBy('name', 'asc')->get();
+        $blood_type = BloodType::orderBy('name', 'asc')->get();
+
+        return view('pages.backsite.operational.donor.edit', compact('donor', 'profession', 'blood_type'));
     }
 
     /**
@@ -67,9 +136,42 @@ class DonorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDonor $request, Donor $donor)
     {
-        //
+        // Ambil semua data dari frontsite
+        $data = $request->all();
+
+        $data['age'] = str_replace(' Tahun', '', $data['age']);
+
+        // upload process here
+        // change format photo
+        if(isset($data['photo'])){
+
+             // first checking old photo to delete from storage
+            $get_item = $donor['photo'];
+
+            // change file locations
+            $data['photo'] = $request->file('photo')->store(
+                'assets/file-donor', 'public'
+            );
+
+            // delete old photo from storage
+            $data_old = 'storage/'.$get_item;
+            if (File::exists($data_old)) {
+                File::delete($data_old);
+            }else{
+                File::delete('storage/app/public/'.$get_item);
+            }
+
+        }
+
+        // Update data ke database
+        $donor->update($data);
+
+        // Sweetalert
+        alert()->success('Success Update Message', 'Successfully updated Donor');
+        // Tempat akan ditampilkannya Sweetalert
+        return redirect()->route('backsite.donor.index');
     }
 
     /**
@@ -78,8 +180,25 @@ class DonorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Donor $donor)
     {
-        //
+        abort_if(Gate::denies('donor_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // first checking old file to delete from storage
+        $get_item = $donor['photo'];
+
+        $data = 'storage/'.$get_item;
+        if (File::exists($data)) {
+            File::delete($data);
+        }else{
+            File::delete('storage/app/public/'.$get_item);
+        }
+
+        $donor->delete();
+
+        // Sweetalert
+        alert()->success('Success Delete Message', 'Successfully deleted Donor');
+        // Tempat akan ditampilkannya Sweetalert
+        return back();
     }
 }
