@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blood_donor', function (Blueprint $table) {
+        Schema::create('maintenance_section', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->enum('gender', [1,2])->nullable();
-            $table->string('age')->nullable();
-            $table->enum('donor_reaction', [1,2,3])->nullable();
-            $table->enum('retrieval_process',[1,2,3])->nullable();
-            $table->enum('status', [1,2])->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blood_donor');
+        Schema::dropIfExists('maintenance_section');
     }
 };

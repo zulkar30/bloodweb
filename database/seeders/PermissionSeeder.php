@@ -67,6 +67,30 @@ class PermissionSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
 
+            // Donor Type
+            [
+                'name'      => 'donor_type_access',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'      => 'donor_type_table',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+
+            // Maintenance Section
+            [
+                'name'      => 'maintenance_section_access',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'      => 'maintenance_section_table',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+
             // Permission
             [
                 'name'      => 'permission_access',

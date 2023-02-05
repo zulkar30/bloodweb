@@ -97,7 +97,7 @@
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="email" name="email"
                                                                 class="form-control"
-                                                                placeholder="example People@mail.com or Human@mail.com"
+                                                                placeholder="example People@gmail.com or Human@mail.com"
                                                                 value="{{ old('email') }}" autocomplete="off"
                                                                 data-inputmask="'alias': 'email'" required>
 
@@ -161,13 +161,13 @@
 
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="photo">Photo <code
-                                                                style="color:red;">required</code></label>
+                                                                style="color:green;">optional</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <div class="custom-file">
                                                                 <input type="file"
                                                                     accept="image/png, image/svg, image/jpeg"
                                                                     class="custom-file-input" id="photo" name="photo"
-                                                                    required>
+                                                                    >
                                                                 <label class="custom-file-label" for="photo"
                                                                     aria-describedby="photo">Choose File</label>
                                                             </div>

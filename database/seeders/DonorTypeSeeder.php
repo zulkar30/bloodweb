@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\MasterData\Room;
+use App\Models\MasterData\DonorType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RoomSeeder extends Seeder
+class DonorTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,34 +15,24 @@ class RoomSeeder extends Seeder
      */
     public function run()
     {
-        $room = [
+        $donor_type = [
             [
-                'name'      => 'Anggrek',
+                'name'      => 'Sukarela',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Mawar',
+                'name'      => 'Keluarga/Pengganti',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Melati',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'name'      => 'Kemboja',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'name'      => 'Kemuning',
+                'name'      => 'Bayaran',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]
         ];
 
-        Room::insert($room);
+        DonorType::insert($donor_type);
     }
 }

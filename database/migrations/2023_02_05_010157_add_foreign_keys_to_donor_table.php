@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('donor', function (Blueprint $table) {
             $table->foreignId('profession_id', 'fk_donor_to_profession')->references('id')->on('profession')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreignId('blood_type_id', 'fk_donor_to_blood_type')->references('id')->on('blood_type')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId('donor_type_id', 'fk_donor_to_donor_type')->references('id')->on('donor_type')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
         Schema::table('donor', function (Blueprint $table) {
             $table->dropForeign('fk_donor_to_profession');
             $table->dropForeign('fk_donor_to_blood_type');
+            $table->dropForeign('fk_donor_to_donor_type');
         });
     }
 };

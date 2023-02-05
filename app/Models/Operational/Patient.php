@@ -46,6 +46,12 @@ class Patient extends Model
     }
 
     // Relasi one to many
+    public function maintenance_section()
+    {
+        return $this->belongsTo('App\Models\MasterData\MaintenanceSection', 'maintenance_section_id', 'id');
+    }
+
+    // Relasi one to many
     public function room()
     {
         return $this->belongsTo('App\Models\MasterData\Room', 'room_id', 'id');

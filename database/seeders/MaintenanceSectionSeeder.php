@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\MasterData\Room;
+use App\Models\MasterData\MaintenanceSection;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RoomSeeder extends Seeder
+class MaintenanceSectionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,34 +15,34 @@ class RoomSeeder extends Seeder
      */
     public function run()
     {
-        $room = [
+        $maintenance_section = [
             [
-                'name'      => 'Anggrek',
+                'name'      => 'Anak',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Mawar',
+                'name'      => 'Bedah',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Melati',
+                'name'      => 'Penyakit Dalam',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Kemboja',
+                'name'      => 'Kandungan',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Kemuning',
+                'name'      => 'Lain-lain',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]
         ];
 
-        Room::insert($room);
+        MaintenanceSection::insert($maintenance_section);
     }
 }

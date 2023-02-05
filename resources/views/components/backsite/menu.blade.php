@@ -35,7 +35,7 @@
 
             {{-- @can('master_data_access') --}}
             <li class=" nav-item"><a href="#"><i
-                        class="{{ request()->is('backsite/blood_type') || request()->is('backsite/blood_type/*') || request()->is('backsite/*/blood_type') || request()->is('backsite/*/blood_type/*') || request()->is('backsite/permission') || request()->is('backsite/permission/*') || request()->is('backsite/*/permission') || request()->is('backsite/*/permission/*') || request()->is('backsite/position') || request()->is('backsite/position/*') || request()->is('backsite/*/position') || request()->is('backsite/*/position/*') || request()->is('backsite/pouch_type') || request()->is('backsite/pouch_type/*') || request()->is('backsite/*/pouch_type') || request()->is('backsite/*/pouch_type/*') || request()->is('backsite/profession') || request()->is('backsite/profession/*') || request()->is('backsite/*/profession') || request()->is('backsite/*/profession/*') || request()->is('backsite/role') || request()->is('backsite/role/*') || request()->is('backsite/*/role') || request()->is('backsite/*/role/*') || request()->is('backsite/room') || request()->is('backsite/room/*') || request()->is('backsite/*/room') || request()->is('backsite/*/room/*') || request()->is('backsite/type_user') || request()->is('backsite/type_user/*') || request()->is('backsite/*/type_user') || request()->is('backsite/*/type_user/*') ? 'bx bx-customize bx-flashing' : 'bx bx-customize' }}"></i><span
+                        class="{{ request()->is('backsite/blood_type') || request()->is('backsite/blood_type/*') || request()->is('backsite/*/blood_type') || request()->is('backsite/*/blood_type/*') || request()->is('backsite/donor_type') || request()->is('backsite/donor_type/*') || request()->is('backsite/*/donor_type') || request()->is('backsite/*/donor_type/*') || request()->is('backsite/maintenance_section') || request()->is('backsite/maintenance_section/*') || request()->is('backsite/*/maintenance_section') || request()->is('backsite/*/maintenance_section/*') || request()->is('backsite/permission') || request()->is('backsite/permission/*') || request()->is('backsite/*/permission') || request()->is('backsite/*/permission/*') || request()->is('backsite/position') || request()->is('backsite/position/*') || request()->is('backsite/*/position') || request()->is('backsite/*/position/*') || request()->is('backsite/pouch_type') || request()->is('backsite/pouch_type/*') || request()->is('backsite/*/pouch_type') || request()->is('backsite/*/pouch_type/*') || request()->is('backsite/profession') || request()->is('backsite/profession/*') || request()->is('backsite/*/profession') || request()->is('backsite/*/profession/*') || request()->is('backsite/role') || request()->is('backsite/role/*') || request()->is('backsite/*/role') || request()->is('backsite/*/role/*') || request()->is('backsite/room') || request()->is('backsite/room/*') || request()->is('backsite/*/room') || request()->is('backsite/*/room/*') || request()->is('backsite/type_user') || request()->is('backsite/type_user/*') || request()->is('backsite/*/type_user') || request()->is('backsite/*/type_user/*') ? 'bx bx-customize bx-flashing' : 'bx bx-customize' }}"></i><span
                         class="menu-title" data-i18n="Master Data">Master Data</span></a>
                 <ul class="menu-content">
 
@@ -44,6 +44,24 @@
                             class="{{ request()->is('backsite/blood_type') || request()->is('backsite/blood_type/*') || request()->is('backsite/*/blood_type') || request()->is('backsite/*/blood_type/*') ? 'active' : '' }} ">
                             <a class="menu-item" href="{{ route('backsite.blood_type.index') }}">
                                 <i></i><span>Blood Type</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('donor_type_access')
+                        <li
+                            class="{{ request()->is('backsite/donor_type') || request()->is('backsite/donor_type/*') || request()->is('backsite/*/donor_type') || request()->is('backsite/*/donor_type/*') ? 'active' : '' }} ">
+                            <a class="menu-item" href="{{ route('backsite.donor_type.index') }}">
+                                <i></i><span>Donor Type</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('maintenance_section_access')
+                        <li
+                            class="{{ request()->is('backsite/maintenance_section') || request()->is('backsite/maintenance_section/*') || request()->is('backsite/*/maintenance_section') || request()->is('backsite/*/maintenance_section/*') ? 'active' : '' }} ">
+                            <a class="menu-item" href="{{ route('backsite.maintenance_section.index') }}">
+                                <i></i><span>Maintenance Section</span>
                             </a>
                         </li>
                     @endcan

@@ -21,6 +21,8 @@ use App\Http\Controllers\Backsite\ProfessionController;
 use App\Http\Controllers\Backsite\BloodSupplyController;
 use App\Http\Controllers\Backsite\BloodRequestController;
 use App\Http\Controllers\Backsite\BloodTypeController;
+use App\Http\Controllers\Backsite\DonorTypeController;
+use App\Http\Controllers\Backsite\MaintenanceSectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,12 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     
     // Blood Type Page
     Route::resource('blood_type', BloodTypeController::class);
+
+    // Donor Type Page
+    Route::resource('donor_type', DonorTypeController::class);
+
+    // Maintenance Section Page
+    Route::resource('maintenance_section', MaintenanceSectionController::class);
 
     // Permission Page
     Route::resource('permission', PermissionController::class);

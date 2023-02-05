@@ -49,4 +49,10 @@ class Donor extends Model
     {
         return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
     }
+
+    // Relasi one to many
+    public function donor_type()
+    {
+        return $this->belongsTo('App\Models\MasterData\DonorType', 'donor_type_id', 'id');
+    }
 }

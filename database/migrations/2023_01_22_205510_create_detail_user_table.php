@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('detail_user', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->enum('gender', [1,2])->nullable();
             $table->string('contact')->unique()->nullable();
             $table->longText('address')->nullable();
