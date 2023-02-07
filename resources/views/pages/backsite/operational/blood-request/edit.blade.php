@@ -119,9 +119,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="wb" name="wb"
-                                                            class="form-control" value="{{ old('wb', isset($blood_request) ? $blood_request->wb : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('wb', isset($blood_request) ? $blood_request->wb . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('wb'))
                                                             <p style="font-style: bold; color: red;">
@@ -135,9 +135,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="we" name="we"
-                                                            class="form-control" value="{{ old('we', isset($blood_request) ? $blood_request->we : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('we', isset($blood_request) ? $blood_request->we . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('we'))
                                                             <p style="font-style: bold; color: red;">
@@ -151,9 +151,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="prc" name="prc"
-                                                            class="form-control" value="{{ old('prc', isset($blood_request) ? $blood_request->prc : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('prc', isset($blood_request) ? $blood_request->prc . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('prc'))
                                                             <p style="font-style: bold; color: red;">
@@ -167,9 +167,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="tc" name="tc"
-                                                            class="form-control" value="{{ old('tc', isset($blood_request) ? $blood_request->tc : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('tc', isset($blood_request) ? $blood_request->tc . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('tc'))
                                                             <p style="font-style: bold; color: red;">
@@ -183,9 +183,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="ffp" name="ffp"
-                                                            class="form-control" value="{{ old('ffp', isset($blood_request) ? $blood_request->ffp : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('ffp', isset($blood_request) ? $blood_request->ffp . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('ffp'))
                                                             <p style="font-style: bold; color: red;">
@@ -199,9 +199,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="cry" name="cry"
-                                                            class="form-control" value="{{ old('cry', isset($blood_request) ? $blood_request->cry : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('cry', isset($blood_request) ? $blood_request->cry . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('cry'))
                                                             <p style="font-style: bold; color: red;">
@@ -215,9 +215,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="plasma" name="plasma"
-                                                            class="form-control" value="{{ old('plasma', isset($blood_request) ? $blood_request->plasma : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('plasma', isset($blood_request) ? $blood_request->plasma . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('plasma'))
                                                             <p style="font-style: bold; color: red;">
@@ -231,9 +231,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="prp" name="prp"
-                                                            class="form-control" value="{{ old('prp', isset($blood_request) ? $blood_request->prp : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('prp', isset($blood_request) ? $blood_request->prp . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('prp'))
                                                             <p style="font-style: bold; color: red;">
@@ -247,9 +247,9 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="total" name="total"
-                                                            class="form-control" value="{{ old('total', isset($blood_request) ? $blood_request->total : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                            class="form-control" value="{{ old('total', isset($blood_request) ? $blood_request->total . ' Unit' : '') }}"
+                                                            autocomplete="off" placeholder="example 1 Unit"
+                                                            disabled>
 
                                                         @if ($errors->has('total'))
                                                             <p style="font-style: bold; color: red;">
@@ -262,9 +262,9 @@
                                                     <label class="col-md-3 label-control" for="fulfilled">Fulfilled <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="fulfilled" name="fulfilled"
+                                                        <input type="number" id="fulfilled" name="fulfilled"
                                                             class="form-control" value="{{ old('fulfilled', isset($blood_request) ? $blood_request->fulfilled : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                            autocomplete="off" placeholder="example 1 Unit"
                                                             required>
 
                                                         @if ($errors->has('fulfilled'))
@@ -282,14 +282,16 @@
                                                         <select name="status" id="status" class="form-control select2"
                                                             required>
                                                             <option value="{{ old('status', isset($blood_request) ? $blood_request->status : '') }}" disabled selected>
-                                                                @if ($blood_request->status ==1)
-                                                                    <span>Setuju</span>
+                                                                @if ($blood_request->status == 1)
+                                                                    <span>{{ 'Approved' }}</span>
+                                                                @elseif($blood_request->status == 2)
+                                                                    <span>{{ 'Waiting' }}</span>
                                                                 @else
-                                                                    <span>Tolak</span>
+                                                                    <span>{{ 'Rejected' }}</span>
                                                                 @endif
                                                             </option>
                                                             <option value="1">Setuju</option>
-                                                            <option value="2">Tolak</option>
+                                                            <option value="3">Tolak</option>
                                                         </select>
 
                                                         @if ($errors->has('status'))

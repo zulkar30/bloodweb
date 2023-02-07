@@ -103,7 +103,7 @@
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="volume" name="volume"
                                                             class="form-control" placeholder="example volume 10 Kantong"
-                                                            value="{{ old('volume', isset($blood_supply) ? $blood_supply->volume : '') }}"
+                                                            value="{{ old('volume', isset($blood_supply) ? $blood_supply->volume . ' Kantong' : '') }}"
                                                             autocomplete="off"
                                                             data-inputmask="'alias': 'numeric', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': ' Kantong', 'placeholder': '0'"
                                                             required>

@@ -212,6 +212,29 @@
                                                     </div>
 
                                                     <div
+                                                        class="form-group row {{ $errors->has('maintenance_section_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Maintenance Section <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="maintenance_section_id" id="maintenance_section_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($maintenance_section as $key => $maintenance_section_item)
+                                                                    <option value="{{ $maintenance_section_item->id }}">
+                                                                        {{ $maintenance_section_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('maintenance_section_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('maintenance_section_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
                                                         class="form-group row {{ $errors->has('room_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Room <code
                                                                 style="color:red;">required</code></label>
@@ -235,14 +258,28 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="photo">Photo <code
+                                                        <label class="col-md-3 label-control" for="diagnosis">Diagnosis <code
                                                                 style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="diagnosis" name="diagnosis"
+                                                                class="form-control" value="{{ old('diagnosis') }}"
+                                                                autocomplete="off" placeholder="example Anemia" required>
+
+                                                            @if ($errors->has('diagnosis'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('diagnosis') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="photo">Photo <code
+                                                                style="color:green;">optional</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <div class="custom-file">
                                                                 <input type="file"
                                                                     accept="image/png, image/svg, image/jpeg"
-                                                                    class="custom-file-input" id="photo" name="photo"
-                                                                    required>
+                                                                    class="custom-file-input" id="photo" name="photo">
                                                                 <label class="custom-file-label" for="photo"
                                                                     aria-describedby="photo">Choose File</label>
                                                             </div>

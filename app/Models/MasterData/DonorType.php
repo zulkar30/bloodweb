@@ -28,4 +28,10 @@ class DonorType extends Model
     {
         return $this->hasMany('App\Models\Operational\Donor', 'donor_type_id');
     }
+
+    // Relasi one to many
+    public function blood_donor()
+    {
+        return $this->hasMany('App\Models\Operational\BloodDonor', 'donor_type_id');
+    }
 }

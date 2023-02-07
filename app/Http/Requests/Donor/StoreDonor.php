@@ -38,6 +38,9 @@ class StoreDonor extends FormRequest
             'blood_type_id' => [
                 'required', 'integer'
             ],
+            'donor_type_id' => [
+                'required', 'integer'
+            ],
             'name' => [
                 'required', 'string', 'max:255'
             ],

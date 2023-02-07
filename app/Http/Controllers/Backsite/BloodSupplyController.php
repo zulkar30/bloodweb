@@ -71,6 +71,8 @@ class BloodSupplyController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
+        $data['volume'] = str_replace(' Kantong', '', $data['volume']);
+
         // Kirim data ke database
         $blood_supply = BloodSupply::create($data);
 
@@ -120,6 +122,8 @@ class BloodSupplyController extends Controller
     {
         // Ambil semua data dari frontsite
         $data = $request->all();
+
+        $data['volume'] = str_replace(' Kantong', '', $data['volume']);
 
         // Update data ke database
         $blood_supply->update($data);

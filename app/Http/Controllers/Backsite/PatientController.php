@@ -23,6 +23,7 @@ use File;
 use App\Models\User;
 use App\Models\Operational\Patient;
 use App\Models\MasterData\BloodType;
+use App\Models\MasterData\MaintenanceSection;
 use App\Models\MasterData\Room;
 
 // Third Party
@@ -48,8 +49,9 @@ class PatientController extends Controller
         $patient = Patient::orderBy('created_at', 'desc')->get();
         $room = Room::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $maintenance_section = MaintenanceSection::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.patient.index', compact('patient', 'room', 'blood_type'));
+        return view('pages.backsite.operational.patient.index', compact('patient', 'room', 'blood_type', 'maintenance_section'));
     }
 
     /**
@@ -125,8 +127,9 @@ class PatientController extends Controller
         // Ditampilkan pada form sebagai pilihan
         $room = Room::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $maintenance_section = MaintenanceSection::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.patient.edit', compact('patient', 'room', 'blood_type'));
+        return view('pages.backsite.operational.patient.edit', compact('patient', 'room', 'blood_type', 'maintenance_section'));
     }
 
     /**
@@ -162,7 +165,6 @@ class PatientController extends Controller
             }else{
                 File::delete('storage/app/public/'.$get_item);
             }
-
         }
 
         // Update data ke database

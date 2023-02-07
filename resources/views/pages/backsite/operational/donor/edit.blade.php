@@ -97,7 +97,8 @@
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="birth_place" name="birth_place"
                                                             class="form-control" placeholder="example Bengkalis"
-                                                            value="{{ old('birth_place', isset($donor) ? $donor->birth_place : '') }}" autocomplete="off" required>
+                                                            value="{{ old('birth_place', isset($donor) ? $donor->birth_place : '') }}"
+                                                            autocomplete="off" required>
 
                                                         @if ($errors->has('birth_place'))
                                                             <p style="font-style: bold; color: red;">
@@ -111,7 +112,8 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="date" id="birth_date" name="birth_date"
-                                                            class="form-control" value="{{ old('birth_date', isset($donor) ? $donor->birth_date : '') }}"
+                                                            class="form-control"
+                                                            value="{{ old('birth_date', isset($donor) ? $donor->birth_date : '') }}"
                                                             autocomplete="off" required>
 
                                                         @if ($errors->has('birth_date'))
@@ -121,15 +123,16 @@
                                                     </div>
                                                 </div>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
+                                                <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
                                                     <label class="col-md-3 label-control">Gender <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="gender" id="gender" class="form-control select2"
                                                             required>
-                                                            <option value="{{ old('gender', isset($donor) ? $donor->gender : '') }}" disabled selected>
-                                                                @if ($donor->gender ==1)
+                                                            <option
+                                                                value="{{ old('gender', isset($donor) ? $donor->gender : '') }}"
+                                                                disabled selected>
+                                                                @if ($donor->gender == 1)
                                                                     <span>Laki-laki</span>
                                                                 @else
                                                                     <span>Perempuan</span>
@@ -151,7 +154,8 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="contact" name="contact"
-                                                            class="form-control" value="{{ old('contact', isset($donor) ? $donor->contact : '') }}"
+                                                            class="form-control"
+                                                            value="{{ old('contact', isset($donor) ? $donor->contact : '') }}"
                                                             autocomplete="off" placeholder="example +628xxxxxxxxxx"
                                                             required>
 
@@ -167,7 +171,8 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="address" name="address"
-                                                            class="form-control" value="{{ old('address', isset($donor) ? $donor->address : '') }}"
+                                                            class="form-control"
+                                                            value="{{ old('address', isset($donor) ? $donor->address : '') }}"
                                                             autocomplete="off"
                                                             placeholder="example Jalan Pramuka Gang Haji Ilyas" required>
 
@@ -183,7 +188,8 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="age" name="age"
-                                                            class="form-control" value="{{ old('age', isset($donor) ? $donor->age : '') }}"
+                                                            class="form-control"
+                                                            value="{{ old('age', isset($donor) ? $donor->age : '') }}"
                                                             autocomplete="off" placeholder="example 23 Tahun" required>
 
                                                         @if ($errors->has('age'))
@@ -200,11 +206,38 @@
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="blood_type_id" id="blood_type_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('blood_type_id', isset($donor) ? $donor->blood_type_id : '') }}" disabled selected>{{ $donor->blood_type->name }}
+                                                            <option
+                                                                value="{{ old('blood_type_id', isset($donor) ? $donor->blood_type_id : '') }}"
+                                                                disabled selected>{{ $donor->blood_type->name }}
                                                             </option>
                                                             @foreach ($blood_type as $key => $blood_type_item)
                                                                 <option value="{{ $blood_type_item->id }}">
                                                                     {{ $blood_type_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('blood_type_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('blood_type_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('donor_type_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Donor Type <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="donor_type_id" id="donor_type_id"
+                                                            class="form-control select2" required>
+                                                            <option
+                                                                value="{{ old('donor_type_id', isset($donor) ? $donor->donor_type_id : '') }}"
+                                                                disabled selected>{{ $donor->donor_type->name }}
+                                                            </option>
+                                                            @foreach ($donor_type as $key => $donor_type_item)
+                                                                <option value="{{ $donor_type_item->id }}">
+                                                                    {{ $donor_type_item->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -223,7 +256,9 @@
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="profession_id" id="profession_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('profession_id', isset($donor) ? $donor->profession_id : '') }}" disabled selected>{{ $donor->profession->name }}
+                                                            <option
+                                                                value="{{ old('profession_id', isset($donor) ? $donor->profession_id : '') }}"
+                                                                disabled selected>{{ $donor->profession->name }}
                                                             </option>
                                                             @foreach ($profession as $key => $profession_item)
                                                                 <option value="{{ $profession_item->id }}">
@@ -240,17 +275,25 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="photo">Photo <code style="color:green;">optional</code></label>
+                                                    <label class="col-md-3 label-control" for="photo">Photo <code
+                                                            style="color:green;">optional</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <div class="custom-file">
-                                                            <input type="file" accept="image/png, image/svg, image/jpeg" class="custom-file-input" id="photo" name="photo">
-                                                            <label class="custom-file-label" for="photo" aria-describedby="photo">Choose File</label>
+                                                            <input type="file"
+                                                                accept="image/png, image/svg, image/jpeg"
+                                                                class="custom-file-input" id="photo" name="photo">
+                                                            <label class="custom-file-label" for="photo"
+                                                                aria-describedby="photo">Choose File</label>
                                                         </div>
 
-                                                        <p class="text-muted"><small class="text-danger">Hanya dapat mengunggah 1 file</small><small> dan yang dapat digunakan JPEG, SVG, PNG & Maksimal ukuran file hanya 10 MegaBytes</small></p>
+                                                        <p class="text-muted"><small class="text-danger">Hanya dapat
+                                                                mengunggah 1 file</small><small> dan yang dapat digunakan
+                                                                JPEG, SVG, PNG & Maksimal ukuran file hanya 10
+                                                                MegaBytes</small></p>
 
-                                                        @if($errors->has('photo'))
-                                                            <p style="font-style: bold; color: red;">{{ $errors->first('photo') }}</p>
+                                                        @if ($errors->has('photo'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('photo') }}</p>
                                                         @endif
 
                                                     </div>

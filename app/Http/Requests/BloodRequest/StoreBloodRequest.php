@@ -72,10 +72,10 @@ class StoreBloodRequest extends FormRequest
                 'required', 'string', 'max:255'
             ],
             'fulfilled' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'status' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ]
         ];
     }

@@ -33,25 +33,25 @@ class UpdateScreening extends FormRequest
     {
         return [
             'officer_id' => [
-                'integer',
+                'nullable', 'integer',
             ],
             'blood_type_id' => [
-                'integer'
+                'nullable', 'integer'
             ],
             'hiv' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'hcv' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'hbsag' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'vdrl' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'result' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
         ];
     }

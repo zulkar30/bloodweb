@@ -38,22 +38,28 @@ class StoreBloodDonor extends FormRequest
             'blood_type_id' => [
                 'required', 'integer'
             ],
-            'name' => [
-                'required', 'string', 'max:255'
+            'pouch_type_id' => [
+                'required', 'integer'
+            ],
+            'donor_type_id' => [
+                'required', 'integer'
+            ],
+            'donor_id' => [
+                'required', 'integer'
             ],
             'gender' => [
                 'required', 'string', 'max:255'
             ],
-            'hb' => [
+            'age' => [
                 'required', 'string', 'max:255'
             ],
-            'tm' => [
+            'donor_reaction' => [
                 'required', 'string', 'max:255'
             ],
-            'bb' => [
+            'retrieval_process' => [
                 'required', 'string', 'max:255'
             ],
-            'status' => [
+            'donor_status' => [
                 'required', 'string', 'max:255'
             ]
         ];

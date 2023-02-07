@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('contact')->nullable();
             $table->longText('address')->nullable();
             $table->integer('age')->nullable();
-            $table->integer('diagnosis')->nullable();
+            $table->string('diagnosis')->nullable();
             $table->longText('photo')->nullable();
             $table->timestamps();
         });

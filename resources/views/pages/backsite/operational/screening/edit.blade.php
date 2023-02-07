@@ -214,15 +214,15 @@
                                                             required>
                                                             <option value="{{ old('result', isset($screening) ? $screening->result : '') }}" disabled selected>
                                                                 @if ($screening->result == 1)
-                                                                    <span>{{ 'Positif' }}</span>
+                                                                    <span>{{ 'Reaktif' }}</span>
                                                                 @elseif($screening->result == 2)
-                                                                    <span>{{ 'Negatif' }}</span>
+                                                                    <span>{{ 'Non-Reaktif' }}</span>
                                                                 @else
                                                                     <span>{{ 'N/A' }}</span>
                                                                 @endif
                                                             </option>
-                                                            <option value="1">Positif</option>
-                                                            <option value="2">Negatif</option>
+                                                            <option value="1">Reaktif</option>
+                                                            <option value="2">Non-Reaktif</option>
                                                         </select>
 
                                                         @if ($errors->has('result'))

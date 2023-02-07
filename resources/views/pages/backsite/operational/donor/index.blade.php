@@ -164,7 +164,7 @@
                                                             <input type="text" id="address" name="address"
                                                                 class="form-control" value="{{ old('address') }}"
                                                                 autocomplete="off"
-                                                                placeholder="example Jalan Pramuka Gang Haji Ilyas" required>
+                                                                placeholder="example Jalan xxxxxxxxxxxx" required>
 
                                                             @if ($errors->has('address'))
                                                                 <p style="font-style: bold; color: red;">
@@ -207,6 +207,29 @@
                                                             @if ($errors->has('blood_type_id'))
                                                                 <p style="font-style: bold; color: red;">
                                                                     {{ $errors->first('blood_type_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('donor_type_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Donor Type <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="donor_type_id" id="donor_type_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($donor_type as $key => $donor_type_item)
+                                                                    <option value="{{ $donor_type_item->id }}">
+                                                                        {{ $donor_type_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('donor_type_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('donor_type_id') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -310,7 +333,7 @@
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Name</th>
-                                                            <th>Profession</th>
+                                                            <th>Blood Type</th>
                                                             <th>Photo</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
@@ -321,7 +344,7 @@
                                                                 <td>{{ isset($donor_item->created_at) ? date('d/m/Y H:i:s', strtotime($donor_item->created_at)) : '' }}
                                                                 </td>
                                                                 <td>{{ $donor_item->name ?? '' }}</td>
-                                                                <td>{{ $donor_item->profession->name ?? '' }}</td>
+                                                                <td>{{ $donor_item->blood_type->name ?? '' }}</td>
                                                                 <td><a data-fancybox="gallery"
                                                                         data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $donor_item->photo }}"
                                                                         class="blue accent-4">Show</a></td>
@@ -377,7 +400,7 @@
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Name</th>
-                                                            <th>Profession</th>
+                                                            <th>Blood Type</th>
                                                             <th>Photo</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>

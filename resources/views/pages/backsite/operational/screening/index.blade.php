@@ -189,8 +189,8 @@
                                                                 class="form-control select2" required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
-                                                                <option value="1">Positif</option>
-                                                                <option value="2">Negatif</option>
+                                                                <option value="1">Reaktif</option>
+                                                                <option value="2">Non-Reaktif</option>
                                                             </select>
 
                                                             @if ($errors->has('result'))
@@ -283,9 +283,9 @@
                                                             <td>{{ $screening_item->blood_type->name ?? '' }}</td>
                                                             <td>
                                                                 @if ($screening_item->result == 1)
-                                                                    <span class="badge badge-success">{{ 'Positif' }}</span>
+                                                                    <span class="badge badge-danger">{{ 'Reaktif' }}</span>
                                                                 @elseif($screening_item->result == 2)
-                                                                    <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                                                                    <span class="badge badge-success">{{ 'Non-Reaktif' }}</span>
                                                                 @else
                                                                     <span>{{ 'N/A' }}</span>
                                                                 @endif

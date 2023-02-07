@@ -9,43 +9,43 @@
     </tr>
     <tr>
         <th>Whole Blood</th>
-        <td>{{ isset($blood_request->wb) ? $blood_request->wb : 'N/A' }}</td>
+        <td>{{ isset($blood_request->wb) ? $blood_request->wb . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Whases Eritrosit</th>
-        <td>{{ isset($blood_request->we) ? $blood_request->we : 'N/A' }}</td>
+        <td>{{ isset($blood_request->we) ? $blood_request->we . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Packed Red Cell</th>
-        <td>{{ isset($blood_request->prc) ? $blood_request->prc : 'N/A' }}</td>
+        <td>{{ isset($blood_request->prc) ? $blood_request->prc . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Trombosite Concentrate</th>
-        <td>{{ isset($blood_request->tc) ? $blood_request->tc : 'N/A' }}</td>
+        <td>{{ isset($blood_request->tc) ? $blood_request->tc . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Fresh Frozen Plasma</th>
-        <td>{{ isset($blood_request->ffp) ? $blood_request->ffp : 'N/A' }}</td>
+        <td>{{ isset($blood_request->ffp) ? $blood_request->ffp . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Cryocitate</th>
-        <td>{{ isset($blood_request->cry) ? $blood_request->cry : 'N/A' }}</td>
+        <td>{{ isset($blood_request->cry) ? $blood_request->cry . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Plasma</th>
-        <td>{{ isset($blood_request->plasma) ? $blood_request->plasma : 'N/A' }}</td>
+        <td>{{ isset($blood_request->plasma) ? $blood_request->plasma . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Platelet Rich Plasma</th>
-        <td>{{ isset($blood_request->prp) ? $blood_request->prp : 'N/A' }}</td>
+        <td>{{ isset($blood_request->prp) ? $blood_request->prp . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Total</th>
-        <td>{{ isset($blood_request->total) ? $blood_request->total : 'N/A' }}</td>
+        <td>{{ isset($blood_request->total) ? $blood_request->total . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Fulfilled</th>
-        <td>{{ isset($blood_request->fulfilled) ? $blood_request->fulfilled : 'N/A' }}</td>
+        <td>{{ isset($blood_request->fulfilled) ? $blood_request->fulfilled . ' Unit' : 'N/A' }}</td>
     </tr>
     <tr>
         <th>Status</th>
@@ -53,7 +53,9 @@
             @if($blood_request->status == 1)
                 <span class="badge badge-success">{{ 'Approved' }}</span>
             @elseif($blood_request->status == 2)
-                <span class="badge badge-warning">{{ 'Rejected' }}</span>
+                <span class="badge badge-warning">{{ 'Waiting' }}</span>
+            @elseif($blood_request->status == 3)
+                <span class="badge badge-danger">{{ 'Rejected' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif

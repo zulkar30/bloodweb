@@ -32,36 +32,51 @@ class UpdateBloodRequest extends FormRequest
     public function rules()
     {
         return [
+            'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'doctor_id' => [
+                'nullable', 'integer',
+            ],
+            'patient_id' => [
+                'nullable', 'integer',
+            ],
+            'blood_type_id' => [
+                'nullable', 'integer'
+            ],
             'wb' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'we' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'prc' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'tc' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'ffp' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'cry' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'plasma' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'prp' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'total' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'fulfilled' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
+            'status' => [
+                'nullable', 'string', 'max:255'
+            ]
         ];
     }
 }

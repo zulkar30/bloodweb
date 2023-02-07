@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('blood_donor', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
             $table->enum('gender', [1,2])->nullable();
             $table->string('age')->nullable();
             $table->enum('donor_reaction', [1,2,3])->nullable();
             $table->enum('retrieval_process',[1,2,3])->nullable();
-            $table->enum('status', [1,2])->nullable();
+            $table->enum('donor_status', [1,2])->nullable();
             $table->timestamps();
         });
     }

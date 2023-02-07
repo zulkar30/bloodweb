@@ -23,6 +23,7 @@ use File;
 use App\Models\User;
 use App\Models\Operational\Donor;
 use App\Models\MasterData\BloodType;
+use App\Models\MasterData\DonorType;
 use App\Models\MasterData\Profession;
 
 // Third Party
@@ -48,8 +49,9 @@ class DonorController extends Controller
         $donor = Donor::orderBy('created_at', 'desc')->get();
         $profession = Profession::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $donor_type = DonorType::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.donor.index', compact('donor', 'profession', 'blood_type'));
+        return view('pages.backsite.operational.donor.index', compact('donor', 'profession', 'blood_type', 'donor_type'));
     }
 
     /**
@@ -125,8 +127,9 @@ class DonorController extends Controller
         // Ditampilkan pada form sebagai pilihan
         $profession = Profession::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $donor_type = DonorType::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.donor.edit', compact('donor', 'profession', 'blood_type'));
+        return view('pages.backsite.operational.donor.edit', compact('donor', 'profession', 'blood_type', 'donor_type'));
     }
 
     /**

@@ -75,6 +75,29 @@
                                                 <h4 class="form-section"><i class="fa fa-edit"></i> Form Aftap</h4>
 
                                                 <div
+                                                    class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Donor <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="donor_id" id="donor_id"
+                                                            class="form-control select2" required>
+                                                            <option value="{{ old('donor_id', isset($aftap) ? $aftap->donor_id : '') }}" disabled selected>{{ $aftap->donor->name }}
+                                                            </option>
+                                                            @foreach ($donor as $key => $donor_item)
+                                                                <option value="{{ $donor_item->id }}">
+                                                                    {{ $donor_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('blood_type_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('blood_type_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
                                                     class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                     <label class="col-md-3 label-control">Blood Type <code
                                                             style="color:red;">required</code></label>
@@ -127,35 +150,12 @@
                                                         <input type="text" id="volume" name="volume"
                                                             class="form-control"
                                                             placeholder="example dentist or dermatology"
-                                                            value="{{ old('volume', isset($aftap) ? $aftap->volume : '') }}"
+                                                            value="{{ old('volume', isset($aftap) ? $aftap->volume . ' Kantong' : '') }}"
                                                             autocomplete="off" required>
 
                                                         @if ($errors->has('volume'))
                                                             <p style="font-style: bold; color: red;">
                                                                 {{ $errors->first('volume') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Donor <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="donor_id" id="donor_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('donor_id', isset($aftap) ? $aftap->donor_id : '') }}" disabled selected>{{ $aftap->donor->name }}
-                                                            </option>
-                                                            @foreach ($donor as $key => $donor_item)
-                                                                <option value="{{ $donor_item->id }}">
-                                                                    {{ $donor_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                        @if ($errors->has('blood_type_id'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type_id') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>

@@ -4,7 +4,6 @@
         <td>{{ isset($donor->name) ? $donor->name : 'N/A' }}</td>
     </tr>
     <tr>
-    <tr>
         <th>Profession</th>
         <td>{{ isset($donor->profession->name) ? $donor->profession->name : 'N/A' }}</td>
     </tr>
@@ -19,9 +18,9 @@
     <tr>
         <th>Gender</th>
         <td>
-            @if($blood_donor->gender == 1)
+            @if($donor->gender == 1)
                 <span>{{ 'Laki-laki' }}</span>
-            @elseif($blood_donor->gender == 2)
+            @elseif($donor->gender == 2)
                 <span>{{ 'Perempuan' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -43,5 +42,9 @@
     <tr>
         <th>Blood Type</th>
         <td>{{ isset($donor->blood_type->name) ? $donor->blood_type->name : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Donor Type</th>
+        <td>{{ isset($donor->donor_type->name) ? $donor->donor_type->name : 'N/A' }}</td>
     </tr>
 </table>

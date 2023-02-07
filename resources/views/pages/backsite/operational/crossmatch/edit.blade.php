@@ -187,15 +187,15 @@
                                                             required>
                                                             <option value="{{ old('result', isset($crossmatch) ? $crossmatch->result : '') }}" disabled selected>
                                                                 @if ($crossmatch->result == 1)
-                                                                    <span>{{ 'Positif' }}</span>
+                                                                    <span>{{ 'Reaktif' }}</span>
                                                                 @elseif($crossmatch->result == 2)
-                                                                    <span>{{ 'Negatif' }}</span>
+                                                                    <span>{{ 'Non-Reaktif' }}</span>
                                                                 @else
                                                                     <span>{{ 'N/A' }}</span>
                                                                 @endif
                                                             </option>
-                                                            <option value="1">Positif</option>
-                                                            <option value="2">Negatif</option>
+                                                            <option value="1">Reaktif</option>
+                                                            <option value="2">Non-Reaktif</option>
                                                         </select>
 
                                                         @if ($errors->has('result'))

@@ -20,12 +20,14 @@ class BloodDonor extends Model
     protected $fillable = [
         'officer_id',
         'blood_type_id',
-        'name',
+        'pouch_type_id',
+        'donor_type_id',
+        'donor_id',
         'gender',
-        'hb',
-        'tm',
-        'bb',
-        'status',
+        'age',
+        'donor_reaction',
+        'retrieval_process',
+        'donor_status',
         'created_at',
         'updated_at',
     ];
@@ -40,5 +42,23 @@ class BloodDonor extends Model
     public function blood_type()
     {
         return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
+    }
+
+    // Relasi one to many
+    public function pouch_type()
+    {
+        return $this->belongsTo('App\Models\MasterData\PouchType', 'pouch_type_id', 'id');
+    }
+
+    // Relasi one to many
+    public function donor_type()
+    {
+        return $this->belongsTo('App\Models\MasterData\DonorType', 'donor_type_id', 'id');
+    }
+
+    // Relasi one to many
+    public function donor()
+    {
+        return $this->belongsTo('App\Models\Operational\Donor', 'donor_id', 'id');
     }
 }

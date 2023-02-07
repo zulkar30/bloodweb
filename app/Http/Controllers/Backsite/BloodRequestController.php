@@ -77,6 +77,8 @@ class BloodRequestController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
+        $data['status'] =  2;
+
         // Kirim data ke database
         $blood_request = BloodRequest::create($data);
 

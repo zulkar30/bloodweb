@@ -7,9 +7,9 @@
         <th>Fase 1</th>
         <td>
             @if ($crossmatch->fase1 == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($crossmatch->fase1 == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -19,9 +19,9 @@
         <th>Fase 2</th>
         <td>
             @if ($crossmatch->fase2 == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($crossmatch->fase2 == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -31,9 +31,9 @@
         <th>Fase 3</th>
         <td>
             @if ($crossmatch->fase3 == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($crossmatch->fase3 == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -43,9 +43,9 @@
         <th>Result</th>
         <td>
             @if ($crossmatch->result == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span class="badge badge-danger">{{ 'Reaktif' }}</span>
             @elseif($crossmatch->result == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span class="badge badge-success">{{ 'Non-Reaktif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif

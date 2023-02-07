@@ -5,10 +5,6 @@
     </tr>
     <tr>
     <tr>
-        <th>Room</th>
-        <td>{{ isset($patient->room->name) ? $patient->room->name : 'N/A' }}</td>
-    </tr>
-    <tr>
         <th>Birth Place</th>
         <td>{{ isset($patient->birth_place) ? $patient->birth_place : 'N/A' }}</td>
     </tr>
@@ -19,9 +15,9 @@
     <tr>
         <th>Gender</th>
         <td>
-            @if($blood_donor->gender == 1)
+            @if($patient->gender == 1)
                 <span>{{ 'Laki-laki' }}</span>
-            @elseif($blood_donor->gender == 2)
+            @elseif($patient->gender == 2)
                 <span>{{ 'Perempuan' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -43,5 +39,17 @@
     <tr>
         <th>Blood Type</th>
         <td>{{ isset($patient->blood_type->name) ? $patient->blood_type->name : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Maintenance Section</th>
+        <td>{{ isset($patient->maintenance_section->name) ? $patient->maintenance_section->name : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Room</th>
+        <td>{{ isset($patient->room->name) ? $patient->room->name : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Diagnosis</th>
+        <td>{{ isset($patient->diagnosis) ? $patient->diagnosis : 'N/A' }}</td>
     </tr>
 </table>

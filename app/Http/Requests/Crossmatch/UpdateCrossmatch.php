@@ -33,22 +33,22 @@ class UpdateCrossmatch extends FormRequest
     {
         return [
             'officer_id' => [
-                'integer',
+                'nullable', 'integer',
             ],
             'blood_type_id' => [
-                'integer'
+                'nullable', 'integer'
             ],
             'fase1' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'fase2' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'fase3' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'result' => [
-                'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
         ];
     }

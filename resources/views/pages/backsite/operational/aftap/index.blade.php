@@ -77,6 +77,28 @@
                                                             submit button.</p>
                                                     </div>
 
+                                                    <div class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Donor <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="donor_id" id="donor_id" class="form-control select2"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                </option>
+                                                                @foreach ($donor as $key => $donor_item)
+                                                                    <option value="{{ $donor_item->id }}">
+                                                                        {{ $donor_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+    
+                                                            @if ($errors->has('donor_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('donor_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                     <div
                                                         class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Blood Type <code
@@ -142,50 +164,27 @@
                                                 </div>
 
                                                 <div
-                                                        class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Donor <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="donor_id" id="donor_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                    class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Officer <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="officer_id" id="officer_id" class="form-control select2"
+                                                            required>
+                                                            <option value="{{ '' }}" disabled selected>Choose
+                                                            </option>
+                                                            @foreach ($officer as $key => $officer_item)
+                                                                <option value="{{ $officer_item->id }}">
+                                                                    {{ $officer_item->name }}
                                                                 </option>
-                                                                @foreach ($donor as $key => $donor_item)
-                                                                    <option value="{{ $donor_item->id }}">
-                                                                        {{ $donor_item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                            @endforeach
+                                                        </select>
 
-                                                            @if ($errors->has('donor_id'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('donor_id') }}</p>
-                                                            @endif
-                                                        </div>
+                                                        @if ($errors->has('officer_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('officer_id') }}</p>
+                                                        @endif
                                                     </div>
-
-                                                    <div
-                                                        class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Officer <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="officer_id" id="officer_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($officer as $key => $officer_item)
-                                                                    <option value="{{ $officer_item->id }}">
-                                                                        {{ $officer_item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if ($errors->has('officer_id'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('officer_id') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
+                                                </div>
 
                                                 <div class="form-actions text-right">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan"
@@ -234,8 +233,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Date</th>
+                                                        <th>Name</th>
                                                         <th>Blood Type</th>
-                                                        <th>Volume</th>
                                                         <th style="text-align:center; width:150px;">Action</th>
                                                     </tr>
                                                 </thead>
@@ -244,9 +243,8 @@
                                                         <tr data-entry-id="{{ $aftap_item->id }}">
                                                             <td>{{ isset($aftap_item->created_at) ? date('d/m/Y H:i:s', strtotime($aftap_item->created_at)) : '' }}
                                                             </td>
+                                                            <td>{{ $aftap_item->donor->name ?? '' }}</td>
                                                             <td>{{ $aftap_item->blood_type->name ?? '' }}</td>
-                                                            <td>{{ $aftap_item->volume . ' Kantong' ?? '' }}
-                                                            </td>
                                                             <td class="text-center">
 
                                                                 <div class="btn-group mr-1 mb-1">
@@ -298,8 +296,8 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>Date</th>
+                                                        <th>Name</th>
                                                         <th>Blood Type</th>
-                                                        <th>Volume</th>
                                                         <th style="text-align:center; width:150px;">Action</th>
                                                     </tr>
                                                 </tfoot>

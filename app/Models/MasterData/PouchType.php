@@ -28,4 +28,10 @@ class PouchType extends Model
     {
         return $this->hasMany('App\Models\Operational\Aftap', 'pouch_type_id');
     }
+
+    // Relasi one to many
+    public function blood_donor()
+    {
+        return $this->hasMany('App\Models\Operational\BloodDonor', 'pouch_type_id');
+    }
 }

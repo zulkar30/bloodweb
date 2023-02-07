@@ -74,19 +74,25 @@
 
                                                 <h4 class="form-section"><i class="fa fa-edit"></i> Form Blood Donor</h4>
 
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="name">Name <code
+                                                <div
+                                                    class="form-group row {{ $errors->has('donor') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Donor <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="name" name="name"
-                                                            class="form-control"
-                                                            placeholder="example dentist or dermatology"
-                                                            value="{{ old('name', isset($blood_donor) ? $blood_donor->name : '') }}"
-                                                            autocomplete="off" required>
+                                                        <select name="donor" id="donor"
+                                                            class="form-control select2">
+                                                            <option value="{{ old('donor', isset($blood_donor) ? $blood_donor->donor : '') }}" disabled selected>{{ $blood_donor->donor->name }}
+                                                            </option>
+                                                            @foreach ($donor as $key => $donor_item)
+                                                                <option value="{{ $donor_item->id }}">
+                                                                    {{ $donor_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
 
-                                                        @if ($errors->has('name'))
+                                                        @if ($errors->has('donor'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('name') }}</p>
+                                                                {{ $errors->first('donor') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -117,73 +123,17 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="hb">Hemoglobin <code
+                                                    <label class="col-md-3 label-control" for="age">Age <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="hb" name="hb"
-                                                            class="form-control" value="{{ old('hb', isset($blood_donor) ? $blood_donor->hb : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                        <input type="text" id="age" name="age"
+                                                            class="form-control" value="{{ old('age', isset($blood_donor) ? $blood_donor->age . ' Tahun' : '') }}"
+                                                            autocomplete="off" placeholder="example 27 Tahun"
                                                             required>
 
-                                                        @if ($errors->has('hb'))
+                                                        @if ($errors->has('age'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('hb') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="tm">Tekanan Darah <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="tm" name="tm"
-                                                            class="form-control" value="{{ old('tm', isset($blood_donor) ? $blood_donor->tm : '') }}"
-                                                            autocomplete="off"
-                                                            placeholder="example Jalan Pramuka Gang Haji Ilyas" required>
-
-                                                        @if ($errors->has('tm'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('tm') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="bb">Berat Badan <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="bb" name="bb"
-                                                            class="form-control" value="{{ old('bb', isset($blood_donor) ? $blood_donor->bb : '') }}"
-                                                            autocomplete="off" placeholder="example 23 Tahun" required>
-
-                                                        @if ($errors->has('bb'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('bb') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="form-group row {{ $errors->has('status') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Gender <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="status" id="status" class="form-control select2"
-                                                            required>
-                                                            <option value="{{ old('status', isset($blood_donor) ? $blood_donor->status : '') }}" disabled selected>
-                                                                @if ($blood_donor->status ==1)
-                                                                    <span>Setuju</span>
-                                                                @else
-                                                                    <span>Tolak</span>
-                                                                @endif
-                                                            </option>
-                                                            <option value="1">Setuju</option>
-                                                            <option value="2">Tolak</option>
-                                                        </select>
-
-                                                        @if ($errors->has('status'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('status') }}</p>
+                                                                {{ $errors->first('age') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -207,6 +157,133 @@
                                                         @if ($errors->has('blood_type_id'))
                                                             <p style="font-style: bold; color: red;">
                                                                 {{ $errors->first('blood_type_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('donor_type_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Donor Type <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="donor_type_id" id="donor_type_id"
+                                                            class="form-control select2" required>
+                                                            <option value="{{ old('donor_type_id', isset($blood_donor) ? $blood_donor->donor_type_id : '') }}" disabled selected>{{ $blood_donor->donor_type->name }}
+                                                            </option>
+                                                            @foreach ($donor_type as $key => $donor_type_item)
+                                                                <option value="{{ $donor_type_item->id }}">
+                                                                    {{ $donor_type_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('donor_type_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('donor_type_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('pouch_type_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Pouch Type <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="pouch_type_id" id="pouch_type_id"
+                                                            class="form-control select2" required>
+                                                            <option value="{{ old('pouch_type_id', isset($blood_donor) ? $blood_donor->pouch_type_id : '') }}" disabled selected>{{ $blood_donor->pouch_type->name }}
+                                                            </option>
+                                                            @foreach ($pouch_type as $key => $pouch_type_item)
+                                                                <option value="{{ $pouch_type_item->id }}">
+                                                                    {{ $pouch_type_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('pouch_type_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('pouch_type_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('donor_reaction') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Donor Reaction <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="donor_reaction" id="donor_reaction" class="form-control select2"
+                                                            required>
+                                                            <option value="{{ old('donor_reaction', isset($blood_donor) ? $blood_donor->donor_reaction : '') }}" disabled selected>
+                                                                @if ($blood_donor->donor_reaction ==1)
+                                                                    <span>Pingsan</span>
+                                                                @elseif($blood_donor->donor_reaction ==2)
+                                                                    <span>Mual</span>
+                                                                @else
+                                                                    <span>Dll</span>
+                                                                @endif
+                                                            </option>
+                                                            <option value="1">Pingsan</option>
+                                                            <option value="2">Mual</option>
+                                                            <option value="3">Dll</option>
+                                                        </select>
+
+                                                        @if ($errors->has('donor_reaction'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('donor_reaction') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('retrieval_process') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Retrieval Process <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="retrieval_process" id="retrieval_process" class="form-control select2"
+                                                            required>
+                                                            <option value="{{ old('retrieval_process', isset($blood_donor) ? $blood_donor->retrieval_process : '') }}" disabled selected>
+                                                                @if ($blood_donor->retrieval_process ==1)
+                                                                    <span>Lancar</span>
+                                                                @elseif($blood_donor->retrieval_process ==2)
+                                                                    <span>Macet</span>
+                                                                @else
+                                                                    <span>Dll</span>
+                                                                @endif
+                                                            </option>
+                                                            <option value="1">Lancar</option>
+                                                            <option value="2">Macet</option>
+                                                            <option value="3">Dll</option>
+                                                        </select>
+
+                                                        @if ($errors->has('retrieval_process'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('retrieval_process') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('donor_status') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Donor Status <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="donor_status" id="donor_status" class="form-control select2"
+                                                            required>
+                                                            <option value="{{ old('donor_status', isset($blood_donor) ? $blood_donor->donor_status : '') }}" disabled selected>
+                                                                @if ($blood_donor->donor_status ==1)
+                                                                    <span>Pendonor Baru</span>
+                                                                @else
+                                                                    <span>Pendonor Lama</span>
+                                                                @endif
+                                                            </option>
+                                                            <option value="1">Pendonor Baru</option>
+                                                            <option value="2">Pendonor Lama</option>
+                                                        </select>
+
+                                                        @if ($errors->has('donor_status'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('donor_status') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>

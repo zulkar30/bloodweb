@@ -100,13 +100,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('fase1') ? 'has-error' : '' }}">
+                                                    <div class="form-group row {{ $errors->has('fase1') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Fase 1 <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="fase1" id="fase1"
-                                                                class="form-control select2" required>
+                                                            <select name="fase1" id="fase1" class="form-control select2"
+                                                                required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -120,13 +119,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('fase2') ? 'has-error' : '' }}">
+                                                    <div class="form-group row {{ $errors->has('fase2') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Fase 2 <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="fase2" id="fase2"
-                                                                class="form-control select2" required>
+                                                            <select name="fase2" id="fase2" class="form-control select2"
+                                                                required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -140,13 +138,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('fase3') ? 'has-error' : '' }}">
+                                                    <div class="form-group row {{ $errors->has('fase3') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Fase 3 <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="fase3" id="fase3"
-                                                                class="form-control select2" required>
+                                                            <select name="fase3" id="fase3" class="form-control select2"
+                                                                required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -165,12 +162,12 @@
                                                         <label class="col-md-3 label-control">Result <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="result" id="result"
-                                                                class="form-control select2" required>
+                                                            <select name="result" id="result" class="form-control select2"
+                                                                required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
-                                                                <option value="1">Positif</option>
-                                                                <option value="2">Negatif</option>
+                                                                <option value="1">Reaktif</option>
+                                                                <option value="2">Non-Reaktif</option>
                                                             </select>
 
                                                             @if ($errors->has('result'))
@@ -203,12 +200,12 @@
                                                         </div>
                                                     </div>
 
-                                                <div class="form-actions text-right">
-                                                    <button type="submit" style="width:120px;" class="btn btn-cyan"
-                                                        onclick="return confirm('Are you sure want to save this data ?')">
-                                                        <i class="la la-check-square-o"></i> Submit
-                                                    </button>
-                                                </div>
+                                                    <div class="form-actions text-right">
+                                                        <button type="submit" style="width:120px;" class="btn btn-cyan"
+                                                            onclick="return confirm('Are you sure want to save this data ?')">
+                                                            <i class="la la-check-square-o"></i> Submit
+                                                        </button>
+                                                    </div>
                                             </form>
 
                                         </div>
@@ -263,9 +260,11 @@
                                                             <td>{{ $crossmatch_item->blood_type->name ?? '' }}</td>
                                                             <td>
                                                                 @if ($crossmatch_item->result == 1)
-                                                                    <span class="badge badge-success">{{ 'Positif' }}</span>
+                                                                    <span
+                                                                        class="badge badge-danger">{{ 'Reaktif' }}</span>
                                                                 @elseif($crossmatch_item->result == 2)
-                                                                    <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                                                                    <span
+                                                                        class="badge badge-success">{{ 'Non-Reaktif' }}</span>
                                                                 @else
                                                                     <span>{{ 'N/A' }}</span>
                                                                 @endif

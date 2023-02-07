@@ -32,8 +32,20 @@ class UpdateAftap extends FormRequest
     public function rules()
     {
         return [
+            'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'donor_id' => [
+                'nullable', 'integer',
+            ],
+            'pouch_type_id' => [
+                'nullable', 'integer',
+            ],
+            'blood_type_id' => [
+                'nullable', 'integer'
+            ],
             'volume' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ]
         ];
     }

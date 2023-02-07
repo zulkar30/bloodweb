@@ -32,27 +32,42 @@ class UpdatePatient extends FormRequest
     public function rules()
     {
         return [
+            'room_id' => [
+                'nullable', 'integer'
+            ],
+            'blood_type_id' => [
+                'nullable', 'integer'
+            ],
+            'maintenance_section_id' => [
+                'nullable', 'integer'
+            ],
             'name' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'birth_place' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'birth_date' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
+            ],
+            'gender' => [
+                'nullable', 'string', 'max:255'
             ],
             'contact' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'address' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'age' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
+            ],
+            'diagnosis' => [
+                'nullable', 'string', 'max:255'
             ],
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
-            ],
+            ]
         ];
     }
 }

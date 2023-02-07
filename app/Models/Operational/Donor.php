@@ -20,6 +20,7 @@ class Donor extends Model
     protected $fillable = [
         'profession_id',
         'blood_type_id',
+        'donor_type_id',
         'name',
         'birth_place',
         'birth_date',
@@ -36,6 +37,12 @@ class Donor extends Model
     public function aftap()
     {
         return $this->hasMany('App\Models\Operational\Aftap', 'donor_id');
+    }
+
+    // Relasi one to many
+    public function blood_donor()
+    {
+        return $this->hasMany('App\Models\Operational\BloodDonor', 'donor_id');
     }
 
     // Relasi one to many

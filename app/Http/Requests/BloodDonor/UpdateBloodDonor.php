@@ -32,18 +32,36 @@ class UpdateBloodDonor extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required', 'string', 'max:255'
+            'officer_id' => [
+                'nullable', 'integer',
             ],
-            'hb' => [
-                'required', 'string', 'max:255'
+            'blood_type_id' => [
+                'nullable', 'integer'
             ],
-            'tm' => [
-                'required', 'string', 'max:255'
+            'pouch_type_id' => [
+                'nullable', 'integer'
             ],
-            'bb' => [
-                'required', 'string', 'max:255'
+            'donor_type_id' => [
+                'nullable', 'integer'
             ],
+            'donor_id' => [
+                'nullable', 'integer'
+            ],
+            'gender' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'age' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'donor_reaction' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'retrieval_process' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'donor_status' => [
+                'nullable', 'string', 'max:255'
+            ]
         ];
     }
 }

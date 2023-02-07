@@ -7,9 +7,9 @@
         <th>HIV</th>
         <td>
             @if ($screening->hiv == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($screening->hiv == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -19,9 +19,9 @@
         <th>HCV</th>
         <td>
             @if ($screening->hcv == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($screening->hcv == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -31,9 +31,9 @@
         <th>HBSAG</th>
         <td>
             @if ($screening->hbsag == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($screening->hbsag == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -43,9 +43,9 @@
         <th>VDRl</th>
         <td>
             @if ($screening->vdrl == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span >{{ 'Positif' }}</span>
             @elseif($screening->vdrl == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
@@ -55,9 +55,9 @@
         <th>Result</th>
         <td>
             @if ($screening->result == 1)
-                <span class="badge badge-success">{{ 'Positif' }}</span>
+                <span class="badge badge-danger">{{ 'Reaktif' }}</span>
             @elseif($screening->result == 2)
-                <span class="badge badge-warning">{{ 'Negatif' }}</span>
+                <span class="badge badge-success">{{ 'Non-Reaktif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif

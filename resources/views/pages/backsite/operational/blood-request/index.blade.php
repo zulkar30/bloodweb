@@ -128,8 +128,8 @@
                                                         <label class="col-md-3 label-control" for="wb">Whole Blood <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="wb" name="wb"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="wb" name="wb"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('wb') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('wb'))
@@ -140,11 +140,11 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="we">Washes Eritrosit <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="we">Washes Eritrosit
+                                                            <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="we" name="we"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="we" name="we"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('we') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('we'))
@@ -155,11 +155,11 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="prc">Packed Red Cell <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="prc">Packed Red Cell
+                                                            <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="prc" name="prc"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="prc" name="prc"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('prc') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('prc'))
@@ -170,11 +170,11 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="tc">Trombosite Concentrate <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="tc">Trombosite
+                                                            Concentrate <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="tc" name="tc"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="tc" name="tc"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('tc') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('tc'))
@@ -185,11 +185,11 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="ffp">Fresh Frozen Plasma <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="ffp">Fresh Frozen
+                                                            Plasma <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="ffp" name="ffp"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="ffp" name="ffp"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('ffp') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('ffp'))
@@ -203,8 +203,8 @@
                                                         <label class="col-md-3 label-control" for="cry">Cryocypate <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="cry" name="cry"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="cry" name="cry"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('cry') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('cry'))
@@ -218,8 +218,8 @@
                                                         <label class="col-md-3 label-control" for="plasma">Plasma <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="plasma" name="plasma"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="plasma" name="plasma"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('plasma') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('plasma'))
@@ -230,11 +230,11 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="prp">Platelet Rich Plasma <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="prp">Platelet Rich
+                                                            Plasma <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="prp" name="prp"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="prp" name="prp"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('prp') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('prp'))
@@ -245,11 +245,11 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="total">Total Permintaan <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="total">Total Permintaan
+                                                            <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="total" name="total"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="total" name="total"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('total') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('total'))
@@ -259,12 +259,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
+                                                    {{-- <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="fulfilled">Terpenuhi <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="fulfilled" name="fulfilled"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                            <input type="number" id="fulfilled" name="fulfilled"
+                                                                class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('fulfilled') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('fulfilled'))
@@ -272,9 +272,9 @@
                                                                     {{ $errors->first('fulfilled') }}</p>
                                                             @endif
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
-                                                    <div
+                                                    {{-- <div
                                                         class="form-group row {{ $errors->has('status') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Status <code
                                                                 style="color:red;">required</code></label>
@@ -292,7 +292,7 @@
                                                                     {{ $errors->first('status') }}</p>
                                                             @endif
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                     <div
                                                         class="form-group row {{ $errors->has('doctor_id') ? 'has-error' : '' }}">
@@ -406,7 +406,10 @@
                                                                             class="badge badge-success">{{ 'Approved' }}</span>
                                                                     @elseif($blood_request_item->status == 2)
                                                                         <span
-                                                                            class="badge badge-warning">{{ 'Rejected' }}</span>
+                                                                            class="badge badge-warning">{{ 'Waiting' }}</span>
+                                                                    @elseif($blood_request_item->status == 3)
+                                                                        <span
+                                                                            class="badge badge-danger">{{ 'Rejected' }}</span>
                                                                     @else
                                                                         <span>{{ 'N/A' }}</span>
                                                                     @endif

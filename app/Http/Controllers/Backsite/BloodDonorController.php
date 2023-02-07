@@ -22,6 +22,9 @@ use Gate;
 use App\Models\Operational\Officer;
 use App\Models\Operational\BloodDonor;
 use App\Models\MasterData\BloodType;
+use App\Models\MasterData\DonorType;
+use App\Models\MasterData\PouchType;
+use App\Models\Operational\Donor;
 
 // Third Party
 
@@ -47,9 +50,12 @@ class BloodDonorController extends Controller
         $blood_donor = BloodDonor::orderBy('created_at', 'desc')->get();
         // Ditampilkan pada pilihan
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $pouch_type = PouchType::orderBy('name', 'asc')->get();
+        $donor_type = DonorType::orderBy('name', 'asc')->get();
+        $donor = Donor::orderBy('name', 'asc')->get();
         $officer = Officer::orderBy('name', 'asc')->get();
         
-        return view('pages.backsite.operational.blood-donor.index', compact('blood_donor', 'blood_type', 'officer'));
+        return view('pages.backsite.operational.blood-donor.index', compact('blood_donor', 'blood_type', 'officer', 'pouch_type', 'donor_type', 'donor'));
     }
 
     /**
@@ -72,6 +78,8 @@ class BloodDonorController extends Controller
     {
         // Ambil semua data dari frontsite
         $data = $request->all();
+
+        $data['age'] = str_replace(' Tahun', '', $data['age']);
 
         // Kirim data ke database
         $blood_donor = BloodDonor::create($data);
@@ -108,8 +116,11 @@ class BloodDonorController extends Controller
         // Ditampilkan pada form sebagai pilihan
         $officer = Officer::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $pouch_type = PouchType::orderBy('name', 'asc')->get();
+        $donor_type = DonorType::orderBy('name', 'asc')->get();
+        $donor = Donor::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.blood-donor.edit', compact('blood_donor', 'officer', 'blood_type'));
+        return view('pages.backsite.operational.blood-donor.edit', compact('blood_donor', 'officer', 'blood_type', 'pouch_type', 'donor_type', 'donor'));
     }
 
     /**
@@ -123,6 +134,8 @@ class BloodDonorController extends Controller
     {
         // Ambil semua data dari frontsite
         $data = $request->all();
+
+        $data['age'] = str_replace(' Tahun', '', $data['age']);
 
         // Update data ke database
         $blood_donor->update($data);

@@ -77,6 +77,8 @@ class AftapController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
+        $data['volume'] = str_replace(' Kantong', '', $data['volume']);
+
         // Kirim data ke database
         $aftap = Aftap::create($data);
 
@@ -129,6 +131,8 @@ class AftapController extends Controller
     {
         // Ambil semua data dari frontsite
         $data = $request->all();
+
+        $data['volume'] = str_replace(' Kantong', '', $data['volume']);
 
         // Update data ke database
         $aftap->update($data);

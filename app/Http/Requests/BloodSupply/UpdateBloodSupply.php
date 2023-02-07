@@ -32,8 +32,11 @@ class UpdateBloodSupply extends FormRequest
     public function rules()
     {
         return [
+            'blood_type_id' => [
+                'nullable', 'integer'
+            ],
             'volume' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ]
         ];
     }

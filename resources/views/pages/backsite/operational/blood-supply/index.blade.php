@@ -105,7 +105,7 @@
                                                         <label class="col-md-3 label-control" for="volume">Volume <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="volume" name="volume"
+                                                            <input type="number" id="volume" name="volume"
                                                                 class="form-control" placeholder="example volume 10 Kantong"
                                                                 value="{{ old('volume') }}" autocomplete="off"
                                                                 data-inputmask="'alias': 'numeric', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': ' Kantong', 'placeholder': '0'"
