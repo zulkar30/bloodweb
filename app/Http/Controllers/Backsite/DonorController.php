@@ -75,8 +75,6 @@ class DonorController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
-        $data['age'] = str_replace(' Tahun', '', $data['age']);
-
         // upload process here
         $path = public_path('app/public/assets/file-donor');
         if(!File::isDirectory($path)){
@@ -201,6 +199,30 @@ class DonorController extends Controller
 
         // Sweetalert
         alert()->success('Success Delete Message', 'Successfully deleted Donor');
+        // Tempat akan ditampilkannya Sweetalert
+        return back();
+    }
+
+    public function accept(Request $request, $id)
+    {
+        $donor = Donor::findOrFail($id);
+        $donor->status = 1; // Set the status to "Diterima"
+        $donor->save();
+
+        // Sweetalert
+        alert()->success('Success Message', 'Successfully Accept');
+        // Tempat akan ditampilkannya Sweetalert
+        return back();
+    }
+
+    public function reject(Request $request, $id)
+    {
+        $donor = Donor::findOrFail($id);
+        $donor->status = 3; // Set the status to "Ditolak"
+        $donor->save();
+
+        // Sweetalert
+        alert()->success('Success Message', 'Successfully Reject');
         // Tempat akan ditampilkannya Sweetalert
         return back();
     }

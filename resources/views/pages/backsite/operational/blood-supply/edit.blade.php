@@ -71,50 +71,25 @@
                                             @csrf
 
                                             <div class="form-body">
-
-                                                <h4 class="form-section"><i class="fa fa-edit"></i> Form Blood Supply</h4>
-
-                                                <div
-                                                    class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Blood Type <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="blood_type_id" id="blood_type_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('blood_type_id', isset($blood_supply) ? $blood_supply->blood_type_id : '') }}" disabled selected>{{ $blood_supply->blood_type->name }}
-                                                            </option>
-                                                            @foreach ($blood_type as $key => $blood_type_item)
-                                                                <option value="{{ $blood_type_item->id }}">
-                                                                    {{ $blood_type_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                        @if ($errors->has('blood_type_id'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type_id') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
+                                                <!-- Blood Type field -->
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="volume">Volume <code
-                                                            style="color:red;">required</code></label>
+                                                    <label class="col-md-3 label-control">Blood Type <code style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="volume" name="volume"
-                                                            class="form-control" placeholder="example volume 10 Kantong"
-                                                            value="{{ old('volume', isset($blood_supply) ? $blood_supply->volume . ' Kantong' : '') }}"
-                                                            autocomplete="off"
-                                                            data-inputmask="'alias': 'numeric', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': ' Kantong', 'placeholder': '0'"
-                                                            required>
-
-                                                        @if ($errors->has('volume'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('volume') }}</p>
-                                                        @endif
+                                                        <input type="text" class="form-control" value="{{ $blood_supply->blood_type->name }}" readonly>
                                                     </div>
                                                 </div>
-
+                                
+                                                <!-- Total Volume field -->
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control">Total Volume <code style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="text" class="form-control" value="{{ $totalVolume . ' Kantong' }}" readonly>
+                                                    </div>
+                                                </div>
+                                
+                                                <!-- Other form fields -->
+                                                <!-- ... -->
+                                
                                             </div>
 
                                             <div class="form-actions text-right">

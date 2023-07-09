@@ -9,7 +9,7 @@
             <!-- Content-->
             <div class="px-4 lg:px-[91px] pt-10">
                 <!-- Logo Brand -->
-                <a href="{{ route('login') }}" class="flex-shrink-0 inline-flex items-center">
+                <a href="{{ route('index') }}" class="flex-shrink-0 inline-flex items-center">
                     <img class="h-10" src="{{ asset('assets/frontsite/images/logo4.png') }}" alt="BloodWeb Logo" />
                 </a>
                 <!--End Logo Brand -->
@@ -73,7 +73,8 @@
                                 alt="" />
                         </div>
                         <p class="text-2xl leading-loose">
-                            BloodWeb telah membantu saya dalam proses birokrasi terkait donor darah maupun saat butuh darah yang
+                            BloodWeb telah membantu saya dalam proses birokrasi terkait donor darah maupun saat butuh darah
+                            yang
                             dibantu oleh petugas professional dan memberikan dampak yang sangat besar kepada
                             saya dan bagi yang membutuhkan
                         </p>

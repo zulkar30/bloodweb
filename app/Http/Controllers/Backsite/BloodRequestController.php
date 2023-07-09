@@ -52,6 +52,8 @@ class BloodRequestController extends Controller
         $officer = Officer::orderBy('name', 'asc')->get();
         $doctor = Doctor::orderBy('name', 'asc')->get();
         $patient = Patient::orderBy('name', 'asc')->get();
+
+        // dd($blood_request);
         
         return view('pages.backsite.operational.blood-request.index', compact('blood_request', 'blood_type', 'officer', 'doctor', 'patient'));
     }
@@ -76,6 +78,8 @@ class BloodRequestController extends Controller
     {
         // Ambil semua data dari frontsite
         $data = $request->all();
+
+        $data['total'] = str_replace(' Unit', '', $data['total']);
 
         $data['status'] =  2;
 
@@ -155,6 +159,32 @@ class BloodRequestController extends Controller
 
         // Sweetalert
         alert()->success('Success Delete Message', 'Successfully deleted Blood Request');
+        // Tempat akan ditampilkannya Sweetalert
+        return back();
+    }
+
+    public function accept(Request $request, $id)
+    {
+        $blood_request = BloodRequest::findOrFail($id);
+        $blood_request->status = 1; // Set status menjadi "Diterima"
+        $blood_request->fulfilled = $request->input('fulfilled'); // Ambil nilai fulfilled dari input form
+        $blood_request->save();
+
+        // Sweetalert
+        alert()->success('Success Message', 'Successfully accept Blood Request');
+        // Tempat akan ditampilkannya Sweetalert
+        return back();
+    }
+
+    public function reject($id)
+    {
+        $blood_request = BloodRequest::findOrFail($id);
+        $blood_request->status = 3; // Set status menjadi "Rejected"
+        $blood_request->fulfilled = 0; // Set nilai fulfilled menjadi 0
+        $blood_request->save();
+
+        // Sweetalert
+        alert()->success('Success Message', 'Successfully reject Blood Request');
         // Tempat akan ditampilkannya Sweetalert
         return back();
     }

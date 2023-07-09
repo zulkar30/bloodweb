@@ -36,7 +36,7 @@ class UpdateBloodSupply extends FormRequest
                 'nullable', 'integer'
             ],
             'volume' => [
-                'nullable', 'string', 'max:255'
+                'nullable',
             ]
         ];
     }

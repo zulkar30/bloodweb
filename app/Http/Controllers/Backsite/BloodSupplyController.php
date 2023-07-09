@@ -46,8 +46,26 @@ class BloodSupplyController extends Controller
         $blood_supply = BloodSupply::orderBy('created_at', 'desc')->get();
         // Ditampilkan pada pilihan
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+
+        // Buat array untuk menyimpan data BloodSupply yang sudah digabungkan
+        $merged_blood_supply = [];
+
+        foreach ($blood_supply as $blood_supply_item) {
+            $blood_type_id = $blood_supply_item->blood_type_id;
+
+            if (!isset($merged_blood_supply[$blood_type_id])) {
+                $merged_blood_supply[$blood_type_id] = [
+                    'blood_supply_item' => $blood_supply_item,
+                    'volume' => $blood_supply_item->volume,
+                    'count' => 1,
+                ];
+            } else {
+                $merged_blood_supply[$blood_type_id]['volume'] += $blood_supply_item->volume;
+                $merged_blood_supply[$blood_type_id]['count']++;
+            }
+        }
         
-        return view('pages.backsite.operational.blood-supply.index', compact('blood_supply', 'blood_type'));
+        return view('pages.backsite.operational.blood-supply.index', compact('merged_blood_supply', 'blood_type'));
     }
 
     /**
@@ -92,8 +110,15 @@ class BloodSupplyController extends Controller
     {
         abort_if(Gate::denies('blood_donor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('pages.backsite.operational.blood-supply.show', compact('blood_supply'));
+        $blood_type = $blood_supply->blood_type;
+        $merged_blood_supply = BloodSupply::where('blood_type_id', $blood_supply->blood_type_id)->get();
+        $totalVolume = $merged_blood_supply->sum('volume');
+
+        return view('pages.backsite.operational.blood-supply.show', compact('blood_supply', 'blood_type', 'totalVolume'));
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -105,11 +130,15 @@ class BloodSupplyController extends Controller
     {
         abort_if(Gate::denies('blood_donor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        // Calculate the total volume
+        $totalVolume = $blood_supply->volume;
+
         // Ditampilkan pada form sebagai pilihan
         $blood_type = BloodType::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.blood-supply.edit', compact('blood_supply', 'blood_type'));
+        return view('pages.backsite.operational.blood-supply.edit', compact('blood_supply', 'blood_type', 'totalVolume'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -130,9 +159,11 @@ class BloodSupplyController extends Controller
 
         // Sweetalert
         alert()->success('Success Update Message', 'Successfully updated Blood Supply');
+
         // Tempat akan ditampilkannya Sweetalert
         return redirect()->route('backsite.blood_supply.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -141,14 +172,20 @@ class BloodSupplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(BloodSupply $blood_supply)
-    {
-        abort_if(Gate::denies('blood_donor_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+{
+    abort_if(Gate::denies('blood_donor_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $blood_supply->delete();
+    // Get the blood type ID of the blood supply being deleted
+    $bloodTypeId = $blood_supply->blood_type_id;
 
-        // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Blood Supply');
-        // Tempat akan ditampilkannya Sweetalert
-        return back();
-    }
+    // Delete all blood supplies with the same blood type ID
+    BloodSupply::where('blood_type_id', $bloodTypeId)->delete();
+
+    // Sweetalert
+    alert()->success('Success Delete Message', 'Successfully deleted Blood Supply');
+
+    // Redirect back to the previous page
+    return back();
+}
+
 }

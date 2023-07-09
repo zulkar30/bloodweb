@@ -172,42 +172,35 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @forelse($blood_supply as $key => $blood_supply_item)
-                                                        <tr data-entry-id="{{ $blood_supply_item->id }}">
-                                                            <td>{{ isset($blood_supply_item->created_at) ? date('d/m/Y H:i:s', strtotime($blood_supply_item->created_at)) : '' }}
+                                                    @forelse($merged_blood_supply as $key => $blood_supply_item)
+                                                        <tr
+                                                            data-entry-id="{{ $blood_supply_item['blood_supply_item']->id }}">
+                                                            <td>{{ isset($blood_supply_item['blood_supply_item']->updated_at) ? date('d/m/Y H:i:s', strtotime($blood_supply_item['blood_supply_item']->updated_at)) : '' }}
                                                             </td>
-                                                            <td>{{ $blood_supply_item->blood_type->name ?? '' }}</td>
-                                                            <td>{{ $blood_supply_item->volume . ' Kantong' ?? '' }}
+                                                            <td>{{ $blood_supply_item['blood_supply_item']->blood_type->name ?? '' }}
                                                             </td>
+                                                            <td>{{ $blood_supply_item['volume'] . ' Kantong' ?? '' }}</td>
                                                             <td class="text-center">
-
                                                                 <div class="btn-group mr-1 mb-1">
                                                                     <button type="button"
                                                                         class="btn btn-info btn-sm dropdown-toggle"
                                                                         data-toggle="dropdown" aria-haspopup="true"
                                                                         aria-expanded="false">Action</button>
                                                                     <div class="dropdown-menu">
-
                                                                         @can('blood_supply_show')
                                                                             <a href="#mymodal"
-                                                                                data-remote="{{ route('backsite.blood_supply.show', $blood_supply_item->id) }}"
+                                                                                data-remote="{{ route('backsite.blood_supply.show', $blood_supply_item['blood_supply_item']->id) }}"
                                                                                 data-toggle="modal" data-target="#mymodal"
                                                                                 data-title="Blood Supply Detail"
-                                                                                class="dropdown-item">
-                                                                                Show
-                                                                            </a>
+                                                                                class="dropdown-item">Show</a>
                                                                         @endcan
-
                                                                         @can('blood_supply_edit')
                                                                             <a class="dropdown-item"
-                                                                                href="{{ route('backsite.blood_supply.edit', $blood_supply_item->id) }}">
-                                                                                Edit
-                                                                            </a>
+                                                                                href="{{ route('backsite.blood_supply.edit', $blood_supply_item['blood_supply_item']->id) }}">Edit</a>
                                                                         @endcan
-
                                                                         @can('blood_supply_delete')
                                                                             <form
-                                                                                action="{{ route('backsite.blood_supply.destroy', $blood_supply_item->id) }}"
+                                                                                action="{{ route('backsite.blood_supply.destroy', $blood_supply_item['blood_supply_item']->id) }}"
                                                                                 method="POST"
                                                                                 onsubmit="return confirm('Are you sure want to delete this data ?');">
                                                                                 <input type="hidden" name="_method"
@@ -218,13 +211,12 @@
                                                                                     value="Delete">
                                                                             </form>
                                                                         @endcan
-
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     @empty
-                                                        {{-- not found --}}
+                                                        {{-- empty --}}
                                                     @endforelse
                                                 </tbody>
                                                 <tfoot>

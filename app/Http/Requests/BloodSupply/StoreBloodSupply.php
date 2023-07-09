@@ -36,7 +36,7 @@ class StoreBloodSupply extends FormRequest
                 'required', 'integer'
             ],
             'volume' => [
-                'required', 'string', 'max:255'
+                'required'
             ]
         ];
     }

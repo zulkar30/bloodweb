@@ -128,7 +128,7 @@
                                                         <label class="col-md-3 label-control" for="wb">Whole Blood <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="wb" name="wb"
+                                                            <input type="number" id="wb" name="wb" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('wb') }}" autocomplete="off" required>
 
@@ -143,7 +143,7 @@
                                                         <label class="col-md-3 label-control" for="we">Washes Eritrosit
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="we" name="we"
+                                                            <input type="number" id="we" name="we" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('we') }}" autocomplete="off" required>
 
@@ -158,7 +158,7 @@
                                                         <label class="col-md-3 label-control" for="prc">Packed Red Cell
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="prc" name="prc"
+                                                            <input type="number" id="prc" name="prc" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('prc') }}" autocomplete="off" required>
 
@@ -173,7 +173,7 @@
                                                         <label class="col-md-3 label-control" for="tc">Trombosite
                                                             Concentrate <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="tc" name="tc"
+                                                            <input type="number" id="tc" name="tc" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('tc') }}" autocomplete="off" required>
 
@@ -188,7 +188,7 @@
                                                         <label class="col-md-3 label-control" for="ffp">Fresh Frozen
                                                             Plasma <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="ffp" name="ffp"
+                                                            <input type="number" id="ffp" name="ffp" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('ffp') }}" autocomplete="off" required>
 
@@ -203,7 +203,7 @@
                                                         <label class="col-md-3 label-control" for="cry">Cryocypate <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="cry" name="cry"
+                                                            <input type="number" id="cry" name="cry" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('cry') }}" autocomplete="off" required>
 
@@ -218,7 +218,7 @@
                                                         <label class="col-md-3 label-control" for="plasma">Plasma <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="plasma" name="plasma"
+                                                            <input type="number" id="plasma" name="plasma" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('plasma') }}" autocomplete="off" required>
 
@@ -233,7 +233,7 @@
                                                         <label class="col-md-3 label-control" for="prp">Platelet Rich
                                                             Plasma <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="prp" name="prp"
+                                                            <input type="number" id="prp" name="prp" oninput="calculateTotal()"
                                                                 class="form-control" placeholder="example 1 Unit"
                                                                 value="{{ old('prp') }}" autocomplete="off" required>
 
@@ -248,9 +248,9 @@
                                                         <label class="col-md-3 label-control" for="total">Total Permintaan
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="total" name="total"
+                                                            <input type="text" id="total" name="total"
                                                                 class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('total') }}" autocomplete="off" required>
+                                                                value="{{ old('total') }}" autocomplete="off" readonly>
 
                                                             @if ($errors->has('total'))
                                                                 <p style="font-style: bold; color: red;">
@@ -258,41 +258,6 @@
                                                             @endif
                                                         </div>
                                                     </div>
-
-                                                    {{-- <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="fulfilled">Terpenuhi <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="fulfilled" name="fulfilled"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('fulfilled') }}" autocomplete="off" required>
-
-                                                            @if ($errors->has('fulfilled'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('fulfilled') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div> --}}
-
-                                                    {{-- <div
-                                                        class="form-group row {{ $errors->has('status') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Status <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="status" id="status"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                <option value="1">Setuju</option>
-                                                                <option value="2">Tolak</option>
-                                                            </select>
-
-                                                            @if ($errors->has('status'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('status') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div> --}}
 
                                                     <div
                                                         class="form-group row {{ $errors->has('doctor_id') ? 'has-error' : '' }}">
@@ -390,6 +355,8 @@
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Name</th>
+                                                            <th>Blood Type</th>
+                                                            <th>Total Request</th>
                                                             <th>Status</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
@@ -399,7 +366,15 @@
                                                             <tr data-entry-id="{{ $blood_request_item->id }}">
                                                                 <td>{{ isset($blood_request_item->created_at) ? date('d/m/Y H:i:s', strtotime($blood_request_item->created_at)) : '' }}
                                                                 </td>
-                                                                <td>{{ $blood_request_item->patient->name ?? '' }}</td>
+                                                                <td>
+                                                                    @if (empty($blood_request_item->name))
+                                                                        {{ $blood_request_item->patient->name ?? '' }}
+                                                                    @else
+                                                                        {{ $blood_request_item->name }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{ $blood_request_item->blood_type->name }}</td>
+                                                                <td>{{ $blood_request_item->total . ' Unit' }}</td>
                                                                 <td>
                                                                     @if ($blood_request_item->status == 1)
                                                                         <span
@@ -454,6 +429,24 @@
                                                                                 </form>
                                                                             @endcan
 
+                                                                            @if ($blood_request_item->status == 2)
+                                                                                @can('blood_request_accept')
+                                                                                    <a href="#" class="dropdown-item"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#fulfilledModal{{ $blood_request_item->id }}">
+                                                                                        Accept
+                                                                                    </a>
+                                                                                @endcan
+
+                                                                                @can('blood_request_reject')
+                                                                                    <a href="#" class="dropdown-item"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#rejectModal{{ $blood_request_item->id }}">
+                                                                                        Reject
+                                                                                    </a>
+                                                                                @endcan
+                                                                            @endif
+
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -466,6 +459,8 @@
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Name</th>
+                                                            <th>Blood Type</th>
+                                                            <th>Total Request</th>
                                                             <th>Status</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
@@ -485,6 +480,64 @@
         </div>
     </div>
     <!-- END: Content-->
+
+    @foreach ($blood_request as $key => $blood_request_item)
+        <!-- Modal for Fulfilled -->
+        <div class="modal fade" id="fulfilledModal{{ $blood_request_item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="fulfilledModal{{ $blood_request_item->id }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fulfilledModal{{ $blood_request_item->id }}Label">Enter Fulfilled
+                            Value</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('backsite.blood_request.accept', $blood_request_item->id) }}"
+                            method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="fulfilledValue">Fulfilled Value:</label>
+                                <input type="number" name="fulfilled" class="form-control" id="fulfilledValue"
+                                    required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Accept</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+    @foreach ($blood_request as $key => $blood_request_item)
+        <!-- Modal for Reject -->
+        <div class="modal fade" id="rejectModal{{ $blood_request_item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="rejectModal{{ $blood_request_item->id }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="rejectModal{{ $blood_request_item->id }}Label">Reject Blood Request
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to reject this blood request?</p>
+                        <form action="{{ route('backsite.blood_request.reject', $blood_request_item->id) }}"
+                            method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 
 @endsection
 
@@ -552,6 +605,24 @@
         Fancybox.bind('[data-fancybox="gallery"]', {
             infinite: false
         });
+
+        function calculateTotal() {
+            // Get the input field values
+            var wb = Number(document.getElementById('wb').value) || 0;
+            var we = Number(document.getElementById('we').value) || 0;
+            var prc = Number(document.getElementById('prc').value) || 0;
+            var tc = Number(document.getElementById('tc').value) || 0;
+            var ffp = Number(document.getElementById('ffp').value) || 0;
+            var cry = Number(document.getElementById('cry').value) || 0;
+            var plasma = Number(document.getElementById('plasma').value) || 0;
+            var prp = Number(document.getElementById('prp').value) || 0;
+
+            // Calculate the total
+            var total = wb + we + prc + tc + ffp + cry + plasma + prp;
+
+            // Update the total input field value
+            document.getElementById('total').value = total + ' Unit';
+        }
     </script>
 
     <div class="modal fade" id="mymodal" tabindex="-1" role="dialog">

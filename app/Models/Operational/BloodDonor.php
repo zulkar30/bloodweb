@@ -23,8 +23,6 @@ class BloodDonor extends Model
         'pouch_type_id',
         'donor_type_id',
         'donor_id',
-        'gender',
-        'age',
         'donor_reaction',
         'retrieval_process',
         'donor_status',

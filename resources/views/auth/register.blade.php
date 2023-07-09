@@ -10,7 +10,7 @@
             <div class="px-4 lg:px-[91px] pt-10">
 
                 <!-- Logo Brand -->
-                <a href="{{ route('login') }}" class="flex-shrink-0 inline-flex items-center">
+                <a href="{{ route('index') }}" class="flex-shrink-0 inline-flex items-center">
                     <img class="h-10" src="{{ asset('assets/frontsite/images/logo4.png') }}" alt="Meet Doctor Logo" />
                 </a>
 

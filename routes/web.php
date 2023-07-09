@@ -23,6 +23,12 @@ use App\Http\Controllers\Backsite\BloodRequestController;
 use App\Http\Controllers\Backsite\BloodTypeController;
 use App\Http\Controllers\Backsite\DonorTypeController;
 use App\Http\Controllers\Backsite\MaintenanceSectionController;
+use App\Http\Controllers\Frontsite\AboutController;
+use App\Http\Controllers\Frontsite\BloodDonorController as FrontsiteBloodDonorController;
+use App\Http\Controllers\Frontsite\BloodRequestController as FrontsiteBloodRequestController;
+use App\Http\Controllers\Frontsite\ContactController;
+use App\Http\Controllers\Frontsite\HomeController;
+use App\Http\Controllers\Frontsite\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +41,9 @@ use App\Http\Controllers\Backsite\MaintenanceSectionController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
 // Backsite Page Start
 Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum', 'verified']], function(){
@@ -86,6 +92,8 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // Blood Request Page
     Route::resource('blood_request', BloodRequestController::class);
+    Route::post('blood_request/accept/{id}', [BloodRequestController::class, 'accept'])->name('blood_request.accept');
+    Route::post('blood_request/reject/{id}', [BloodRequestController::class, 'reject'])->name('blood_request.reject');
 
     // Blood Supply Page
     Route::resource('blood_supply', BloodSupplyController::class);
@@ -98,6 +106,8 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // Donor Page
     Route::resource('donor', DonorController::class);
+    Route::post('donor/{id}/accept', [DonorController::class, 'accept'])->name('donor.accept');
+    Route::post('donor/{id}/reject', [DonorController::class, 'reject'])->name('donor.reject');
 
     // Officer Page
     Route::resource('officer', OfficerController::class);
@@ -109,3 +119,29 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     Route::resource('screening', ScreeningController::class);
 });
 // Backsite Page End
+
+// Frontsite Page Start
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    // Blood Donor
+    Route::get('blood_donor', [FrontsiteBloodDonorController::class, 'index'])->name('blood_donor');
+    Route::post('blood_donor', [FrontsiteBloodDonorController::class, 'store'])->name('blood_donor.store');
+    Route::get('blood_donor/success', [FrontsiteBloodDonorController::class, 'success'])->name('blood_donor.success');
+
+    // Blood Request
+    Route::get('blood_request', [FrontsiteBloodRequestController::class, 'index'])->name('blood_request');
+    Route::post('blood_request', [FrontsiteBloodRequestController::class, 'store'])->name('blood_request.store');
+    Route::get('blood_request/success', [FrontsiteBloodRequestController::class, 'success'])->name('blood_request.success');
+
+    Route::resource('register_success', RegisterController::class);
+
+});
+
+// Home
+Route::get('/', [HomeController::class, 'index'])->name('index');
+// About
+Route::get('about', [AboutController::class, 'index'])->name('about');
+// Contact
+Route::get('contact', [ContactController::class, 'index'])->name('contact');
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('contact/success', [ContactController::class, 'success'])->name('contact.success');
+// Frontsite Page End

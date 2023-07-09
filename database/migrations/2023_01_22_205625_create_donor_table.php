@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('address')->nullable();
             $table->integer('age')->nullable();
             $table->longText('photo')->nullable();
+            $table->enum('status', [1,2,3])->nullable();
             $table->timestamps();
         });
     }

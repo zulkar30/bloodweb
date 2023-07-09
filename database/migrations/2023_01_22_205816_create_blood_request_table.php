@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('blood_request', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('age')->nullable();
             $table->string('wb')->nullable();
             $table->string('we')->nullable();
             $table->string('prc')->nullable();
@@ -24,6 +29,7 @@ return new class extends Migration
             $table->string('plasma')->nullable();
             $table->string('prp')->nullable();
             $table->string('total')->nullable();
+            $table->string('info')->nullable();
             $table->string('fulfilled')->nullable();
             $table->enum('status', [1,2,3])->nullable();
             $table->timestamps();

@@ -163,8 +163,8 @@
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="address" name="address"
                                                                 class="form-control" value="{{ old('address') }}"
-                                                                autocomplete="off"
-                                                                placeholder="example Jalan xxxxxxxxxxxx" required>
+                                                                autocomplete="off" placeholder="example Jalan xxxxxxxxxxxx"
+                                                                required>
 
                                                             @if ($errors->has('address'))
                                                                 <p style="font-style: bold; color: red;">
@@ -335,6 +335,7 @@
                                                             <th>Name</th>
                                                             <th>Blood Type</th>
                                                             <th>Photo</th>
+                                                            <th>Status</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
                                                     </thead>
@@ -348,6 +349,18 @@
                                                                 <td><a data-fancybox="gallery"
                                                                         data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $donor_item->photo }}"
                                                                         class="blue accent-4">Show</a></td>
+                                                                <td>
+                                                                    @if ($donor_item->status == 2)
+                                                                        <span
+                                                                            class="badge badge-warning">{{ 'Menunggu' }}</span>
+                                                                    @elseif($donor_item->status == 3)
+                                                                        <span
+                                                                            class="badge badge-danger">{{ 'Ditolak' }}</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="badge badge-success">{{ 'Diterima' }}</span>
+                                                                    @endif
+                                                                </td>
                                                                 <td class="text-center">
 
                                                                     <div class="btn-group mr-1 mb-1">
@@ -388,6 +401,28 @@
                                                                                 </form>
                                                                             @endcan
 
+                                                                            @if ($donor_item->status == 2)
+                                                                                @can('donor_accept')
+                                                                                    <form
+                                                                                        action="{{ route('backsite.donor.accept', $donor_item->id) }}"
+                                                                                        method="POST">
+                                                                                        @csrf
+                                                                                        <input type="submit" class="dropdown-item"
+                                                                                        value="Accept">
+                                                                                    </form>
+                                                                                @endcan
+
+                                                                                @can('donor_reject')
+                                                                                    <form
+                                                                                        action="{{ route('backsite.donor.reject', $donor_item->id) }}"
+                                                                                        method="POST">
+                                                                                        @csrf
+                                                                                        <input type="submit" class="dropdown-item"
+                                                                                        value="Reject">
+                                                                                    </form>
+                                                                                @endcan
+                                                                            @endif
+
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -402,6 +437,7 @@
                                                             <th>Name</th>
                                                             <th>Blood Type</th>
                                                             <th>Photo</th>
+                                                            <th>Status</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
                                                     </tfoot>
