@@ -63,6 +63,7 @@ class BloodDonorController extends Controller
     }
 
     public function success(Request $request){
-        return view('pages.frontsite.success.blood_donor_success');
+        $blood_donor = Donor::latest()->first();
+        return view('pages.frontsite.success.blood_donor_success', compact('blood_donor'));
     }
 }

@@ -105,7 +105,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="fase1" id="fase1" class="form-control select2"
-                                                                required>
+                                                                required onchange="calculateResult()">
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -124,7 +124,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="fase2" id="fase2" class="form-control select2"
-                                                                required>
+                                                                required onchange="calculateResult()">
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -143,7 +143,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="fase3" id="fase3" class="form-control select2"
-                                                                required>
+                                                                required onchange="calculateResult()">
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -163,8 +163,9 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="result" id="result" class="form-control select2"
-                                                                required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                disabled >
+                                                                <option value="{{ '' }}" disabled selected>
+                                                                    Choose
                                                                 </option>
                                                                 <option value="1">Reaktif</option>
                                                                 <option value="2">Non-Reaktif</option>
@@ -176,6 +177,8 @@
                                                             @endif
                                                         </div>
                                                     </div>
+
+                                                    <input type="hidden" name="result" id="result_hidden" value="">
 
                                                     <div
                                                         class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
@@ -358,18 +361,6 @@
                 modal.find('.modal-body').load(button.data("remote"));
                 modal.find('.modal-title').html(button.data("title"));
             });
-
-            $('.select-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', 'selected')
-                $select2.trigger('change')
-            })
-
-            $('.deselect-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', '')
-                $select2.trigger('change')
-            })
         });
 
         $('.default-table').DataTable({
@@ -385,6 +376,36 @@
         $(function() {
             $(":input").inputmask();
         });
+
+        function calculateResult() {
+            var fase1 = document.getElementById("fase1").value;
+            var fase2 = document.getElementById("fase2").value;
+            var fase3 = document.getElementById("fase3").value;
+            var result = '';
+
+            if (fase1 === '1' && fase2 === '1' && fase3 === '1') {
+                result = '1';
+            } else if (fase1 === '1' && fase2 === '1' && fase3 === '2') {
+                result = '1';
+            } else if (fase1 === '1' && fase2 === '2' && fase3 === '1') {
+                result = '1';
+            } else if (fase1 === '1' && fase2 === '2' && fase3 === '2') {
+                result = '2';
+            } else if (fase1 === '2' && fase2 === '1' && fase3 === '1') {
+                result = '1';
+            } else if (fase1 === '2' && fase2 === '1' && fase3 === '2') {
+                result = '2';
+            } else if (fase1 === '2' && fase2 === '2' && fase3 === '1') {
+                result = '2';
+            } else if (fase1 === '2' && fase2 === '2' && fase3 === '2') {
+                result = '2';
+            } else {
+                result = '';
+            }
+            $('#result').val(result).trigger('change');
+            
+            $('#result_hidden').val(result);
+        }
     </script>
 
     <div class="modal fade" id="mymodal" tabindex="-1" role="dialog">

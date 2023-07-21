@@ -106,7 +106,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="hiv" id="hiv"
-                                                                class="form-control select2" required>
+                                                                class="form-control select2" onchange="calculateResult()" required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -126,7 +126,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="hcv" id="hcv"
-                                                                class="form-control select2" required>
+                                                                class="form-control select2" onchange="calculateResult()" required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -146,7 +146,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="hbsag" id="hbsag"
-                                                                class="form-control select2" required>
+                                                                class="form-control select2" onchange="calculateResult()" required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -166,7 +166,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="vdrl" id="vdrl"
-                                                                class="form-control select2" required>
+                                                                class="form-control select2" onchange="calculateResult()" required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Positif</option>
@@ -186,7 +186,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="result" id="result"
-                                                                class="form-control select2" required>
+                                                                class="form-control select2" disabled required>
                                                                 <option value="{{ '' }}" disabled selected>Choose
                                                                 </option>
                                                                 <option value="1">Reaktif</option>
@@ -380,17 +380,6 @@
                 modal.find('.modal-title').html(button.data("title"));
             });
 
-            $('.select-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', 'selected')
-                $select2.trigger('change')
-            })
-
-            $('.deselect-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', '')
-                $select2.trigger('change')
-            })
         });
 
         $('.default-table').DataTable({
@@ -406,6 +395,51 @@
         $(function() {
             $(":input").inputmask();
         });
+
+        function calculateResult() {
+            var hiv = document.getElementById("hiv").value;
+            var hcv = document.getElementById("hcv").value;
+            var hbsag = document.getElementById("hbsag").value;
+            var vdrl = document.getElementById("vdrl").value;
+            var result = '';
+
+            if (hiv === '1' && hcv === '1' && hbsag === '1' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '1' && hbsag === '1' && vdrl === '2') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '1' && hbsag === '2' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '1' && hbsag === '2' && vdrl === '2') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '2' && hbsag === '1' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '2' && hbsag === '1' && vdrl === '2') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '2' && hbsag === '2' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '1' && hcv === '2' && hbsag === '2' && vdrl === '2') {
+                result = '2';
+            } else if (hiv === '2' && hcv === '1' && hbsag === '1' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '2' && hcv === '1' && hbsag === '1' && vdrl === '2') {
+                result = '1';
+            } else if (hiv === '2' && hcv === '1' && hbsag === '2' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '2' && hcv === '1' && hbsag === '2' && vdrl === '2') {
+                result = '2';
+            } else if (hiv === '2' && hcv === '2' && hbsag === '1' && vdrl === '1') {
+                result = '1';
+            } else if (hiv === '2' && hcv === '2' && hbsag === '1' && vdrl === '2') {
+                result = '2';
+            } else if (hiv === '2' && hcv === '2' && hbsag === '2' && vdrl === '2') {
+                result = '2';
+            } else {
+                result = '';
+            }
+            $('#result').val(result).trigger('change');
+            
+            $('#result_hidden').val(result);
+        }
     </script>
 
     <div class="modal fade" id="mymodal" tabindex="-1" role="dialog">

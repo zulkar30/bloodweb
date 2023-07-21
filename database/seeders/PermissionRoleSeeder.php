@@ -22,7 +22,7 @@ class PermissionRoleSeeder extends Seeder
 
         // Admin
         $user_permissions = $admin_permissions->filter(function ($permission) {
-            return substr($permission->name, 0, 5) != 'user_' && substr($permission->name, 0, 5) != 'role_' && substr($permission->name, 0, 11) != 'permission_';
+            return substr($permission->name, 0, 5) != 'user_' && substr($permission->name, 0, 5) != 'role_' && substr($permission->name, 0, 11) != 'permission_' && substr($permission->name, 0, 22) != 'dashboard_super_admin_';
         });
         Role::findOrFail(2)->permission()->sync($user_permissions);
     }

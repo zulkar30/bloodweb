@@ -48,7 +48,7 @@ class StoreCrossmatch extends FormRequest
                 'required', 'string', 'max:255'
             ],
             'result' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
         ];
     }

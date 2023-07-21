@@ -22,6 +22,16 @@ class PermissionSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'name'      => 'dashboard_admin_access',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name'      => 'dashboard_super_admin_access',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
 
             // User
             [

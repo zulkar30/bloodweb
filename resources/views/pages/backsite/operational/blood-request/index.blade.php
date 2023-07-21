@@ -607,7 +607,6 @@
         });
 
         function calculateTotal() {
-            // Get the input field values
             var wb = Number(document.getElementById('wb').value) || 0;
             var we = Number(document.getElementById('we').value) || 0;
             var prc = Number(document.getElementById('prc').value) || 0;
@@ -617,10 +616,8 @@
             var plasma = Number(document.getElementById('plasma').value) || 0;
             var prp = Number(document.getElementById('prp').value) || 0;
 
-            // Calculate the total
             var total = wb + we + prc + tc + ffp + cry + plasma + prp;
 
-            // Update the total input field value
             document.getElementById('total').value = total + ' Unit';
         }
     </script>

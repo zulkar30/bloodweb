@@ -18,61 +18,6 @@
                     class="mt-8 space-y-5">
 
                     @csrf
-                    @can('blood_request_admin')
-                        <div class="form-group flex justify-between gap-2">
-                            <label class="block w-full">
-                                <small class="px-5 font-bold">Patient Name</small>
-                                <select name="patient_id" id="patient_id"
-                                    class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                    placeholder="Your Patient">
-
-                                    <option disabled selected class="hidden">
-                                        Patient
-                                    </option>
-
-                                    @foreach ($patient as $patient_item)
-                                        <option value="{{ $patient_item->id }}">{{ $patient_item->name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </label>
-
-                            <label class="block w-full">
-                                <small class="px-5 font-bold">Doctor Name</small>
-                                <select name="doctor_id" id="doctor_id"
-                                    class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                    placeholder="Your Doctor">
-
-                                    <option disabled selected class="hidden">
-                                        Doctor
-                                    </option>
-
-                                    @foreach ($doctor as $doctor_item)
-                                        <option value="{{ $doctor_item->id }}">{{ $doctor_item->name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </label>
-
-                            <label class="block w-full">
-                                <small class="px-5 font-bold">Officer Name</small>
-                                <select name="officer_id" id="officer_id"
-                                    class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                    placeholder="Your Officer">
-
-                                    <option disabled selected class="hidden">
-                                        Officer
-                                    </option>
-
-                                    @foreach ($officer as $officer_item)
-                                        <option value="{{ $officer_item->id }}">{{ $officer_item->name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </label>
-                        </div>
-                    @endcan
-
                     @cannot('blood_request_admin')
                         <label class="relative block">
                             <input type="text" id="name" name="name"
@@ -223,7 +168,6 @@
 @push('after-script')
     <script>
         function calculateTotal() {
-            // Get the input field values
             var wb = Number(document.getElementById('wb').value) || 0;
             var we = Number(document.getElementById('we').value) || 0;
             var prc = Number(document.getElementById('prc').value) || 0;
@@ -233,14 +177,11 @@
             var plasma = Number(document.getElementById('plasma').value) || 0;
             var prp = Number(document.getElementById('prp').value) || 0;
 
-            // Calculate the total
             var total = wb + we + prc + tc + ffp + cry + plasma + prp;
 
-            // Update the total input field value
             document.getElementById('total').value = total + ' Komponen';
         }
 
-        // Calculate age based on birth date
         function calculateAge() {
             var birthDate = document.getElementById("birth_date").value;
             var today = new Date();
@@ -253,7 +194,6 @@
             document.getElementById("age").value = age + " Tahun";
         }
 
-        // Attach the calculateAge function to the birth_date input
         document.getElementById("birth_date").addEventListener("change", calculateAge);
     </script>
 @endpush

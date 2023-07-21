@@ -3,17 +3,37 @@
 namespace App\Http\Controllers\Backsite;
 
 // Default
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Auth;
+use App\Models\User;
 
 // Library
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
-
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\MasterData\BloodType;
+use App\Models\MasterData\DonorType;
+use App\Models\MasterData\MaintenanceSection;
+use App\Models\MasterData\Permission;
+use App\Models\MasterData\Position;
+use App\Models\MasterData\PouchType;
+use App\Models\MasterData\Profession;
+use App\Models\MasterData\Role;
+use App\Models\MasterData\Room;
+use App\Models\MasterData\TypeUser;
+use App\Models\Operational\Aftap;
+use App\Models\Operational\BloodDonor;
+use App\Models\Operational\BloodRequest;
+use App\Models\Operational\BloodSupply;
+use App\Models\Operational\Crossmatch;
+use App\Models\Operational\Doctor;
+use App\Models\Operational\Donor;
+use App\Models\Operational\Officer;
+use App\Models\Operational\Patient;
+use App\Models\Operational\Screening;
 // Request
 
 // Everything Else
-use Auth;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 // Model
 
@@ -34,7 +54,28 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.backsite.dashboard.index');
+        $users = User::count();
+        $blood_types = BloodType::count();
+        $donor_types = DonorType::count();
+        $maintenance_sections = MaintenanceSection::count();
+        $permissions = Permission::count();
+        $positions = Position::count();
+        $pouch_types = PouchType::count();
+        $professions = Profession::count();
+        $roles = Role::count();
+        $rooms = Room::count();
+        $type_users = TypeUser::count();
+        $aftaps = Aftap::count();
+        $blood_donors = BloodDonor::count();
+        $blood_requests = BloodRequest::count();
+        $blood_supplies = BloodSupply::count();
+        $crossmatches = Crossmatch::count();
+        $doctors = Doctor::count();
+        $donors = Donor::count();
+        $officers = Officer::count();
+        $patients = Patient::count();
+        $screenings = Screening::count();
+        return view('pages.backsite.dashboard.index', compact('users', 'blood_types', 'donor_types', 'maintenance_sections', 'permissions', 'positions', 'pouch_types', 'professions', 'roles', 'rooms', 'type_users', 'aftaps', 'blood_donors', 'blood_requests', 'blood_supplies', 'crossmatches', 'doctors', 'donors', 'officers', 'patients', 'screenings'));
     }
 
     /**

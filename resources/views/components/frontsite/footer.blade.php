@@ -1,5 +1,5 @@
 <!--Footer container-->
-<footer class="bg-neutral-200 text-center text-white dark:bg-neutral-600">
+<footer class="bg-neutral-200 text-center text-white dark:bg-neutral-600 d-print-none">
     <div class="pt-9">
         <div class="mb-9 flex justify-center">
             <a href="#!" class="mr-9 text-neutral-800 dark:text-neutral-200">

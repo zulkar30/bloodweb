@@ -1,5 +1,5 @@
 <!-- Header -->
-<nav x-data="{ navbarMobileOpen: false }" class="bg-white">
+<nav x-data="{ navbarMobileOpen: false }" class="bg-white d-print-none">
     <div class="max-w-7xl mx-auto px-4 lg:px-14 pt-6 lg:py-10">
         <div class="flex justify-between h-16">
             <div class="flex flex-auto justify-between">
