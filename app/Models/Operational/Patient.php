@@ -18,32 +18,35 @@ class Patient extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
+        'no_mr',
+        'name',
+        'gender',
+        'birth_place',
+        'birth_date',
+        'nik',
+        'address',
+        'contact',
+        'age',
         'blood_type_id',
         'room_id',
         'maintenance_section_id',
-        'name',
-        'birth_place',
-        'birth_date',
-        'gender',
-        'contact',
-        'address',
-        'age',
         'diagnosis',
         'photo',
         'created_at',
         'updated_at',
+        
     ];
-
-    // Relasi one to many
-    public function blood_request()
-    {
-        return $this->hasMany('App\Models\Operational\BloodRequest', 'patient_id');
-    }
-
+    
     // Relasi one to many
     public function blood_type()
     {
         return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
+    }
+    
+    // Relasi one to many
+    public function room()
+    {
+        return $this->belongsTo('App\Models\MasterData\Room', 'room_id', 'id');
     }
 
     // Relasi one to many
@@ -53,8 +56,15 @@ class Patient extends Model
     }
 
     // Relasi one to many
-    public function room()
+    public function aftap()
     {
-        return $this->belongsTo('App\Models\MasterData\Room', 'room_id', 'id');
+        return $this->hasMany('App\Models\Operational\Aftap', 'patient_id');
     }
+
+    // Relasi one to many
+    public function blood_request()
+    {
+        return $this->hasMany('App\Models\Operational\BloodRequest', 'patient_id');
+    }
+
 }

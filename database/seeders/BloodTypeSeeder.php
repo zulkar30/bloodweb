@@ -17,42 +17,42 @@ class BloodTypeSeeder extends Seeder
     {
         $blood_type = [
             [
-                'name'      => 'A+',
+                'name'      => 'A+',        //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'A-',
+                'name'      => 'A-',        //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'B+',
+                'name'      => 'B+',        //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'B-',
+                'name'      => 'B-',        //4
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'O+',
+                'name'      => 'O+',        //5
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'O-',
+                'name'      => 'O-',        //6
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'AB+',
+                'name'      => 'AB+',       //7
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'AB-',
+                'name'      => 'AB-',       //8
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

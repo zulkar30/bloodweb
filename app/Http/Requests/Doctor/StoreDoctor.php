@@ -32,15 +32,6 @@ class StoreDoctor extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => [
-                'required', 'integer',
-            ],
-            'specialist_id' => [
-                'required', 'integer'
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
-            ],
             'name' => [
                 'required', 'string', 'max:255'
             ],
@@ -65,6 +56,15 @@ class StoreDoctor extends FormRequest
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
             ],
+            'user_id' => [
+                'required', 'integer',
+            ],
+            'specialist_id' => [
+                'required', 'integer'
+            ],
+            'blood_type_id' => [
+                'required', 'integer'
+            ]
         ];
     }
 }

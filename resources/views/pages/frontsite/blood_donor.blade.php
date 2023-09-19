@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Blood Donor')
+@section('title', 'Donor Darah')
 
 @section('content')
 
@@ -10,8 +10,7 @@
             {{-- Form --}}
             <div class="lg:w-full mt-10 lg:mt-0">
                 <h2 class="text-[#1E2B4F] text-4xl font-semibold leading-normal">
-                    Registry Form of
-                    Blood Donor
+                    Formulir Pendaftaran Donor Darah
                 </h2>
 
                 <form action="{{ route('blood_donor.store') }}" method="POST" enctype="multipart/form-data"
@@ -20,30 +19,36 @@
                     @csrf
 
                     <label class="relative block">
+                        <input type="text" id="no_reg" name="no_reg" value="{{ old('no_reg') }}"
+                            class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
+                            placeholder="Nomor Registrasi" readonly />
+                    </label>
+
+                    <label class="relative block">
                         <input type="text" id="name" name="name"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                            placeholder="Your Name" required />
+                            placeholder="Nama Lengkap" required />
                     </label>
 
                     <label class="relative block">
                         <input type="text" id="birth_place" name="birth_place"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                            placeholder="Your Birth Place" required />
+                            placeholder="Tempat Lahir" required />
                     </label>
 
                     <div class="form-group flex justify-between gap-2">
                         <label class="relative block w-full">
                             <input type="date" id="birth_date" name="birth_date"
                                 class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                placeholder="Your Birth Date" required />
+                                placeholder="Tanggal Lahir" required />
                             </span>
                         </label>
 
                         <label class="block w-full">
                             <select name="gender" id="gender"
                                 class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                placeholder="Gender" required>
-                                <option value="" disabled selected class="hidden">Gender</option>
+                                placeholder="Jenis Kelamin" required>
+                                <option value="" disabled selected class="hidden">Jenis Kelamin</option>
                                 <option value="1">Laki-laki</option>
                                 <option value="2">Perempuan</option>
                             </select>
@@ -53,20 +58,20 @@
                     <label class="relative block">
                         <input type="text" id="address" name="address"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                            placeholder="Your Address" required />
+                            placeholder="Alamat" required />
                     </label>
 
                     <div class="form-group flex justify-between gap-2">
                         <label class="relative block w-full">
                             <input type="text" id="contact" name="contact"
                                 class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                placeholder="Your Contact" required />
+                                placeholder="Kontak" required />
                         </label>
 
                         <label class="relative block w-full">
                             <input type="text" id="age" name="age"
                                 class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                placeholder="Your Age" readonly />
+                                placeholder="Umur" readonly />
                         </label>
                     </div>
 
@@ -74,10 +79,10 @@
                         <label class="block w-full">
                             <select name="blood_type_id" id="blood_type_id"
                                 class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                                placeholder="Your Blood Type" required>
+                                placeholder="Golongan Darah" required>
 
                                 <option disabled selected class="hidden">
-                                    Blood Type
+                                    Golongan Darah
                                 </option>
 
                                 @foreach ($blood_type as $blood_type_item)
@@ -93,7 +98,7 @@
                                 placeholder="Your Donor Type" required>
 
                                 <option disabled selected class="hidden">
-                                    Donor Type
+                                    Tipe Pendonor
                                 </option>
 
                                 @foreach ($donor_type as $donor_type_item)
@@ -111,7 +116,7 @@
                                 placeholder="Your Profession" required>
 
                                 <option disabled selected class="hidden">
-                                    Profession
+                                    Pekerjaan
                                 </option>
 
                                 @foreach ($profession as $profession_item)
@@ -125,23 +130,23 @@
                             <input type="file" id="photo" name="photo" accept="image/png, image/svg, image/jpeg"
                                 class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
                                 placeholder="Your Photo" required />
-                            <p class="px-5"><small class="text-[#f54444]">Please choose your photo</small><small>
-                                    just
-                                    can use
-                                    JPEG and PNG, max 10
-                                    MegaBytes file size</small></p>
+                            <p class="px-5"><small class="text-[#f54444]">Silahkan masukkan foto Anda</small><small>
+                                    hanya bisa format
+                                    JPEG and PNG, maks. 10
+                                    MB</small></p>
                         </label>
                     </div>
 
                     <input type="hidden" name="blood_donor_id" value="#">
+                    <input type="hidden" id="last_reg_number" name="last_reg_number" value="{{ $lastDonorId }}">
 
                     <div class="flex justify-between gap-2">
                         <a href="{{ route('index') }}" class="w-full"><button type="button"
                                 class="bg-[#b1b2b4] rounded-full mt-5 w-full text-white text-lg font-medium px-10 py-3 text-center"
-                                onclick="return confirm('Are you sure want to cancel this registry ?')">Cancel</button></a>
+                                onclick="return confirm('Anda yakin ingin membatalkan ?')">Batal</button></a>
                         <button type="submit"
                             class="bg-[#0D63F3] rounded-full mt-5 w-full text-white text-lg font-medium px-10 py-3 text-center"
-                            onclick="return confirm('Are you sure want to confirm this registry ?')">Continue</button>
+                            onclick="return confirm('Anda yakin ingin melanjutkan ?')">Lanjutkan</button>
                     </div>
                 </form>
             </div>
@@ -152,7 +157,22 @@
 @endsection
 
 @push('after-script')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
     <script>
+        // Membuat nomor registrasi
+        $(document).ready(function() {
+            var noRegInput = $('#no_reg');
+            var lastRegNumberInput = $('#last_reg_number');
+
+            var lastDonorId = parseInt(lastRegNumberInput.val());
+            var newRegNumber = lastDonorId + 1;
+            var formattedRegNumber = 'REG' + newRegNumber.toString().padStart(5, '0');
+
+            noRegInput.val(formattedRegNumber);
+            lastRegNumberInput.val(newRegNumber);
+        });
+
         // Calculate age based on birth date
         function calculateAge() {
             var birthDate = document.getElementById("birth_date").value;

@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Backsite;
 
 // Default
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 // Library
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 // Request
@@ -15,17 +13,14 @@ use App\Http\Requests\Aftap\StoreAftap;
 use App\Http\Requests\Aftap\UpdateAftap;
 
 // Everything Else
-use Auth;
 use Gate;
 
 // Model
-use App\Models\Operational\Officer;
 use App\Models\Operational\Donor;
-use App\Models\MasterData\PouchType;
+use App\Models\Operational\Officer;
 use App\Models\Operational\Aftap;
-use App\Models\MasterData\BloodType;
-
-// Third Party
+use App\Models\MasterData\PouchType;
+use App\Models\Operational\Patient;
 
 class AftapController extends Controller
 {
@@ -45,15 +40,24 @@ class AftapController extends Controller
         // Middleware Gate
         abort_if(Gate::denies('aftap_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada table
+        // Model
         $aftap = Aftap::orderBy('created_at', 'desc')->get();
-        // Ditampilkan pada pilihan
-        $blood_type = BloodType::orderBy('name', 'asc')->get();
-        $officer = Officer::orderBy('name', 'asc')->get();
-        $donor = Donor::orderBy('name', 'asc')->get();
-        $pouch_type = PouchType::orderBy('name', 'asc')->get();
+        $donor = Donor::orderBy('id', 'desc')->get();
+        $patient = Patient::orderBy('id', 'desc')->get();
+        $pouch_type = PouchType::orderBy('id', 'asc')->get();
+
+        // Mendapatkan AftapID terakhir
+        $lastAftap = Aftap::orderBy('id', 'desc')->first();
+        $lastAftapId = $lastAftap ? $lastAftap->id : 0;
+
+        // Mendapatkan data officer yang login sebagai officer
+        $loggedInUser = Auth::user();
+        $officerForLoggedInUser = $loggedInUser->officer;
+
+        // Mendapatkan OfficerID
+        $officerOptions = Officer::pluck('name', 'id');
         
-        return view('pages.backsite.operational.aftap.index', compact('aftap', 'blood_type', 'officer', 'donor', 'pouch_type'));
+        return view('pages.backsite.operational.aftap.index', compact('aftap', 'donor', 'officerForLoggedInUser', 'officerOptions', 'patient', 'pouch_type', 'lastAftapId'));
     }
 
     /**
@@ -75,16 +79,17 @@ class AftapController extends Controller
     public function store(StoreAftap $request)
     {
         // Ambil semua data dari frontsite
-        $data = $request->all();
-
-        $data['volume'] = str_replace(' Kantong', '', $data['volume']);
-
-        // Kirim data ke database
-        $aftap = Aftap::create($data);
+        $aftap = new Aftap;
+        $aftap->no_labu = $request->input('no_labu');
+        $aftap->volume = $request->input('volume');
+        $aftap->patient_id = $request->input('patient_id_hidden');
+        $aftap->donor_id = $request->input('donor_id_hidden');
+        $aftap->pouch_type_id = $request->input('pouch_type_id');
+        $aftap->officer_id = $request->input('officer_id');
+        $aftap->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Aftap');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Aftap Baru');
         return redirect()->route('backsite.aftap.index');
     }
 
@@ -96,6 +101,7 @@ class AftapController extends Controller
      */
     public function show(Aftap $aftap)
     {
+        // Middleware Gate
         abort_if(Gate::denies('aftap_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('pages.backsite.operational.aftap.show', compact('aftap'));
@@ -109,15 +115,16 @@ class AftapController extends Controller
      */
     public function edit(Aftap $aftap)
     {
+        // Middleware Gate
         abort_if(Gate::denies('aftap_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada form sebagai pilihan
+        // Model
+        $donor = Donor::orderBy('no_reg', 'desc')->get();
         $officer = Officer::orderBy('name', 'asc')->get();
-        $donor = Donor::orderBy('name', 'asc')->get();
+        $patient = Patient::orderBy('no_mr', 'desc')->get();
         $pouch_type = PouchType::orderBy('name', 'asc')->get();
-        $blood_type = BloodType::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.aftap.edit', compact('aftap', 'officer', 'blood_type', 'donor', 'pouch_type'));
+        return view('pages.backsite.operational.aftap.edit', compact('aftap', 'donor', 'officer', 'patient', 'pouch_type'));
     }
 
     /**
@@ -132,14 +139,14 @@ class AftapController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
+        // Menghilangkan string pada input number
         $data['volume'] = str_replace(' Kantong', '', $data['volume']);
 
         // Update data ke database
         $aftap->update($data);
 
         // Sweetalert
-        alert()->success('Success Update Message', 'Successfully updated Aftap');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Mengubah Data Aftap');
         return redirect()->route('backsite.aftap.index');
     }
 
@@ -151,13 +158,14 @@ class AftapController extends Controller
      */
     public function destroy(Aftap $aftap)
     {
+        // Middleware Gate
         abort_if(Gate::denies('aftap_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        // Menghapus data
         $aftap->delete();
 
         // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Aftap');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menghapus Data Aftap');
         return back();
     }
 }

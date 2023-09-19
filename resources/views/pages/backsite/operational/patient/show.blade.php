@@ -1,23 +1,18 @@
 <table class="table table-bordered">
     <tr>
-        <th>Name</th>
+        <th>No MR</th>
+        <td>{{ isset($patient->no_mr) ? $patient->no_mr : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Nama</th>
         <td>{{ isset($patient->name) ? $patient->name : 'N/A' }}</td>
     </tr>
     <tr>
-    <tr>
-        <th>Birth Place</th>
-        <td>{{ isset($patient->birth_place) ? $patient->birth_place : 'N/A' }}</td>
-    </tr>
-    <tr>
-        <th>Birth Date</th>
-        <td>{{ isset($patient->birth_date) ? $patient->birth_date : 'N/A' }}</td>
-    </tr>
-    <tr>
-        <th>Gender</th>
+        <th>Jenis Kelamin</th>
         <td>
-            @if($patient->gender == 1)
+            @if($patient->gender == 'laki-laki')
                 <span>{{ 'Laki-laki' }}</span>
-            @elseif($patient->gender == 2)
+            @elseif($patient->gender == 'perempuan')
                 <span>{{ 'Perempuan' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -25,31 +20,43 @@
         </td>
     </tr>
     <tr>
-        <th>Contact</th>
-        <td>{{ isset($patient->contact) ? $patient->contact : 'N/A' }}</td>
+        <th>Tempat Lahir</th>
+        <td>{{ isset($patient->birth_place) ? $patient->birth_place : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Address</th>
+        <th>Tanggal Lahir</th>
+        <td>{{ isset($patient->birth_date) ? $patient->birth_date : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>NIK</th>
+        <td>{{ isset($patient->nik) ? $patient->nik : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Alamat</th>
         <td>{{ isset($patient->address) ? $patient->address : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Age</th>
+        <th>Kontak</th>
+        <td>{{ isset($patient->contact) ? $patient->contact : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Umur</th>
         <td>{{ isset($patient->age) ? $patient->age . ' Tahun' : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Blood Type</th>
+        <th>Diagnosa</th>
+        <td>{{ isset($patient->diagnosis) ? $patient->diagnosis : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Golongan Darah</th>
         <td>{{ isset($patient->blood_type->name) ? $patient->blood_type->name : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Maintenance Section</th>
+        <th>Bidang Perawatan</th>
         <td>{{ isset($patient->maintenance_section->name) ? $patient->maintenance_section->name : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Room</th>
+        <th>Ruangan</th>
         <td>{{ isset($patient->room->name) ? $patient->room->name : 'N/A' }}</td>
-    </tr>
-    <tr>
-        <th>Diagnosis</th>
-        <td>{{ isset($patient->diagnosis) ? $patient->diagnosis : 'N/A' }}</td>
     </tr>
 </table>

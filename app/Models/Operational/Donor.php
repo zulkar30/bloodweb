@@ -18,20 +18,42 @@ class Donor extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'profession_id',
-        'blood_type_id',
-        'donor_type_id',
+        'no_reg',
         'name',
+        'gender',
         'birth_place',
         'birth_date',
-        'gender',
-        'contact',
+        'nik',
         'address',
+        'contact',
+        'profession_id',
         'age',
+        'blood_type_id',
+        'donor_type_id',
         'photo',
+        'status',
         'created_at',
         'updated_at',
     ];
+
+    
+    // Relasi one to many
+    public function profession()
+    {
+        return $this->belongsTo('App\Models\MasterData\Profession', 'profession_id', 'id');
+    }
+
+    // Relasi one to many
+    public function blood_type()
+    {
+        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
+    }
+    
+    // Relasi one to many
+    public function donor_type()
+    {
+        return $this->belongsTo('App\Models\MasterData\DonorType', 'donor_type_id', 'id');
+    }
 
     // Relasi one to many
     public function aftap()
@@ -45,21 +67,4 @@ class Donor extends Model
         return $this->hasMany('App\Models\Operational\BloodDonor', 'donor_id');
     }
 
-    // Relasi one to many
-    public function profession()
-    {
-        return $this->belongsTo('App\Models\MasterData\Profession', 'profession_id', 'id');
-    }
-
-    // Relasi one to many
-    public function blood_type()
-    {
-        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
-    }
-
-    // Relasi one to many
-    public function donor_type()
-    {
-        return $this->belongsTo('App\Models\MasterData\DonorType', 'donor_type_id', 'id');
-    }
 }

@@ -1,72 +1,81 @@
 <table class="table table-bordered">
     <tr>
-        <th>Name</th>
-        <td>{{ isset($blood_request->patient->name) ? $blood_request->patient->name : 'N/A' }}</td>
+        <th>No BR</th>
+        <td>{{ isset($blood_request->no_br) ? $blood_request->no_br : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Blood Type</th>
-        <td>{{ isset($blood_request->blood_type->name) ? $blood_request->blood_type->name : 'N/A' }}</td>
+        <th>No MR</th>
+        <td>{{ isset($blood_request->patient->no_mr) ? $blood_request->patient->no_mr : 'Tidak Ada' }}</td>
     </tr>
     <tr>
-        <th>Whole Blood</th>
-        <td>{{ isset($blood_request->wb) ? $blood_request->wb . ' Unit' : 'N/A' }}</td>
+        <th>Nama</th>
+        <td>{{ isset($blood_request->patient->name) ? $blood_request->patient->name : $blood_request->name }}</td>
     </tr>
     <tr>
-        <th>Whases Eritrosit</th>
-        <td>{{ isset($blood_request->we) ? $blood_request->we . ' Unit' : 'N/A' }}</td>
+        <th>GolDa Permintaan</th>
+        <td>{{ isset($blood_request->patient->blood_type->name) ? $blood_request->patient->blood_type->name : $blood_request->blood_type->name }}
+        </td>
     </tr>
     <tr>
-        <th>Packed Red Cell</th>
-        <td>{{ isset($blood_request->prc) ? $blood_request->prc . ' Unit' : 'N/A' }}</td>
+        <th>Darah Lengkap</th>
+        <td>{{ isset($blood_request->wb) ? $blood_request->wb . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
-        <th>Trombosite Concentrate</th>
-        <td>{{ isset($blood_request->tc) ? $blood_request->tc . ' Unit' : 'N/A' }}</td>
+        <th>Darah Cuci</th>
+        <td>{{ isset($blood_request->we) ? $blood_request->we . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
-        <th>Fresh Frozen Plasma</th>
-        <td>{{ isset($blood_request->ffp) ? $blood_request->ffp . ' Unit' : 'N/A' }}</td>
+        <th>Sel Darah Merah</th>
+        <td>{{ isset($blood_request->prc) ? $blood_request->prc . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
-        <th>Cryocitate</th>
-        <td>{{ isset($blood_request->cry) ? $blood_request->cry . ' Unit' : 'N/A' }}</td>
+        <th>Trombosit</th>
+        <td>{{ isset($blood_request->tc) ? $blood_request->tc . ' Komponen' : ' 0 Komponen' }}</td>
+    </tr>
+    <tr>
+        <th>Plasma Segar Beku</th>
+        <td>{{ isset($blood_request->ffp) ? $blood_request->ffp . ' Komponen' : ' 0 Komponen' }}</td>
+    </tr>
+    <tr>
+        <th>Kriosipitat</th>
+        <td>{{ isset($blood_request->cry) ? $blood_request->cry . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
         <th>Plasma</th>
-        <td>{{ isset($blood_request->plasma) ? $blood_request->plasma . ' Unit' : 'N/A' }}</td>
+        <td>{{ isset($blood_request->plasma) ? $blood_request->plasma . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
-        <th>Platelet Rich Plasma</th>
-        <td>{{ isset($blood_request->prp) ? $blood_request->prp . ' Unit' : 'N/A' }}</td>
+        <th>Plasma Kaya Trombosit</th>
+        <td>{{ isset($blood_request->prp) ? $blood_request->prp . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
-        <th>Total</th>
-        <td>{{ isset($blood_request->total) ? $blood_request->total . ' Unit' : 'N/A' }}</td>
+        <th>Total Permintaan</th>
+        <td>{{ isset($blood_request->total) ? $blood_request->total . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
-        <th>Fulfilled</th>
-        <td>{{ isset($blood_request->fulfilled) ? $blood_request->fulfilled . ' Unit' : 'N/A' }}</td>
+        <th>Total Terpenuhi</th>
+        <td>{{ isset($blood_request->fulfilled) ? $blood_request->fulfilled . ' Komponen' : ' 0 Komponen' }}</td>
     </tr>
     <tr>
         <th>Status</th>
         <td>
-            @if($blood_request->status == 1)
-                <span class="badge badge-success">{{ 'Approved' }}</span>
-            @elseif($blood_request->status == 2)
-                <span class="badge badge-warning">{{ 'Waiting' }}</span>
-            @elseif($blood_request->status == 3)
-                <span class="badge badge-danger">{{ 'Rejected' }}</span>
+            @if ($blood_request->status == 'diterima')
+                <span class="badge badge-success">{{ 'Diterima' }}</span>
+            @elseif($blood_request->status == 'menunggu')
+                <span class="badge badge-warning">{{ 'Menunggu' }}</span>
+            @elseif($blood_request->status == 'ditolak')
+                <span class="badge badge-danger">{{ 'Ditolak' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
             @endif
         </td>
     </tr>
     <tr>
-        <th>Doctor</th>
-        <td>{{ isset($blood_request->doctor->name) ? $blood_request->doctor->name : 'N/A' }}</td>
+        <th>Dokter</th>
+        <td>{{ isset($blood_request->doctor->name) ? $blood_request->doctor->name : 'Tidak Ada' }}</td>
     </tr>
     <tr>
-        <th>Officer</th>
-        <td>{{ isset($blood_request->officer->name) ? $blood_request->officer->name : 'N/A' }}</td>
+        <th>Petugas</th>
+        <td>{{ isset($blood_request->officer->name) ? $blood_request->officer->name : 'Tidak Ada' }}</td>
     </tr>
 </table>

@@ -18,16 +18,16 @@ class BloodDonor extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'officer_id',
-        'blood_type_id',
-        'pouch_type_id',
-        'donor_type_id',
-        'donor_id',
-        'donor_reaction',
-        'retrieval_process',
-        'donor_status',
+        'name',
+        'hb',
+        't_meter',
+        'bb',
+        'result',
         'created_at',
         'updated_at',
+        'officer_id',
+        'blood_request_id',
+        'blood_type_id',
     ];
 
     // Relasi one to many
@@ -37,26 +37,14 @@ class BloodDonor extends Model
     }
 
     // Relasi one to many
+    public function blood_request()
+    {
+        return $this->belongsTo('App\Models\Operational\BloodRequest', 'blood_request_id', 'id');
+    }
+
+    // Relasi one to many
     public function blood_type()
     {
         return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
-    }
-
-    // Relasi one to many
-    public function pouch_type()
-    {
-        return $this->belongsTo('App\Models\MasterData\PouchType', 'pouch_type_id', 'id');
-    }
-
-    // Relasi one to many
-    public function donor_type()
-    {
-        return $this->belongsTo('App\Models\MasterData\DonorType', 'donor_type_id', 'id');
-    }
-
-    // Relasi one to many
-    public function donor()
-    {
-        return $this->belongsTo('App\Models\Operational\Donor', 'donor_id', 'id');
     }
 }

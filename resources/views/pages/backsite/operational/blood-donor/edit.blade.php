@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Edit - Blood Donor')
+@section('title', 'Edit - Donor Darah')
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -27,12 +27,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Edit Blood Donor</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Edit Donor Darah</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item">Blood Donor</li>
+                                <li class="breadcrumb-item">Donor Darah</li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
@@ -60,92 +60,87 @@
                                 <div class="card-content collpase show">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>Please complete the input <code>required</code>, before you click the submit
-                                                button.</p>
+                                            <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                anda menekan tombol submit.</p>
                                         </div>
                                         <form class="form form-horizontal"
-                                            action="{{ route('backsite.blood_donor.update', [$blood_donor->id]) }}" method="POST"
-                                            enctype="multipart/form-data">
+                                            action="{{ route('backsite.blood_donor.update', [$blood_donor->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
 
                                             @method('PUT')
                                             @csrf
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="fa fa-edit"></i> Form Blood Donor</h4>
+                                                <h4 class="form-section"><i class="fa fa-edit"></i> Form Donor Darah</h4>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('donor') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Donor <code
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="no_bd">No BD <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="donor" id="donor"
-                                                            class="form-control select2">
-                                                            <option value="{{ old('donor', isset($blood_donor) ? $blood_donor->donor : '') }}" disabled selected>{{ $blood_donor->donor->name }}
-                                                            </option>
-                                                            @foreach ($donor as $key => $donor_item)
-                                                                <option value="{{ $donor_item->id }}">
-                                                                    {{ $donor_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                        <input type="text" id="no_bd" name="no_bd"
+                                                            class="form-control col-md-3"
+                                                            value="{{ old('no_bd', isset($blood_donor) ? $blood_donor->no_bd : '') }}"
+                                                            autocomplete="off" readonly>
 
-                                                        @if ($errors->has('donor'))
+                                                        @if ($errors->has('no_bd'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('donor') }}</p>
+                                                                {{ $errors->first('no_bd') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div
-                                                    class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Gender <code
+                                                    class="form-group row {{ $errors->has('blood_request_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">No BR <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="gender" id="gender" class="form-control select2"
-                                                            required>
-                                                            <option value="{{ old('gender', isset($blood_donor) ? $blood_donor->gender : '') }}" disabled selected>
-                                                                @if ($blood_donor->gender ==1)
-                                                                    <span>Laki-laki</span>
-                                                                @else
-                                                                    <span>Perempuan</span>
-                                                                @endif
+                                                        <select name="blood_request_id" id="blood_request_id"
+                                                            class="form-control select2" disabled>
+                                                            <option
+                                                                value="{{ old('blood_request_id', isset($blood_donor) ? $blood_donor->blood_request_id : '') }}"
+                                                                disabled selected>{{ $blood_donor->blood_request->no_br }}
                                                             </option>
-                                                            <option value="1">Laki-laki</option>
-                                                            <option value="2">Perempuan</option>
+                                                            @foreach ($blood_request as $key => $blood_request_item)
+                                                                <option value="{{ $blood_request_item->id }}">
+                                                                    {{ $blood_request_item->no_br }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
 
-                                                        @if ($errors->has('gender'))
+                                                        @if ($errors->has('blood_request_id'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('gender') }}</p>
+                                                                {{ $errors->first('blood_request_id') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="age">Age <code
+                                                    <label class="col-md-3 label-control" for="name">Nama <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="age" name="age"
-                                                            class="form-control" value="{{ old('age', isset($blood_donor) ? $blood_donor->age . ' Tahun' : '') }}"
-                                                            autocomplete="off" placeholder="example 27 Tahun"
-                                                            required>
+                                                        <input type="text" id="name" name="name"
+                                                            class="form-control"
+                                                            value="{{ old('name', isset($blood_donor) ? $blood_donor->name : '') }}"
+                                                            autocomplete="off" required>
 
-                                                        @if ($errors->has('age'))
+                                                        @if ($errors->has('name'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('age') }}</p>
+                                                                {{ $errors->first('name') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div
                                                     class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Blood Type <code
+                                                    <label class="col-md-3 label-control">Golongan Darah <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="blood_type_id" id="blood_type_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('blood_type_id', isset($blood_donor) ? $blood_donor->blood_type_id : '') }}" disabled selected>{{ $blood_donor->blood_type->name }}
+                                                            <option
+                                                                value="{{ old('blood_type_id', isset($blood_donor) ? $blood_donor->blood_type_id : '') }}"
+                                                                disabled selected>{{ $blood_donor->blood_type->name }}
                                                             </option>
                                                             @foreach ($blood_type as $key => $blood_type_item)
                                                                 <option value="{{ $blood_type_item->id }}">
@@ -161,145 +156,67 @@
                                                     </div>
                                                 </div>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('donor_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Donor Type <code
-                                                            style="color:red;">required</code></label>
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="hb">Hemoglobin Darah
+                                                        <code style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="donor_type_id" id="donor_type_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('donor_type_id', isset($blood_donor) ? $blood_donor->donor_type_id : '') }}" disabled selected>{{ $blood_donor->donor_type->name }}
-                                                            </option>
-                                                            @foreach ($donor_type as $key => $donor_type_item)
-                                                                <option value="{{ $donor_type_item->id }}">
-                                                                    {{ $donor_type_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                        <input type="text" id="hb" name="hb"
+                                                            class="form-control"
+                                                            value="{{ old('hb', isset($blood_donor) ? $blood_donor->hb : '') }}"
+                                                            autocomplete="off" required>
 
-                                                        @if ($errors->has('donor_type_id'))
+                                                        @if ($errors->has('hb'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('donor_type_id') }}</p>
+                                                                {{ $errors->first('hb') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('pouch_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Pouch Type <code
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="t_meter">Tensi Meter <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="pouch_type_id" id="pouch_type_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('pouch_type_id', isset($blood_donor) ? $blood_donor->pouch_type_id : '') }}" disabled selected>{{ $blood_donor->pouch_type->name }}
-                                                            </option>
-                                                            @foreach ($pouch_type as $key => $pouch_type_item)
-                                                                <option value="{{ $pouch_type_item->id }}">
-                                                                    {{ $pouch_type_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                        <input type="text" id="t_meter" name="t_meter"
+                                                            class="form-control"
+                                                            value="{{ old('t_meter', isset($blood_donor) ? $blood_donor->t_meter : '') }}"
+                                                            autocomplete="off" required>
 
-                                                        @if ($errors->has('pouch_type_id'))
+                                                        @if ($errors->has('t_meter'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('pouch_type_id') }}</p>
+                                                                {{ $errors->first('t_meter') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('donor_reaction') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Donor Reaction <code
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="bb">Berat Badan <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="donor_reaction" id="donor_reaction" class="form-control select2"
-                                                            required>
-                                                            <option value="{{ old('donor_reaction', isset($blood_donor) ? $blood_donor->donor_reaction : '') }}" disabled selected>
-                                                                @if ($blood_donor->donor_reaction ==1)
-                                                                    <span>Pingsan</span>
-                                                                @elseif($blood_donor->donor_reaction ==2)
-                                                                    <span>Mual</span>
-                                                                @else
-                                                                    <span>Dll</span>
-                                                                @endif
-                                                            </option>
-                                                            <option value="1">Pingsan</option>
-                                                            <option value="2">Mual</option>
-                                                            <option value="3">Dll</option>
-                                                        </select>
+                                                        <input type="text" id="bb" name="bb"
+                                                            class="form-control"
+                                                            value="{{ old('bb', isset($blood_donor) ? $blood_donor->bb : '') }}"
+                                                            autocomplete="off" required>
 
-                                                        @if ($errors->has('donor_reaction'))
+                                                        @if ($errors->has('bb'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('donor_reaction') }}</p>
+                                                                {{ $errors->first('bb') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
-
-                                                <div
-                                                    class="form-group row {{ $errors->has('retrieval_process') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Retrieval Process <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="retrieval_process" id="retrieval_process" class="form-control select2"
-                                                            required>
-                                                            <option value="{{ old('retrieval_process', isset($blood_donor) ? $blood_donor->retrieval_process : '') }}" disabled selected>
-                                                                @if ($blood_donor->retrieval_process ==1)
-                                                                    <span>Lancar</span>
-                                                                @elseif($blood_donor->retrieval_process ==2)
-                                                                    <span>Macet</span>
-                                                                @else
-                                                                    <span>Dll</span>
-                                                                @endif
-                                                            </option>
-                                                            <option value="1">Lancar</option>
-                                                            <option value="2">Macet</option>
-                                                            <option value="3">Dll</option>
-                                                        </select>
-
-                                                        @if ($errors->has('retrieval_process'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('retrieval_process') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="form-group row {{ $errors->has('donor_status') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Donor Status <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="donor_status" id="donor_status" class="form-control select2"
-                                                            required>
-                                                            <option value="{{ old('donor_status', isset($blood_donor) ? $blood_donor->donor_status : '') }}" disabled selected>
-                                                                @if ($blood_donor->donor_status ==1)
-                                                                    <span>Pendonor Baru</span>
-                                                                @else
-                                                                    <span>Pendonor Lama</span>
-                                                                @endif
-                                                            </option>
-                                                            <option value="1">Pendonor Baru</option>
-                                                            <option value="2">Pendonor Lama</option>
-                                                        </select>
-
-                                                        @if ($errors->has('donor_status'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('donor_status') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
                                                 <div
                                                     class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Officer <code
+                                                    <label class="col-md-3 label-control">Petugas <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="officer_id" id="officer_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('officer_id', isset($blood_donor) ? $blood_donor->officer_id : '') }}" disabled selected>{{ $blood_donor->officer->name }}
-                                                            </option>
-                                                            @foreach ($officer as $key => $officer_item)
-                                                                <option value="{{ $officer_item->id }}">
-                                                                    {{ $officer_item->name }}
+                                                            class="form-control select2">
+                                                            <option
+                                                                value="{{ old('officer_id'), isset($blood_donor) ? $blood_donor->officer_id : '' }}"
+                                                                disabled selected>Choose</option>
+                                                            @foreach ($officerOptions as $officerId => $officerName)
+                                                                <option value="{{ $officerId }}"
+                                                                    {{ $officerForLoggedInUser && $officerForLoggedInUser->id === $officerId ? 'selected' : '' }}>
+                                                                    {{ $officerName }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -310,30 +227,33 @@
                                                         @endif
                                                     </div>
                                                 </div>
-
                                             </div>
-
-                                            <div class="form-actions text-right">
-                                                <a href="{{ route('backsite.blood_donor.index') }}" style="width:120px;"
-                                                    class="btn bg-blue-grey text-white mr-1"
-                                                    onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
-                                                    <i class="ft-x"></i> Cancel
-                                                </a>
-                                                <button type="submit" style="width:120px;" class="btn btn-cyan"
-                                                    onclick="return confirm('Are you sure want to save this data ?')">
-                                                    <i class="la la-check-square-o"></i> Submit
-                                                </button>
-                                            </div>
-                                        </form>
                                     </div>
+
+
                                 </div>
+
+                                <div class="form-actions text-right">
+                                    <a href="{{ route('backsite.blood_donor.index') }}" style="width:120px;"
+                                        class="btn bg-blue-grey text-white mr-1"
+                                        onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
+                                        <i class="ft-x"></i> Cancel
+                                    </a>
+                                    <button type="submit" style="width:120px;" class="btn btn-cyan"
+                                        onclick="return confirm('Are you sure want to save this data ?')">
+                                        <i class="la la-check-square-o"></i> Submit
+                                    </button>
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </section>
             </div>
-
         </div>
+        </section>
+    </div>
+
+    </div>
     </div>
     <!-- END: Content-->
 

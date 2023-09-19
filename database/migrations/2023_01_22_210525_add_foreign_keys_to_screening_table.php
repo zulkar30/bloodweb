@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::table('screening', function (Blueprint $table) {
             $table->foreignId('officer_id', 'fk_screening_to_officer')
             ->references('id')->on('officer')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreignId('blood_type_id', 'fk_screening_to_blood_type')->references('id')->on('blood_type')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId('aftap_id', 'fk_screening_to_aftap')
+                ->references('id')->on('aftap')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,7 +30,7 @@ return new class extends Migration
     {
         Schema::table('screening', function (Blueprint $table) {
             $table->dropForeign('fk_screening_to_officer');
-            $table->dropForeign('fk_screening_to_blood_type');
+            $table->dropForeign('fk_screening_to_aftap');
         });
     }
 };

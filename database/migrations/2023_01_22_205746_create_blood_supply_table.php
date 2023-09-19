@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('blood_supply', function (Blueprint $table) {
             $table->id();
-            $table->string('volume')->nullable();
+            $table->integer('volume')->nullable();
             $table->timestamps();
         });
     }

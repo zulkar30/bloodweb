@@ -17,7 +17,7 @@ class ContactController extends Controller
 
         $feedback = FeedBack::create($data);
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully Give FeedBack Message');
+        alert()->success('Berhasil', 'Berhasil Memberikan Masukan');
         // Tempat akan ditampilkannya Sweetalert
         return redirect()->route('contact.success');
     }

@@ -32,7 +32,16 @@ class UpdateAftap extends FormRequest
     public function rules()
     {
         return [
+            'no_labu' => [
+                'nullable'
+            ],
+            'volume' => [
+                'nullable', 'string', 'max:255'
+            ],
             'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'patient_id' => [
                 'nullable', 'integer',
             ],
             'donor_id' => [
@@ -40,12 +49,6 @@ class UpdateAftap extends FormRequest
             ],
             'pouch_type_id' => [
                 'nullable', 'integer',
-            ],
-            'blood_type_id' => [
-                'nullable', 'integer'
-            ],
-            'volume' => [
-                'nullable', 'string', 'max:255'
             ]
         ];
     }

@@ -105,7 +105,7 @@ class UserController extends Controller
         $detail_user->photo = $request['photo'];
         $detail_user->save();
 
-        alert()->success('Success Create Message', 'Successfully added new User');
+        alert()->success('Berhasil', 'Berhasil Menambahkan User Baru');
         return redirect()->route('backsite.user.index');
     }
 
@@ -186,7 +186,7 @@ class UserController extends Controller
         $detail_user->photo = $request['photo'];
         $detail_user->save();
 
-        alert()->success('Success Update Message', 'Successfully updated User');
+        alert()->success('Berhasil', 'Berhasil Memperbarui Data User');
         return redirect()->route('backsite.user.index');
     }
 
@@ -212,7 +212,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        alert()->success('Success Delete Message', 'Successfully deleted User');
+        alert()->success('Berhasil', 'Berhasil Menghapus Data User');
         return back();
     }
 }

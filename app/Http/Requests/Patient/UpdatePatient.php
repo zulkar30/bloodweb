@@ -32,15 +32,6 @@ class UpdatePatient extends FormRequest
     public function rules()
     {
         return [
-            'room_id' => [
-                'nullable', 'integer'
-            ],
-            'blood_type_id' => [
-                'nullable', 'integer'
-            ],
-            'maintenance_section_id' => [
-                'nullable', 'integer'
-            ],
             'name' => [
                 'nullable', 'string', 'max:255'
             ],
@@ -67,6 +58,15 @@ class UpdatePatient extends FormRequest
             ],
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
+            ],
+            'room_id' => [
+                'nullable', 'integer'
+            ],
+            'blood_type_id' => [
+                'nullable', 'integer'
+            ],
+            'maintenance_section_id' => [
+                'nullable', 'integer'
             ]
         ];
     }

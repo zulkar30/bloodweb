@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('crossmatch', function (Blueprint $table) {
             $table->id();
-            $table->string('fase1')->nullable();
-            $table->string('fase2')->nullable();
-            $table->string('fase3')->nullable();
-            $table->string('result')->nullable();
+            $table->string('no_cm')->nullable();
+            $table->enum('fase1', ['positif', 'negatif'])->nullable();
+            $table->enum('fase2', ['positif', 'negatif'])->nullable();
+            $table->enum('fase3', ['positif', 'negatif'])->nullable();
+            $table->enum('result', ['reaktif', 'non-reaktif'])->nullable();
             $table->timestamps();
         });
     }

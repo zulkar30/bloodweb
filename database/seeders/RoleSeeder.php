@@ -17,17 +17,17 @@ class RoleSeeder extends Seeder
     {
         $role = [
             [
-                'name'      => 'Super Admin', // 1
+                'name'      => 'Super Admin',   // 1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Admin', // 2
+                'name'      => 'Admin',         // 2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'User', // 3
+                'name'      => 'User',          // 3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

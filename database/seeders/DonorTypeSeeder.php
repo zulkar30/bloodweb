@@ -17,17 +17,17 @@ class DonorTypeSeeder extends Seeder
     {
         $donor_type = [
             [
-                'name'      => 'Sukarela',
+                'name'      => 'Sukarela',              //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Keluarga/Pengganti',
+                'name'      => 'Keluarga/Pengganti',    //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Bayaran',
+                'name'      => 'Bayaran',               //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]

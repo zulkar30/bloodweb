@@ -17,62 +17,62 @@ class PositionSeeder extends Seeder
     {
         $position = [
             [
-                'name'      => 'Rekam Medis',
+                'name'      => 'Rekam Medis',       //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Ahli Gizi',
+                'name'      => 'Ahli Gizi',         //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Radiografer',
+                'name'      => 'Radiografer',       //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Laborat',
+                'name'      => 'Laborat',           //4
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Laundry',
+                'name'      => 'Laundry',           //5
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Bidan',
+                'name'      => 'Bidan',             //6
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [   
+                'name'      => 'Asisten Bidan',     //7
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Asisten Bidan',
+                'name'      => 'Perawat',           //8
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Perawat',
+                'name'      => 'Asisten Perawat',   //9
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Asisten Perawat',
+                'name'      => 'Apoteker',          //10
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Apoteker',
+                'name'      => 'Asisten Apoteker',  //11
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Asisten Apoteker',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'name'      => 'Customer Service',
+                'name'      => 'Customer Service',  //12
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

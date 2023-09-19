@@ -18,8 +18,8 @@ class BloodSupply extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'blood_type_id',
         'volume',
+        'blood_type_id',
         'created_at',
         'updated_at',
     ];

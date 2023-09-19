@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Screening')
+@section('title', 'Skrinning')
 
 @section('content')
 
@@ -28,13 +28,13 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Screening</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Skrinning</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Screening</li>
+                                <li class="breadcrumb-item active">Skrinning</li>
                             </ol>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <div class="card">
                                     <div class="card-header bg-success text-white">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="card-title text-white">Tambah Data</h4>
                                             <a class="heading-elements-toggle"><i
                                                     class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
@@ -73,41 +73,57 @@
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the
-                                                            submit button.</p>
+                                                        <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                            anda menekan tombol submit.</p>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Blood Type <code
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="no_sc">No SC <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="blood_type_id" id="blood_type_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($blood_type as $key => $blood_type_item)
-                                                                    <option value="{{ $blood_type_item->id }}">
-                                                                        {{ $blood_type_item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                            <input type="text" id="no_sc" name="no_sc"
+                                                                class="form-control col-md-3" value="{{ old('no_sc') }}"
+                                                                autocomplete="off" readonly>
 
-                                                            @if ($errors->has('blood_type_id'))
+                                                            @if ($errors->has('no_sc'))
                                                                 <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('blood_type_id') }}</p>
+                                                                    {{ $errors->first('no_sc') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
 
                                                     <div
-                                                        class="form-group row {{ $errors->has('hiv') ? 'has-error' : '' }}">
+                                                        class="form-group row {{ $errors->has('aftap_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">No Labu <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="aftap_id" id="aftap_id" class="form-control select2"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih No
+                                                                    Labu
+                                                                </option>
+                                                                @foreach ($aftap as $key => $aftap_item)
+                                                                    <option value="{{ $aftap_item->id }}">
+                                                                        {{ $aftap_item->no_labu }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('aftap_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('aftap_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row {{ $errors->has('hiv') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">HIV <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="hiv" id="hiv"
-                                                                class="form-control select2" onchange="calculateResult()" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                            <select name="hiv" id="hiv" class="form-control select2"
+                                                                onchange="calculateResult()" required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Hasil
                                                                 </option>
                                                                 <option value="1">Positif</option>
                                                                 <option value="2">Negatif</option>
@@ -120,14 +136,14 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('hcv') ? 'has-error' : '' }}">
+                                                    <div class="form-group row {{ $errors->has('hcv') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">HCV <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="hcv" id="hcv"
-                                                                class="form-control select2" onchange="calculateResult()" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                            <select name="hcv" id="hcv" class="form-control select2"
+                                                                onchange="calculateResult()" required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Hasil
                                                                 </option>
                                                                 <option value="1">Positif</option>
                                                                 <option value="2">Negatif</option>
@@ -140,14 +156,14 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('hbsag') ? 'has-error' : '' }}">
+                                                    <div class="form-group row {{ $errors->has('hbsag') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">HBSAG <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <select name="hbsag" id="hbsag"
-                                                                class="form-control select2" onchange="calculateResult()" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                            <select name="hbsag" id="hbsag" class="form-control select2"
+                                                                onchange="calculateResult()" required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Hasil
                                                                 </option>
                                                                 <option value="1">Positif</option>
                                                                 <option value="2">Negatif</option>
@@ -160,14 +176,15 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('vdrl') ? 'has-error' : '' }}">
+                                                    <div class="form-group row {{ $errors->has('vdrl') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">VDRL <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="vdrl" id="vdrl"
-                                                                class="form-control select2" onchange="calculateResult()" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                class="form-control select2" onchange="calculateResult()"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Hasil
                                                                 </option>
                                                                 <option value="1">Positif</option>
                                                                 <option value="2">Negatif</option>
@@ -182,12 +199,12 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('result') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Result <code
+                                                        <label class="col-md-3 label-control">Hasil <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="result" id="result"
-                                                                class="form-control select2" disabled required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                class="form-control select2" @readonly(true)>
+                                                                <option value="{{ '' }}" disabled selected>Hasil
                                                                 </option>
                                                                 <option value="1">Reaktif</option>
                                                                 <option value="2">Non-Reaktif</option>
@@ -200,18 +217,21 @@
                                                         </div>
                                                     </div>
 
+                                                    <input type="hidden" name="last_sc_number" id="last_sc_number"
+                                                        value="{{ $lastScreeningId }}">
+
                                                     <div
                                                         class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Officer <code
+                                                        <label class="col-md-3 label-control">Petugas <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="officer_id" id="officer_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($officer as $key => $officer_item)
-                                                                    <option value="{{ $officer_item->id }}">
-                                                                        {{ $officer_item->name }}
+                                                                class="form-control select2">
+                                                                <option value="" disabled selected>Choose</option>
+                                                                @foreach ($officerOptions as $officerId => $officerName)
+                                                                    <option value="{{ $officerId }}"
+                                                                        {{ $officerForLoggedInUser && $officerForLoggedInUser->id === $officerId ? 'selected' : '' }}>
+                                                                        {{ $officerName }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
@@ -222,6 +242,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
+                                                </div>
 
                                                 <div class="form-actions text-right">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan"
@@ -250,7 +271,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Screening List</h4>
+                                    <h4 class="card-title">Skrinning List</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -269,69 +290,47 @@
                                                 class="table table-striped table-bordered text-inputs-searching default-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Date</th>
-                                                        <th>Blood Type</th>
-                                                        <th>Result</th>
-                                                        <th style="text-align:center; width:150px;">Action</th>
+                                                        <th>No Labu</th>
+                                                        <th>Pendonor</th>
+                                                        <th>Golongan Darah</th>
+                                                        <th>Hasil</th>
+                                                        <th style="text-align:center; width:150px;">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @forelse($screening as $key => $screening_item)
                                                         <tr data-entry-id="{{ $screening_item->id }}">
-                                                            <td>{{ isset($screening_item->created_at) ? date('d/m/Y H:i:s', strtotime($screening_item->created_at)) : '' }}
+                                                            <td>{{ $screening_item->aftap->no_labu ?? '' }}</td>
+                                                            <td>{{ $screening_item->aftap->donor->name ?? '' }}</td>
+                                                            <td>{{ $screening_item->aftap->donor->blood_type->name ?? '' }}
                                                             </td>
-                                                            <td>{{ $screening_item->blood_type->name ?? '' }}</td>
                                                             <td>
-                                                                @if ($screening_item->result == 1)
-                                                                    <span class="badge badge-danger">{{ 'Reaktif' }}</span>
-                                                                @elseif($screening_item->result == 2)
-                                                                    <span class="badge badge-success">{{ 'Non-Reaktif' }}</span>
+                                                                @if ($screening_item->result == 'reaktif')
+                                                                    <span
+                                                                        class="badge badge-danger">{{ 'Reaktif' }}</span>
+                                                                @elseif($screening_item->result == 'non-reaktif')
+                                                                    <span
+                                                                        class="badge badge-success">{{ 'Non-Reaktif' }}</span>
                                                                 @else
                                                                     <span>{{ 'N/A' }}</span>
                                                                 @endif
                                                             </td>
                                                             <td class="text-center">
-
-                                                                <div class="btn-group mr-1 mb-1">
-                                                                    <button type="button"
-                                                                        class="btn btn-info btn-sm dropdown-toggle"
-                                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                                        aria-expanded="false">Action</button>
-                                                                    <div class="dropdown-menu">
-
-                                                                        @can('screening_show')
-                                                                            <a href="#mymodal"
-                                                                                data-remote="{{ route('backsite.screening.show', $screening_item->id) }}"
-                                                                                data-toggle="modal" data-target="#mymodal"
-                                                                                data-title="Screening Detail"
-                                                                                class="dropdown-item">
-                                                                                Show
-                                                                            </a>
-                                                                        @endcan
-
-                                                                        @can('screening_edit')
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('backsite.screening.edit', $screening_item->id) }}">
-                                                                                Edit
-                                                                            </a>
-                                                                        @endcan
-
-                                                                        @can('screening_delete')
-                                                                            <form
-                                                                                action="{{ route('backsite.screening.destroy', $screening_item->id) }}"
-                                                                                method="POST"
-                                                                                onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                <input type="hidden" name="_method"
-                                                                                    value="DELETE">
-                                                                                <input type="hidden" name="_token"
-                                                                                    value="{{ csrf_token() }}">
-                                                                                <input type="submit" class="dropdown-item"
-                                                                                    value="Delete">
-                                                                            </form>
-                                                                        @endcan
-
-                                                                    </div>
-                                                                </div>
+                                                                @can('screening_show')
+                                                                    <a href="#mymodal"
+                                                                        data-remote="{{ route('backsite.screening.show', $screening_item->id) }}"
+                                                                        data-toggle="modal" data-target="#mymodal"
+                                                                        data-title="Screening Detail"
+                                                                        class="badge badge-info" data-tooltip="Tooltip on top" title="Lihat"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z"></path><path d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z"></path></svg></a>
+                                                                @endcan
+                                                                @can('screening_edit')
+                                                                    <a href="{{ route('backsite.screening.edit', $screening_item->id) }}"
+                                                                        class="badge badge-warning" data-tooltip="Tooltip on top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg></a>
+                                                                @endcan
+                                                                @can('screening_delete')
+                                                                    <a href="#" class="badge badge-danger" data-tooltip="Tooltip on top" title="Hapus"
+                                                                        onclick="deleteScreening({{ $screening_item->id }})"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg></a>
+                                                                @endcan
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -340,10 +339,11 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <th>Date</th>
-                                                        <th>Blood Type</th>
-                                                        <th>Result</th>
-                                                        <th style="text-align:center; width:150px;">Action</th>
+                                                        <th>No Labu</th>
+                                                        <th>Pendonor</th>
+                                                        <th>Golongan Darah</th>
+                                                        <th>Hasil</th>
+                                                        <th style="text-align:center; width:150px;">Aksi</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -437,9 +437,48 @@
                 result = '';
             }
             $('#result').val(result).trigger('change');
-            
-            $('#result_hidden').val(result);
         }
+
+        $(document).ready(function() {
+            var noScreeningInput = $('#no_sc');
+            var lastScreeningNumberInput = $('#last_sc_number');
+
+            var lastScreeningId = parseInt(lastScreeningNumberInput.val());
+            var newScreeningNumber = lastScreeningId + 1;
+            var formattedScreeningNumber = 'SC' + newScreeningNumber.toString().padStart(5, '0');
+
+            noScreeningInput.val(formattedScreeningNumber);
+            lastScreeningNumberInput.val(newScreeningNumber);
+        });
+
+        function deleteScreening(screeningId) {
+            if (confirm('Anda yakin ingin menghapus data Skrinning ini?')) {
+                var form = document.createElement('form');
+                form.action = '{{ route('backsite.screening.destroy', '__id') }}'.replace('__id', screeningId);
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = '_token';
+                tokenInput.value = '{{ csrf_token() }}';
+
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+
+                form.appendChild(tokenInput);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+
+                form.submit();
+            }
+        }
+
+        $(document).ready(function() {
+            $('[data-tooltip]').tooltip();
+        });
     </script>
 
     <div class="modal fade" id="mymodal" tabindex="-1" role="dialog">

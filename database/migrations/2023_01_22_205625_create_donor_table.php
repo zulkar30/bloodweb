@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('donor', function (Blueprint $table) {
             $table->id();
+            $table->string('no_reg')->nullable();
             $table->string('name');
+            $table->enum('gender', ['laki-laki', 'perempuan'])->nullable();
             $table->string('birth_place')->nullable();
             $table->date('birth_date')->nullable();
-            $table->enum('gender', [1,2])->nullable();
-            $table->string('contact')->nullable();
+            $table->bigInteger('nik')->nullable();
             $table->longText('address')->nullable();
+            $table->string('contact')->nullable();
             $table->integer('age')->nullable();
             $table->longText('photo')->nullable();
-            $table->enum('status', [1,2,3])->nullable();
+            $table->enum('status', ['diterima', 'menunggu', 'ditolak'])->nullable();
             $table->timestamps();
         });
     }

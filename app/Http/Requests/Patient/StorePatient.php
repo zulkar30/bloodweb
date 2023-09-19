@@ -32,15 +32,6 @@ class StorePatient extends FormRequest
     public function rules()
     {
         return [
-            'room_id' => [
-                'required', 'integer'
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
-            ],
-            'maintenance_section_id' => [
-                'required', 'integer'
-            ],
             'name' => [
                 'required', 'string', 'max:255'
             ],
@@ -67,6 +58,15 @@ class StorePatient extends FormRequest
             ],
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
+            ],
+            'room_id' => [
+                'required', 'integer'
+            ],
+            'blood_type_id' => [
+                'required', 'integer'
+            ],
+            'maintenance_section_id' => [
+                'required', 'integer'
             ]
         ];
     }

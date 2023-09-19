@@ -3,25 +3,24 @@
 namespace App\Http\Controllers\Backsite;
 
 // Default
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-// Library
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
-
-// Request
-use App\Http\Requests\Screening\StoreScreening;
-use App\Http\Requests\Screening\UpdateScreening;
-
-// Everything Else
-use Auth;
 use Gate;
 
-// Model
+// Library
+use App\Models\Operational\Aftap;
+
+// Request
 use App\Models\Operational\Officer;
+use App\Http\Controllers\Controller;
+
+// Everything Else
 use App\Models\MasterData\BloodType;
+use Illuminate\Support\Facades\Auth;
+
+// Model
 use App\Models\Operational\Screening;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Screening\StoreScreening;
+use App\Http\Requests\Screening\UpdateScreening;
 
 // Third Party
 
@@ -43,13 +42,23 @@ class ScreeningController extends Controller
         // Middleware Gate
         abort_if(Gate::denies('screening_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada table
-        $screening = Screening::orderBy('created_at', 'desc')->get();
-        // Ditampilkan pada pilihan
+        // Model
         $blood_type = BloodType::orderBy('name', 'asc')->get();
-        $officer = Officer::orderBy('name', 'asc')->get();
+        $aftap = Aftap::orderBy('id','desc')->get();
+        $screening = Screening::orderBy('created_at', 'desc')->get();
+
+        // Mendapatkan ScreeningID terakhir
+        $lastScreening = Screening::orderBy('id', 'desc')->first();
+        $lastScreeningId = $lastScreening ? $lastScreening->id : 0;
+
+        // Mendapatkan data officer yang login sebagai officer
+        $loggedInUser = Auth::user();
+        $officerForLoggedInUser = $loggedInUser->officer;
+
+        // Mendapatkan OfficerID
+        $officerOptions = Officer::pluck('name', 'id');
         
-        return view('pages.backsite.operational.screening.index', compact('screening', 'blood_type', 'officer'));
+        return view('pages.backsite.operational.screening.index', compact('screening', 'lastScreeningId', 'blood_type', 'officerForLoggedInUser', 'officerOptions', 'aftap'));
     }
 
     /**
@@ -73,12 +82,19 @@ class ScreeningController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
-        // Kirim data ke database
-        $screening = Screening::create($data);
+        $screening = new Screening();
+        $screening->no_sc = $data['no_sc'];
+        $screening->hiv = $data['hiv'] ?? null;
+        $screening->hcv = $data['hcv'] ?? null;
+        $screening->hbsag = $data['hbsag'] ?? null;
+        $screening->vdrl = $data['vdrl'] ?? null;
+        $screening->result = $data['result'] ?? null;
+        $screening->officer_id = $data['officer_id'];
+        $screening->aftap_id = $data['aftap_id'];
+        $screening->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Screening');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Skrinning Baru');
         return redirect()->route('backsite.screening.index');
     }
 
@@ -108,8 +124,9 @@ class ScreeningController extends Controller
         // Ditampilkan pada form sebagai pilihan
         $officer = Officer::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        $aftap = Aftap::orderBy('id','desc')->get();
 
-        return view('pages.backsite.operational.screening.edit', compact('screening', 'officer', 'blood_type'));
+        return view('pages.backsite.operational.screening.edit', compact('screening', 'officer', 'blood_type', 'aftap'));
     }
 
     /**
@@ -128,8 +145,7 @@ class ScreeningController extends Controller
         $screening->update($data);
 
         // Sweetalert
-        alert()->success('Success Update Message', 'Successfully updated Screening');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Melakukan Perubahan Data Skrinning');
         return redirect()->route('backsite.screening.index');
     }
 
@@ -146,8 +162,7 @@ class ScreeningController extends Controller
         $screening->delete();
 
         // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Screening');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menghapus Data Skrinning');
         return back();
     }
 }

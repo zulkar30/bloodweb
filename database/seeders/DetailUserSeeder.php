@@ -17,7 +17,18 @@ class DetailUserSeeder extends Seeder
     {
         $detail_user = [
             [
-                'user_id'        => 1,
+                'user_id'        => 1,      
+                'type_user_id'   => 2,
+                'gender'         => 1,
+                'contact'        => '082287354040',
+                'address'        => 'Jalan Rintis Gang Yakub',
+                'age'            => 23,
+                'photo'          => NULL,
+                'created_at'     => date('Y-m-d H:i:s'),
+                'updated_at'     => date('Y-m-d H:i:s'),
+            ],
+            [
+                'user_id'        => 4,     
                 'type_user_id'   => 2,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -28,7 +39,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 4,
+                'user_id'        => 5,     
                 'type_user_id'   => 2,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -39,7 +50,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 5,
+                'user_id'        => 6,     
                 'type_user_id'   => 2,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -50,7 +61,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 6,
+                'user_id'        => 7,     
                 'type_user_id'   => 2,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -61,18 +72,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 7,
-                'type_user_id'   => 2,
-                'gender'         => NULL,
-                'contact'        => NULL,
-                'address'        => NULL,
-                'age'            => NULL,
-                'photo'          => NULL,
-                'created_at'     => date('Y-m-d H:i:s'),
-                'updated_at'     => date('Y-m-d H:i:s'),
-            ],
-            [
-                'user_id'        => 2,
+                'user_id'        => 2,     
                 'type_user_id'   => 1,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -83,7 +83,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 3,
+                'user_id'        => 3,     
                 'type_user_id'   => 1,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -94,7 +94,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 8,
+                'user_id'        => 8,     
                 'type_user_id'   => 1,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -105,7 +105,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 9,
+                'user_id'        => 9,     
                 'type_user_id'   => 1,
                 'gender'         => NULL,
                 'contact'        => NULL,
@@ -116,7 +116,7 @@ class DetailUserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'user_id'        => 10,
+                'user_id'        => 10,     
                 'type_user_id'   => 1,
                 'gender'         => NULL,
                 'contact'        => NULL,

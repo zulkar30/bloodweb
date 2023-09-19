@@ -18,10 +18,6 @@ class Doctor extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'user_id',
-        'specialist_id',
-        'position_id',
-        'blood_type_id',
         'name',
         'birth_place',
         'birth_date',
@@ -30,6 +26,9 @@ class Doctor extends Model
         'address',
         'age',
         'photo',
+        'user_id',
+        'specialist_id',
+        'blood_type_id',
         'created_at',
         'updated_at',
     ];

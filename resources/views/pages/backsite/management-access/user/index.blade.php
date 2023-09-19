@@ -50,7 +50,7 @@
                                 <div class="card">
                                     <div class="card-header bg-success text-white">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="card-title text-white">Tambah Data</h4>
                                             <a class="heading-elements-toggle"><i
                                                     class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
@@ -72,16 +72,16 @@
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the
-                                                            submit button.</p>
+                                                        <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                            anda menekan tombol submit.</p>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="name">Name <code
+                                                        <label class="col-md-3 label-control" for="name">Nama <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="name" name="name"
-                                                                class="form-control" placeholder="example John Doe or Jane"
+                                                                class="form-control" placeholder="Nama Lengkap"
                                                                 value="{{ old('name') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('name'))
@@ -96,8 +96,7 @@
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="email" name="email"
-                                                                class="form-control"
-                                                                placeholder="example People@gmail.com or Human@mail.com"
+                                                                class="form-control" placeholder="Email valid"
                                                                 value="{{ old('email') }}" autocomplete="off"
                                                                 data-inputmask="'alias': 'email'" required>
 
@@ -109,14 +108,14 @@
                                                     </div>
 
                                                     <div class="form-group row {{ $errors->has('role') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Role <code
+                                                        <label class="col-md-3 label-control">Peran <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <label for="role">
                                                                 <span
-                                                                    class="btn btn-warning btn-sm select-all">{{ 'Select all' }}</span>
+                                                                    class="btn btn-warning btn-sm select-all">{{ 'Pilih Semua' }}</span>
                                                                 <span
-                                                                    class="btn btn-warning btn-sm deselect-all">{{ 'Delete all' }}</span>
+                                                                    class="btn btn-warning btn-sm deselect-all">{{ 'Hapus Semua' }}</span>
                                                             </label>
 
                                                             <select name="role[]" id="role"
@@ -139,12 +138,13 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('type_user_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Type User <code
+                                                        <label class="col-md-3 label-control">Jenis User <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="type_user_id" id="type_user_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Jenis User
                                                                 </option>
                                                                 @foreach ($type_user as $key => $type_user_item)
                                                                     <option value="{{ $type_user_item->id }}">
@@ -160,21 +160,21 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="photo">Photo <code
+                                                        <label class="col-md-3 label-control" for="photo">Foto <code
                                                                 style="color:green;">optional</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <div class="custom-file">
                                                                 <input type="file"
                                                                     accept="image/png, image/svg, image/jpeg"
-                                                                    class="custom-file-input" id="photo" name="photo"
-                                                                    >
+                                                                    class="custom-file-input" id="photo" name="photo">
                                                                 <label class="custom-file-label" for="photo"
-                                                                    aria-describedby="photo">Choose File</label>
+                                                                    aria-describedby="photo">Pilih Foto</label>
                                                             </div>
 
                                                             <p class="text-muted"><small class="text-danger">Hanya dapat
                                                                     mengunggah 1 file</small><small> dan yang dapat digunakan
-                                                                    JPEG, SVG, PNG & Maksimal ukuran file hanya 10
+                                                                    JPEG, SVG, PNG & resolusi harus 100x100, Maksimal ukuran
+                                                                    file hanya 10
                                                                     MegaBytes</small></p>
 
                                                             @if ($errors->has('photo'))
@@ -220,7 +220,6 @@
                                             <ul class="list-inline mb-0">
                                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                                 <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                                <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -233,13 +232,13 @@
                                                     class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
+                                                            <th>Tanggal</th>
+                                                            <th>Nama</th>
                                                             <th>Email</th>
-                                                            <th>Role</th>
-                                                            <th>Type User</th>
-                                                            <th>Photo</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th>Peran</th>
+                                                            <th>Jenis User</th>
+                                                            <th>Foto</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -261,49 +260,51 @@
                                                                 </td>
                                                                 <td><a data-fancybox="gallery"
                                                                         data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $user_item->photo }}"
-                                                                        class="blue accent-4">Show</a></td>
-
+                                                                        class="blue accent-4">Lihat</a></td>
                                                                 <td class="text-center">
-                                                                    {{-- @can('user_show' || 'user_edit' || 'user_delete') --}}
-                                                                    <div class="btn-group mr-1 mb-1">
-                                                                        <button type="button"
-                                                                            class="btn btn-info btn-sm dropdown-toggle"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">Action</button>
-                                                                        <div class="dropdown-menu">
-                                                                            @can('user_show')
-                                                                                <a href="#mymodal"
-                                                                                    data-remote="{{ route('backsite.user.show', $user_item->id) }}"
-                                                                                    data-toggle="modal" data-target="#mymodal"
-                                                                                    data-title="User Detail"
-                                                                                    class="dropdown-item">
-                                                                                    Show
-                                                                                </a>
-                                                                            @endcan
-                                                                            @can('user_edit')
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('backsite.user.edit', $user_item->id) }}">
-                                                                                    Edit
-                                                                                </a>
-                                                                            @endcan
-                                                                            @can('user_delete')
-                                                                                <form
-                                                                                    action="{{ route('backsite.user.destroy', $user_item->id) }}"
-                                                                                    method="POST"
-                                                                                    onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                    <input type="hidden" name="_method"
-                                                                                        value="DELETE">
-                                                                                    <input type="hidden" name="_token"
-                                                                                        value="{{ csrf_token() }}">
-                                                                                    <input type="submit" class="dropdown-item"
-                                                                                        value="Delete">
-                                                                                </form>
-                                                                            @endcan
-                                                                        </div>
-                                                                    </div>
-                                                                    {{-- @endcan --}}
+                                                                    @can('user_show')
+                                                                        <a href="#mymodal"
+                                                                            data-remote="{{ route('backsite.user.show', $user_item->id) }}"
+                                                                            data-toggle="modal" data-target="#mymodal"
+                                                                            data-title="User Detail" class="badge badge-info"
+                                                                            data-tooltip="Tooltip on top" title="Lihat"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z">
+                                                                                </path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @can('user_edit')
+                                                                        <a href="{{ route('backsite.user.edit', $user_item->id) }}"
+                                                                            class="badge badge-warning"
+                                                                            data-tooltip="Tooltip on top" title="Edit"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z">
+                                                                                </path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @can('user_delete')
+                                                                        <a href="#" class="badge badge-danger"
+                                                                            data-tooltip="Tooltip on top" title="Hapus"
+                                                                            onclick="deleteUser({{ $user_item->id }})"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z">
+                                                                                </path>
+                                                                                <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
+                                                                            </svg></a>
+                                                                    @endcan
                                                                 </td>
-
                                                             </tr>
                                                         @empty
                                                             {{-- not found --}}
@@ -311,13 +312,13 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
+                                                            <th>Tanggal</th>
+                                                            <th>Nama</th>
                                                             <th>Email</th>
-                                                            <th>Role</th>
-                                                            <th>Type User</th>
-                                                            <th>Photo</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th>Peran</th>
+                                                            <th>Jenis User</th>
+                                                            <th>Foto</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -401,6 +402,35 @@
         // fancybox
         Fancybox.bind('[data-fancybox="gallery"]', {
             infinite: false
+        });
+
+        function deleteUser(userId) {
+            if (confirm('Anda yakin ingin menghapus user ini?')) {
+                var form = document.createElement('form');
+                form.action = '{{ route('backsite.user.destroy', '__id') }}'.replace('__id', userId);
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = '_token';
+                tokenInput.value = '{{ csrf_token() }}';
+
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+
+                form.appendChild(tokenInput);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+
+                form.submit();
+            }
+        }
+
+        $(document).ready(function() {
+            $('[data-tooltip]').tooltip();
         });
     </script>
 

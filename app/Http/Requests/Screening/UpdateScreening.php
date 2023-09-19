@@ -32,12 +32,6 @@ class UpdateScreening extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'nullable', 'integer',
-            ],
-            'blood_type_id' => [
-                'nullable', 'integer'
-            ],
             'hiv' => [
                 'nullable', 'string', 'max:255'
             ],
@@ -53,6 +47,12 @@ class UpdateScreening extends FormRequest
             'result' => [
                 'nullable', 'string', 'max:255'
             ],
+            'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'aftap_id' => [
+                'nullable', 'integer',
+            ]
         ];
     }
 }

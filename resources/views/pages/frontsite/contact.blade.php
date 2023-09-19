@@ -11,8 +11,8 @@
             <div class="lg:w-full lg:border-r flex flex-col justify-center px-5">
 
                 <h2 class="text-[#1E2B4F] text-3xl font-semibold leading-normal mb-6">
-                    Frequently Asked <br />
-                    Questions
+                    Pertanyaan yang Sering <br />
+                    Diajukan
                 </h2>
 
                 <div class="faq-item mt-5 space-y-5">
@@ -52,8 +52,7 @@
             <div class="lg:w-full mt-10 lg:mt-0">
 
                 <h2 class="text-[#1E2B4F] text-3xl font-semibold leading-normal mb-6">
-                    Ask Question <br />
-                    Form
+                    Form Masukan
                 </h2>
 
                 <form action="{{ route('contact.store') }}" method="POST" class="mt-8 space-y-5">
@@ -63,20 +62,20 @@
                     <label class="relative block">
                         <input type="text" id="name" name="name"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                            placeholder="Your Name" required />
+                            placeholder="Nama Lengkap" required />
                     </label>
 
 
                     <label class="relative block">
                         <input type="email" id="email" name="email"
                             class="block w-full rounded-full py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                            placeholder="Your Email" required />
+                            placeholder="Email Valid" required />
                     </label>
 
                     <label class="relative block">
                         <textarea name="message" id="message"
                             class="block w-full rounded-md py-4 text-[#1E2B4F] font-medium placeholder:text-[#AFAEC3] placeholder:font-normal px-7 border border-[#d4d4d4] focus:outline-none focus:border-[#0D63F3]"
-                            placeholder="Your Message"></textarea>
+                            placeholder="Masukan"></textarea>
                     </label>
 
                     <input type="hidden" name="blood_request_id" value="#">
@@ -84,7 +83,7 @@
                     <div class="flex justify-between gap-2">
                         <button type="submit"
                             class="bg-[#0D63F3] rounded-full mt-5 w-full text-white text-lg font-medium px-10 py-3 text-center"
-                            onclick="return confirm('Are you sure want to send this message ?')">Send</button>
+                            onclick="return confirm('Anda yakin ingin mengirim masukan ini ?')">Kirim</button>
                     </div>
                 </form>
             </div>

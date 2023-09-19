@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             BloodTypeSeeder::class,
-            // BloodSupplySeeder::class,
+            BloodSupplySeeder::class,
             DonorTypeSeeder::class,
             MaintenanceSectionSeeder::class,
             PositionSeeder::class,
@@ -28,13 +28,14 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DoctorSeeder::class,
             OfficerSeeder::class,
-            DonorSeeder::class,
+            // DonorSeeder::class,
             PatientSeeder::class,
             DetailUserSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
             PermissionRoleSeeder::class,
             RoleUserSeeder::class,
+            // AftapSeeder::class
         ]);
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Blood Request')
+@section('title', 'Permintaan Darah')
 
 @section('content')
 
@@ -28,13 +28,13 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Blood Request</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Permintaan Darah</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Blood Request</li>
+                                <li class="breadcrumb-item active">Permintaan Darah</li>
                             </ol>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <div class="card">
                                     <div class="card-header bg-success text-white">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="card-title text-white">Tambah Data</h4>
                                             <a class="heading-elements-toggle"><i
                                                     class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
@@ -74,26 +74,58 @@
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the
-                                                            submit button.</p>
+                                                        <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                            anda menekan tombol submit.</p>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="no_br">No BR <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="no_br" name="no_br"
+                                                                class="form-control col-md-3" value="{{ old('no_br') }}"
+                                                                autocomplete="off" readonly>
+
+                                                            @if ($errors->has('no_br'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('no_br') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row {{ $errors->has('no_mr') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">NO MR <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="no_mr" id="no_mr" class="form-control select2"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih NO
+                                                                    MR</option>
+                                                                @foreach ($patient as $key => $patient_item)
+                                                                    <option value="{{ $patient_item->id }}"
+                                                                        data-patient-name="{{ $patient_item->name }}">
+                                                                        {{ $patient_item->no_mr }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @if ($errors->has('no_mr'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('no_mr') }}</p>
+                                                            @endif
+                                                        </div>
                                                     </div>
 
                                                     <div
                                                         class="form-group row {{ $errors->has('patient_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Patient <code
+                                                        <label class="col-md-3 label-control">Pasien <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="patient_id" id="patient_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                class="form-control select2" disabled>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Pasien
                                                                 </option>
-                                                                @foreach ($patient as $key => $patient_item)
-                                                                    <option value="{{ $patient_item->id }}">
-                                                                        {{ $patient_item->name }}
-                                                                    </option>
-                                                                @endforeach
                                                             </select>
-
                                                             @if ($errors->has('patient_id'))
                                                                 <p style="font-style: bold; color: red;">
                                                                     {{ $errors->first('patient_id') }}</p>
@@ -101,36 +133,14 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Blood Type <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="blood_type_id" id="blood_type_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($blood_type as $key => $blood_type_item)
-                                                                    <option value="{{ $blood_type_item->id }}">
-                                                                        {{ $blood_type_item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if ($errors->has('blood_type_id'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('blood_type_id') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="wb">Whole Blood <code
+                                                        <label class="col-md-3 label-control" for="wb">Darah Lengkap <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="wb" name="wb" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('wb') }}" autocomplete="off" required>
+                                                            <input type="number" id="wb" name="wb"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Darah Lengkap" value="{{ old('wb') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('wb'))
                                                                 <p style="font-style: bold; color: red;">
@@ -140,12 +150,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="we">Washes Eritrosit
+                                                        <label class="col-md-3 label-control" for="we">Darah Cuci
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="we" name="we" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('we') }}" autocomplete="off" required>
+                                                            <input type="number" id="we" name="we"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Darah Cuci" value="{{ old('we') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('we'))
                                                                 <p style="font-style: bold; color: red;">
@@ -155,12 +166,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="prc">Packed Red Cell
+                                                        <label class="col-md-3 label-control" for="prc">Sel Darah Merah
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="prc" name="prc" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('prc') }}" autocomplete="off" required>
+                                                            <input type="number" id="prc" name="prc"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Sel Darah Merah" value="{{ old('prc') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('prc'))
                                                                 <p style="font-style: bold; color: red;">
@@ -170,12 +182,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="tc">Trombosite
-                                                            Concentrate <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="tc">Trombosit <code
+                                                                style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="tc" name="tc" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('tc') }}" autocomplete="off" required>
+                                                            <input type="number" id="tc" name="tc"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Trombosit" value="{{ old('tc') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('tc'))
                                                                 <p style="font-style: bold; color: red;">
@@ -185,12 +198,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="ffp">Fresh Frozen
-                                                            Plasma <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="ffp">Plasma Segar Beku
+                                                            <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="ffp" name="ffp" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('ffp') }}" autocomplete="off" required>
+                                                            <input type="number" id="ffp" name="ffp"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Plasma Segar Beku" value="{{ old('ffp') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('ffp'))
                                                                 <p style="font-style: bold; color: red;">
@@ -200,12 +214,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="cry">Cryocypate <code
+                                                        <label class="col-md-3 label-control" for="cry">Kriosipitat <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="cry" name="cry" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('cry') }}" autocomplete="off" required>
+                                                            <input type="number" id="cry" name="cry"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Kriosipitat" value="{{ old('cry') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('cry'))
                                                                 <p style="font-style: bold; color: red;">
@@ -218,9 +233,10 @@
                                                         <label class="col-md-3 label-control" for="plasma">Plasma <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="plasma" name="plasma" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('plasma') }}" autocomplete="off" required>
+                                                            <input type="number" id="plasma" name="plasma"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Plasma" value="{{ old('plasma') }}"
+                                                                autocomplete="off">
 
                                                             @if ($errors->has('plasma'))
                                                                 <p style="font-style: bold; color: red;">
@@ -230,12 +246,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="prp">Platelet Rich
-                                                            Plasma <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="prp">Plasma Kaya
+                                                            Trombosit <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="number" id="prp" name="prp" oninput="calculateTotal()"
-                                                                class="form-control" placeholder="example 1 Unit"
-                                                                value="{{ old('prp') }}" autocomplete="off" required>
+                                                            <input type="number" id="prp" name="prp"
+                                                                oninput="calculateTotal()" class="form-control"
+                                                                placeholder="Plasma Kaya Trombosit"
+                                                                value="{{ old('prp') }}" autocomplete="off">
 
                                                             @if ($errors->has('prp'))
                                                                 <p style="font-style: bold; color: red;">
@@ -249,7 +266,7 @@
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="total" name="total"
-                                                                class="form-control" placeholder="example 1 Unit"
+                                                                class="form-control" placeholder="Total Permintaan"
                                                                 value="{{ old('total') }}" autocomplete="off" readonly>
 
                                                             @if ($errors->has('total'))
@@ -261,12 +278,13 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('doctor_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Doctor <code
+                                                        <label class="col-md-3 label-control">Dokter <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="doctor_id" id="doctor_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Dokter
                                                                 </option>
                                                                 @foreach ($doctor as $key => $doctor_item)
                                                                     <option value="{{ $doctor_item->id }}">
@@ -284,16 +302,16 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Officer <code
+                                                        <label class="col-md-3 label-control">Petugas <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="officer_id" id="officer_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($officer as $key => $officer_item)
-                                                                    <option value="{{ $officer_item->id }}">
-                                                                        {{ $officer_item->name }}
+                                                                class="form-control select2">
+                                                                <option value="" disabled selected>Choose</option>
+                                                                @foreach ($officerOptions as $officerId => $officerName)
+                                                                    <option value="{{ $officerId }}"
+                                                                        {{ $officerForLoggedInUser && $officerForLoggedInUser->id === $officerId ? 'selected' : '' }}>
+                                                                        {{ $officerName }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
@@ -304,8 +322,12 @@
                                                             @endif
                                                         </div>
                                                     </div>
-
                                                 </div>
+
+                                                <input type="hidden" name="last_br_number" id="last_br_number"
+                                                    value="{{ $lastBloodRequestId }}">
+                                                <input type="hidden" name="patient_id_hidden" id="patient_id_hidden"
+                                                    value="">
 
                                                 <div class="form-actions text-right">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan"
@@ -334,7 +356,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Blood Request List</h4>
+                                        <h4 class="card-title">Permintaan Darah List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -353,102 +375,110 @@
                                                     class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
-                                                            <th>Blood Type</th>
-                                                            <th>Total Request</th>
+                                                            <th>No BR</th>
+                                                            <th>Nama</th>
+                                                            <th>GolDa Permintaan</th>
+                                                            <th>Total Permintaan</th>
                                                             <th>Status</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @forelse($blood_request as $key => $blood_request_item)
                                                             <tr data-entry-id="{{ $blood_request_item->id }}">
-                                                                <td>{{ isset($blood_request_item->created_at) ? date('d/m/Y H:i:s', strtotime($blood_request_item->created_at)) : '' }}
+                                                                <td>{{ $blood_request_item->no_br }}</td>
+                                                                <td>{{ isset($blood_request_item->patient_id) ? $blood_request_item->patient->name : $blood_request_item->name }}
                                                                 </td>
-                                                                <td>
-                                                                    @if (empty($blood_request_item->name))
-                                                                        {{ $blood_request_item->patient->name ?? '' }}
-                                                                    @else
-                                                                        {{ $blood_request_item->name }}
-                                                                    @endif
+                                                                <td>{{ isset($blood_request_item->patient_id) ? $blood_request_item->patient->blood_type->name : $blood_request_item->blood_type->name }}
                                                                 </td>
-                                                                <td>{{ $blood_request_item->blood_type->name }}</td>
-                                                                <td>{{ $blood_request_item->total . ' Unit' }}</td>
+                                                                <td>{{ $blood_request_item->total . ' Komponen' }}</td>
                                                                 <td>
-                                                                    @if ($blood_request_item->status == 1)
+                                                                    @if ($blood_request_item->status == 'diterima')
                                                                         <span
-                                                                            class="badge badge-success">{{ 'Approved' }}</span>
-                                                                    @elseif($blood_request_item->status == 2)
+                                                                            class="badge badge-success">{{ 'Diterima' }}</span>
+                                                                    @elseif($blood_request_item->status == 'menunggu')
                                                                         <span
-                                                                            class="badge badge-warning">{{ 'Waiting' }}</span>
-                                                                    @elseif($blood_request_item->status == 3)
+                                                                            class="badge badge-warning">{{ 'Menunggu' }}</span>
+                                                                    @elseif($blood_request_item->status == 'ditolak')
                                                                         <span
-                                                                            class="badge badge-danger">{{ 'Rejected' }}</span>
+                                                                            class="badge badge-danger">{{ 'Ditolak' }}</span>
                                                                     @else
                                                                         <span>{{ 'N/A' }}</span>
                                                                     @endif
                                                                 </td>
                                                                 <td class="text-center">
-
-                                                                    <div class="btn-group mr-1 mb-1">
-                                                                        <button type="button"
-                                                                            class="btn btn-info btn-sm dropdown-toggle"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">Action</button>
-                                                                        <div class="dropdown-menu">
-
-                                                                            @can('blood_request_show')
-                                                                                <a href="#mymodal"
-                                                                                    data-remote="{{ route('backsite.blood_request.show', $blood_request_item->id) }}"
-                                                                                    data-toggle="modal" data-target="#mymodal"
-                                                                                    data-title="Blood Request Detail"
-                                                                                    class="dropdown-item">
-                                                                                    Show
-                                                                                </a>
-                                                                            @endcan
-
-                                                                            @can('blood_request_edit')
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('backsite.blood_request.edit', $blood_request_item->id) }}">
-                                                                                    Edit
-                                                                                </a>
-                                                                            @endcan
-
-                                                                            @can('blood_request_delete')
-                                                                                <form
-                                                                                    action="{{ route('backsite.blood_request.destroy', $blood_request_item->id) }}"
-                                                                                    method="POST"
-                                                                                    onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                    <input type="hidden" name="_method"
-                                                                                        value="DELETE">
-                                                                                    <input type="hidden" name="_token"
-                                                                                        value="{{ csrf_token() }}">
-                                                                                    <input type="submit" class="dropdown-item"
-                                                                                        value="Delete">
-                                                                                </form>
-                                                                            @endcan
-
-                                                                            @if ($blood_request_item->status == 2)
-                                                                                @can('blood_request_accept')
-                                                                                    <a href="#" class="dropdown-item"
-                                                                                        data-toggle="modal"
-                                                                                        data-target="#fulfilledModal{{ $blood_request_item->id }}">
-                                                                                        Accept
-                                                                                    </a>
-                                                                                @endcan
-
-                                                                                @can('blood_request_reject')
-                                                                                    <a href="#" class="dropdown-item"
-                                                                                        data-toggle="modal"
-                                                                                        data-target="#rejectModal{{ $blood_request_item->id }}">
-                                                                                        Reject
-                                                                                    </a>
-                                                                                @endcan
-                                                                            @endif
-
-                                                                        </div>
-                                                                    </div>
+                                                                    @can('blood_request_show')
+                                                                        <a href="#mymodal"
+                                                                            data-remote="{{ route('backsite.blood_request.show', $blood_request_item->id) }}"
+                                                                            data-toggle="modal" data-target="#mymodal"
+                                                                            data-title="Blood Donor Detail"
+                                                                            class="badge badge-info" data-tooltip="Tooltip on top"
+                                                                            title="Lihat"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="20" height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z">
+                                                                                </path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @can('blood_request_edit')
+                                                                        <a href="{{ route('backsite.blood_request.edit', $blood_request_item->id) }}"
+                                                                            class="badge badge-warning"
+                                                                            data-tooltip="Tooltip on top" title="Edit"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z">
+                                                                                </path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @can('blood_request_delete')
+                                                                        <a href="#" class="badge badge-danger"
+                                                                            data-tooltip="Tooltip on top" title="Hapus"
+                                                                            onclick="deleteBloodRequest({{ $blood_request_item->id }})"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z">
+                                                                                </path>
+                                                                                <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @if ($blood_request_item->status == 'menunggu')
+                                                                        @can('blood_request_accept')
+                                                                            <a href="#" data-toggle="modal"
+                                                                                data-target="#fulfilledModal{{ $blood_request_item->id }}"
+                                                                                class="badge badge-success"
+                                                                                data-tooltip="Tooltip on top" title="Terima"><svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="20" height="20"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                    <path
+                                                                                        d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z">
+                                                                                    </path>
+                                                                                </svg></a>
+                                                                        @endcan
+                                                                        @can('blood_request_reject')
+                                                                            <a href="#" data-toggle="modal"
+                                                                                data-target="#rejectModal{{ $blood_request_item->id }}"
+                                                                                class="badge badge-danger"
+                                                                                data-tooltip="Tooltip on top" title="Tolak"><svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="20" height="20"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                    <path
+                                                                                        d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                                                                                    </path>
+                                                                                </svg></a>
+                                                                        @endcan
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -457,12 +487,12 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
-                                                            <th>Blood Type</th>
-                                                            <th>Total Request</th>
+                                                            <th>No BR</th>
+                                                            <th>Nama</th>
+                                                            <th>GolDa Permintaan</th>
+                                                            <th>Total Permintaan</th>
                                                             <th>Status</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -488,8 +518,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="fulfilledModal{{ $blood_request_item->id }}Label">Enter Fulfilled
-                            Value</h5>
+                        <h5 class="modal-title" id="fulfilledModal{{ $blood_request_item->id }}Label">Jumlah Total
+                            Terpenuhi</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -499,11 +529,11 @@
                             method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="fulfilledValue">Fulfilled Value:</label>
+                                <label for="fulfilledValue">Terpenuhi:</label>
                                 <input type="number" name="fulfilled" class="form-control" id="fulfilledValue"
                                     required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Accept</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -519,18 +549,19 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="rejectModal{{ $blood_request_item->id }}Label">Reject Blood Request
+                        <h5 class="modal-title" id="rejectModal{{ $blood_request_item->id }}Label">Tolak Permintaan
+                            Darah
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to reject this blood request?</p>
+                        <p>Apakah kamu yakin ingin menolak Permintaan Darah ini?</p>
                         <form action="{{ route('backsite.blood_request.reject', $blood_request_item->id) }}"
                             method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Reject</button>
+                            <button type="submit" class="btn btn-danger">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -573,18 +604,6 @@
                 modal.find('.modal-body').load(button.data("remote"));
                 modal.find('.modal-title').html(button.data("title"));
             });
-
-            $('.select-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', 'selected')
-                $select2.trigger('change')
-            })
-
-            $('.deselect-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', '')
-                $select2.trigger('change')
-            })
         });
 
         $('.default-table').DataTable({
@@ -599,6 +618,18 @@
 
         $(function() {
             $(":input").inputmask();
+        });
+
+        $(document).ready(function() {
+            var noBloodRequestInput = $('#no_br');
+            var lastBloodRequestNumberInput = $('#last_br_number');
+
+            var lastBloodRequestId = parseInt(lastBloodRequestNumberInput.val());
+            var newBloodRequestNumber = lastBloodRequestId + 1;
+            var formattedBloodRequestNumber = 'BR' + newBloodRequestNumber.toString().padStart(5, '0');
+
+            noBloodRequestInput.val(formattedBloodRequestNumber);
+            lastBloodRequestNumberInput.val(newBloodRequestNumber);
         });
 
         // fancybox
@@ -619,6 +650,64 @@
             var total = wb + we + prc + tc + ffp + cry + plasma + prp;
 
             document.getElementById('total').value = total + ' Unit';
+        }
+
+        function togglePatientBasedOnNoMR() {
+            var noMrSelect = $('#no_mr');
+            var patientSelect = $('#patient_id');
+            var selectedOptionValue = noMrSelect.val();
+            var selectedOption = noMrSelect.find('option:selected');
+            var patientName = selectedOption.data('patient-name');
+            var patientId = selectedOptionValue;
+
+            if (patientName !== null && patientId !== '') {
+                patientSelect.empty();
+                patientSelect.prop('disabled', true);
+                var option = new Option(patientName, patientId);
+                patientSelect.append(option);
+                $('#patient_id_hidden').val(patientId);
+            } else {
+                patientSelect.empty();
+                patientSelect.append('<option value="" disabled selected>Data tidak ditemukan</option>');
+                patientSelect.prop('disabled', true);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            togglePatientBasedOnNoMR();
+        });
+
+        $('#no_mr').on('change', function() {
+            togglePatientBasedOnNoMR();
+        });
+
+        $(document).ready(function() {
+            $('[data-tooltip]').tooltip();
+        });
+
+        function deleteBloodRequest(bloodRequestId) {
+            if (confirm('Anda yakin ingin menghapus data Permintaan Darah ini?')) {
+                var form = document.createElement('form');
+                form.action = '{{ route('backsite.blood_request.destroy', '__id') }}'.replace('__id', bloodRequestId);
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = '_token';
+                tokenInput.value = '{{ csrf_token() }}';
+
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+
+                form.appendChild(tokenInput);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+
+                form.submit();
+            }
         }
     </script>
 

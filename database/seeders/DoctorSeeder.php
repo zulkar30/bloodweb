@@ -17,7 +17,7 @@ class DoctorSeeder extends Seeder
     {
         $doctor = [
             [
-                'user_id'         => 2,
+                'user_id'         => 2,     //1
                 'name'            => 'Dr. Wiki',
                 'birth_place'     => 'Belitung',
                 'birth_date'      => '2001-12-12',
@@ -32,7 +32,7 @@ class DoctorSeeder extends Seeder
                 'updated_at'      => date('Y-m-d H:i:s')
             ],
             [
-                'user_id'         => 3,
+                'user_id'         => 3,     //2
                 'name'            => 'Dr. Rizon',
                 'birth_place'     => 'Belitung',
                 'birth_date'      => '2002-12-12',
@@ -47,7 +47,7 @@ class DoctorSeeder extends Seeder
                 'updated_at'      => date('Y-m-d H:i:s')
             ],
             [
-                'user_id'         => 8,
+                'user_id'         => 8,     //3
                 'name'            => 'Dr. Aan',
                 'birth_place'     => 'Tangun',
                 'birth_date'      => '2001-12-12',
@@ -62,7 +62,7 @@ class DoctorSeeder extends Seeder
                 'updated_at'      => date('Y-m-d H:i:s')
             ],
             [
-                'user_id'         => 9,
+                'user_id'         => 9,     //4
                 'name'            => 'Dr. Fikri',
                 'birth_place'     => 'Bengkalis',
                 'birth_date'      => '2001-12-12',
@@ -77,7 +77,7 @@ class DoctorSeeder extends Seeder
                 'updated_at'      => date('Y-m-d H:i:s')
             ],
             [
-                'user_id'         => 10,
+                'user_id'         => 10,        //5
                 'name'            => 'Dr. Fitrah',
                 'birth_place'     => 'Pematang Duku',
                 'birth_date'      => '2001-12-12',

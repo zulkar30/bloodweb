@@ -32,14 +32,8 @@ class StoreDonor extends FormRequest
     public function rules()
     {
         return [
-            'profession_id' => [
-                'required', 'integer'
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
-            ],
-            'donor_type_id' => [
-                'required', 'integer'
+            'no_reg' => [
+                'nullable', 'string', 'max:255'
             ],
             'name' => [
                 'required', 'string', 'max:255'
@@ -65,6 +59,15 @@ class StoreDonor extends FormRequest
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
             ],
+            'status' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'profession_id' => [
+                'required', 'integer'
+            ],
+            'blood_type_id' => [
+                'required', 'integer'
+            ]
         ];
     }
 }

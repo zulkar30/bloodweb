@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::table('crossmatch', function (Blueprint $table) {
             $table->foreignId('officer_id', 'fk_crossmatch_to_officer')
             ->references('id')->on('officer')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreignId('blood_type_id', 'fk_crossmatch_to_blood_type')->references('id')->on('blood_type')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId('screening_id', 'fk_crossmatch_to_screening')
+                ->references('id')->on('screening')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,7 +30,8 @@ return new class extends Migration
     {
         Schema::table('crossmatch', function (Blueprint $table) {
             $table->dropForeign('fk_crossmatch_to_officer');
-            $table->dropForeign('fk_crossmatch_to_blood_type');
+            $table->dropForeign('fk_crossmatch_to_blood_request');
+            $table->dropForeign('fk_crossmatch_to_screening');
         });
     }
 };

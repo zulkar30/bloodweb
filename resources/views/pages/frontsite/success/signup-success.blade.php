@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Sign Up Success')
+@section('title', 'Register Berhasil')
 
 @section('content')
 
@@ -17,7 +17,7 @@
 
             <p class="text-[#AFAEC3] mt-4">Selamat menikmati kemudahan<br />dalam berkonsultasi</p>
 
-            <a href="{{ route('index') }}" class="inline-block mt-10 bg-[#0D63F3] text-white rounded-full px-14 py-3">Home</a>
+            <a href="{{ route('index') }}" class="inline-block mt-10 bg-[#0D63F3] text-white rounded-full px-14 py-3">Beranda</a>
         </div>
     </div>
 </div>

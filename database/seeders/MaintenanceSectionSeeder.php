@@ -17,27 +17,27 @@ class MaintenanceSectionSeeder extends Seeder
     {
         $maintenance_section = [
             [
-                'name'      => 'Anak',
+                'name'      => 'Anak',              //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Bedah',
+                'name'      => 'Bedah',             //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Penyakit Dalam',
+                'name'      => 'Penyakit Dalam',    //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Kandungan',
+                'name'      => 'Kandungan',         //4
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Lain-lain',
+                'name'      => 'Lain-lain',         //5
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]

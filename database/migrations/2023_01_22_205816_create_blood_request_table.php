@@ -15,23 +15,24 @@ return new class extends Migration
     {
         Schema::create('blood_request', function (Blueprint $table) {
             $table->id();
+            $table->string('no_br')->nullable();
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('contact')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('age')->nullable();
-            $table->string('wb')->nullable();
-            $table->string('we')->nullable();
-            $table->string('prc')->nullable();
-            $table->string('tc')->nullable();
-            $table->string('ffp')->nullable();
-            $table->string('cry')->nullable();
-            $table->string('plasma')->nullable();
-            $table->string('prp')->nullable();
-            $table->string('total')->nullable();
+            $table->enum('gender', ['laki-laki', 'perempuan'])->nullable();
+            $table->integer('age')->nullable();
+            $table->integer('wb')->nullable();
+            $table->integer('we')->nullable();
+            $table->integer('prc')->nullable();
+            $table->integer('tc')->nullable();
+            $table->integer('ffp')->nullable();
+            $table->integer('cry')->nullable();
+            $table->integer('plasma')->nullable();
+            $table->integer('prp')->nullable();
+            $table->integer('total')->nullable();
             $table->string('info')->nullable();
-            $table->string('fulfilled')->nullable();
-            $table->enum('status', [1,2,3])->nullable();
+            $table->integer('fulfilled')->nullable();
+            $table->enum('status', ['diterima', 'menunggu', 'ditolak'])->nullable();
             $table->timestamps();
         });
     }

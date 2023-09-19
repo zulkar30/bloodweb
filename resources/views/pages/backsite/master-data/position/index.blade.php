@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Position')
+@section('title', 'Jabatan')
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -26,12 +26,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Position</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Jabatan</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item active">Position</li>
+                                <li class="breadcrumb-item active">Jabatan</li>
                             </ol>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Position List</h4>
+                                        <h4 class="card-title">Jabatan List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -66,7 +66,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Position</th>
+                                                            <th>Jabatan</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -82,7 +82,7 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Position</th>
+                                                            <th>Jabatan</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>

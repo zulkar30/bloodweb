@@ -32,12 +32,6 @@ class StoreCrossmatch extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'required', 'integer',
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
-            ],
             'fase1' => [
                 'required', 'string', 'max:255'
             ],
@@ -50,6 +44,12 @@ class StoreCrossmatch extends FormRequest
             'result' => [
                 'nullable', 'string', 'max:255'
             ],
+            'officer_id' => [
+                'required', 'integer',
+            ],
+            'screening_id' => [
+                'required', 'integer',
+            ]
         ];
     }
 }

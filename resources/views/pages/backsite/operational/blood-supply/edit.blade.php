@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Edit - Blood Supply')
+@section('title', 'Edit - Stok Darah')
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -27,12 +27,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Edit Blood Supply</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Edit Stok Darah</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item">Blood Supply</li>
+                                <li class="breadcrumb-item">Stok Darah</li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
@@ -60,8 +60,8 @@
                                 <div class="card-content collpase show">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>Please complete the input <code>required</code>, before you click the submit
-                                                button.</p>
+                                            <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                anda menekan tombol submit.</p>
                                         </div>
                                         <form class="form form-horizontal"
                                             action="{{ route('backsite.blood_supply.update', [$blood_supply->id]) }}"
@@ -73,30 +73,34 @@
                                             <div class="form-body">
                                                 <!-- Blood Type field -->
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control">Blood Type <code style="color:red;">required</code></label>
+                                                    <label class="col-md-3 label-control">Stok Darah <code
+                                                            style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" class="form-control" value="{{ $blood_supply->blood_type->name }}" readonly>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $blood_supply->blood_type->name }}" readonly>
                                                     </div>
                                                 </div>
-                                
+
                                                 <!-- Total Volume field -->
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control">Total Volume <code style="color:red;">required</code></label>
+                                                    <label class="col-md-3 label-control">Jumlah Total <code
+                                                            style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" class="form-control" value="{{ $totalVolume . ' Kantong' }}" readonly>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $totalVolume . ' Kantong' }}" readonly>
                                                     </div>
                                                 </div>
-                                
+
                                                 <!-- Other form fields -->
                                                 <!-- ... -->
-                                
+
                                             </div>
 
                                             <div class="form-actions text-right">
                                                 <a href="{{ route('backsite.blood_supply.index') }}" style="width:120px;"
                                                     class="btn bg-blue-grey text-white mr-1"
                                                     onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
-                                                    <i class="ft-x"></i> Cancel
+                                                    <i class="ft-x"></i> Batal
                                                 </a>
                                                 <button type="submit" style="width:120px;" class="btn btn-cyan"
                                                     onclick="return confirm('Are you sure want to save this data ?')">

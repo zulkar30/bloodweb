@@ -14,15 +14,15 @@
 
                     <a href="{{ route('index') }}"
                         class="text-[#1E2B4F] relative {{ request()->is('/') ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg" : 'hover:text-gray-500 inline-flex items-center px-1 pt-1 text-lg font-medium' }} ">
-                        Home
+                        Beranda
                     </a>
                     <a href="{{ route('about') }}"
                         class="text-[#1E2B4F] relative {{ request()->is('about') ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg" : 'hover:text-gray-500 inline-flex items-center px-1 pt-1 text-lg font-medium' }}">
-                        About
+                        Tentang Kami
                     </a>
                     <a href="{{ route('contact') }}"
                         class="text-[#1E2B4F] relative {{ request()->is('contact') ? "after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg" : 'hover:text-gray-500 inline-flex items-center px-1 pt-1 text-lg font-medium' }}">
-                        Contact
+                        Kontak
                     </a>
                 </div>
 
@@ -33,7 +33,7 @@
                 <div class="hidden lg:ml-10 lg:flex lg:items-center">
                     <a href="{{ route('login') }}"
                         class="inline-flex items-center rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3">
-                        Sign In
+                        Masuk
                     </a>
                 </div>
 
@@ -45,9 +45,9 @@
                         <span class="sr-only">Open main menu</span>
 
                         <!--
-                                                                    Icon when menu is closed.
-                                                                    Menu open: "hidden", Menu closed: "block"
-                                                                -->
+                                                                                Icon when menu is closed.
+                                                                                Menu open: "hidden", Menu closed: "block"
+                                                                            -->
                         <svg x-show="!navbarMobileOpen" class="block h-8 w-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -55,9 +55,9 @@
                         </svg>
 
                         <!--
-                                                                    Icon when menu is open.
-                                                                    Menu open: "block", Menu closed: "hidden"
-                                                                -->
+                                                                                Icon when menu is open.
+                                                                                Menu open: "block", Menu closed: "hidden"
+                                                                            -->
                         <svg x-show="navbarMobileOpen" class="block h-8 w-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -87,7 +87,7 @@
                                     </div>
                                 </div>
                                 <img class="h-12 w-12 rounded-full ring-1 ring-offset-4 ring-[#0D63F3]"
-                                    src="{{ asset('/assets/frontsite/images/authenticated-user.svg') }}"
+                                    src="{{ Auth::user()->photo ? url(Storage::url(Auth::user()->photo)) : asset('/assets/frontsite/images/authenticated-user.svg') }}"
                                     alt="User Profile" />
                             </button>
                         </div>
@@ -107,7 +107,7 @@
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="block px-4 py-2 text-sm text-[#1E2B4F] hover:bg-gray-100" role="menuitem"
-                                tabindex="-1" id="user-menu-item-2"> Sign out
+                                tabindex="-1" id="user-menu-item-2"> Keluar
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
@@ -127,9 +127,9 @@
                         <span class="sr-only">Open main menu</span>
 
                         <!--
-                                                                    Icon when menu is closed.
-                                                                    Menu open: "hidden", Menu closed: "block"
-                                                                    -->
+                                                                                Icon when menu is closed.
+                                                                                Menu open: "hidden", Menu closed: "block"
+                                                                                -->
                         <svg x-show="!navbarMobileOpen" class="block h-8 w-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -137,9 +137,9 @@
                         </svg>
 
                         <!--
-                                                                    Icon when menu is open.
-                                                                    Menu open: "block", Menu closed: "hidden"
-                                                                    -->
+                                                                                Icon when menu is open.
+                                                                                Menu open: "block", Menu closed: "hidden"
+                                                                                -->
                         <svg x-show="navbarMobileOpen" class="block h-8 w-8" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -163,11 +163,12 @@
                         hover:border-gray-300 hover:text-gray-700"
             -->
             <a href="{{ route('index') }}"
-                class="{{ request()->is('/') ? "bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold" : 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' }} ">Home</a>
+                class="{{ request()->is('/') ? 'bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold' : 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' }} ">Beranda</a>
             <a href="{{ route('about') }}"
-                class="{{ request()->is('about') ? "bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold" : 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' }}">About</a>
+                class="{{ request()->is('about') ? 'bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold' : 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' }}">Tentang
+                Kami</a>
             <a href="{{ route('contact') }}"
-                class="{{ request()->is('contact') ? "bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold" : 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' }}">Contact</a>
+                class="{{ request()->is('contact') ? 'bg-indigo-50 border-[#0D63F5] text-[#1E2B4F] block pl-3 pr-4 py-2 border-l-4 text-base font-semibold' : 'hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' }}">Kontak</a>
         </div>
 
         <!-- Profile (Mobile no authenticated) -->
@@ -175,7 +176,7 @@
             <div class="py-3 border-gray-200">
                 <a href="{{ route('login') }}"
                     class="flex items-center justify-center text-center mx-4 rounded-full text-[#1E2B4F] text-lg font-medium bg-[#F2F6FE] px-10 py-3">
-                    Sign In
+                    Masuk
                 </a>
             </div>
         @endguest
@@ -206,7 +207,7 @@
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="block px-4 py-2 text-sm text-[#1E2B4F] hover:bg-gray-100" role="menuitem"
-                            tabindex="-1" id="user-menu-item-2"> Sign out
+                            tabindex="-1" id="user-menu-item-2"> Keluar
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                 style="display: none;">

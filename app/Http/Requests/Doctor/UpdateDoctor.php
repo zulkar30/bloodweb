@@ -33,26 +33,38 @@ class UpdateDoctor extends FormRequest
     {
         return [
             'name' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'birth_place' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'birth_date' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
+            ],
+            'gender' => [
+                'nullable', 'string', 'max:255'
             ],
             'contact' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'address' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'age' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
             ],
+            'user_id' => [
+                'nullable', 'integer',
+            ],
+            'specialist_id' => [
+                'nullable', 'integer'
+            ],
+            'blood_type_id' => [
+                'nullable', 'integer'
+            ]
         ];
     }
 }

@@ -18,8 +18,7 @@ class Screening extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'officer_id',
-        'blood_type_id',
+        'no_sc',
         'hiv',
         'hcv',
         'hbsag',
@@ -27,6 +26,8 @@ class Screening extends Model
         'result',
         'created_at',
         'updated_at',
+        'officer_id',
+        'aftap_id',
     ];
 
     // Relasi one to many
@@ -34,10 +35,17 @@ class Screening extends Model
     {
         return $this->belongsTo('App\Models\Operational\Officer', 'officer_id', 'id');
     }
+    
+    // Relasi one to many
+    public function aftap()
+    {
+        return $this->belongsTo('App\Models\Operational\Aftap', 'aftap_id', 'id');
+    }
 
     // Relasi one to many
-    public function blood_type()
+    public function crossmatch()
     {
-        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
+        return $this->hasMany('App\Models\Operational\Crossmatch', 'screening_id');
     }
+
 }

@@ -32,14 +32,8 @@ class UpdateDonor extends FormRequest
     public function rules()
     {
         return [
-            'profession_id' => [
-                'nullable', 'integer'
-            ],
-            'blood_type_id' => [
-                'nullable', 'integer'
-            ],
-            'donor_type_id' => [
-                'nullable', 'integer'
+            'no_reg' => [
+                'nullable', 'string', 'max:255'
             ],
             'name' => [
                 'nullable', 'string', 'max:255'
@@ -64,6 +58,15 @@ class UpdateDonor extends FormRequest
             ],
             'photo' => [
                 'nullable', 'mimes:jpeg,svg,png', 'max:10000'
+            ],
+            'status' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'profession_id' => [
+                'nullable', 'integer'
+            ],
+            'blood_type_id' => [
+                'nullable', 'integer'
             ]
         ];
     }

@@ -17,17 +17,17 @@ class TypeUserSeeder extends Seeder
     {
         $type_user = [
             [
-                'name' => 'Dokter',
+                'name' => 'Dokter',    //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Petugas',
+                'name' => 'Petugas',    //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'User',
+                'name' => 'User',       //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],

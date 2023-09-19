@@ -17,62 +17,62 @@ class SpecialistSeeder extends Seeder
     {
         $specialist = [
             [
-                'name' => 'Dermatology',
+                'name' => 'Dermatology',                    //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Dentist',
+                'name' => 'Dentist',                        //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Endodontics',
+                'name' => 'Endodontics',                    //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'General Dentistry',
+                'name' => 'General Dentistry',              //4
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Oral and Maxillofacial Surgery',
+                'name' => 'Oral and Maxillofacial Surgery', //5
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Orthodontics',
+                'name' => 'Orthodontics',                   //6
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Pediatric Dentistry',
+                'name' => 'Pediatric Dentistry',            //7
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Periodontics',
+                'name' => 'Periodontics',                   //8
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Prosthodontics',
+                'name' => 'Prosthodontics',                 //9
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Radiology',
+                'name' => 'Radiology',                      //10
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Surgery',
+                'name' => 'Surgery',                        //11
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'Urology',
+                'name' => 'Urology',                        //12
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],

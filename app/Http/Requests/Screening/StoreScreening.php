@@ -32,12 +32,6 @@ class StoreScreening extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'required', 'integer',
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
-            ],
             'hiv' => [
                 'required', 'string', 'max:255'
             ],
@@ -53,6 +47,12 @@ class StoreScreening extends FormRequest
             'result' => [
                 'required', 'string', 'max:255'
             ],
+            'officer_id' => [
+                'required', 'integer',
+            ],
+            'aftap_id' => [
+                'required', 'integer',
+            ]
         ];
     }
 }

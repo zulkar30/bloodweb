@@ -32,35 +32,26 @@ class StoreBloodDonor extends FormRequest
     public function rules()
     {
         return [
+            'name' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'hb' => [
+                'nullable', 'string', 'max:255'
+            ],
+            't_meter' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'bb' => [
+                'nullable', 'string', 'max:255'
+            ],
+            'result' => [
+                'nullable', 'string', 'max:255'
+            ],
             'officer_id' => [
-                'required', 'integer',
+                'nullable', 'integer',
             ],
             'blood_type_id' => [
-                'required', 'integer'
-            ],
-            'pouch_type_id' => [
-                'required', 'integer'
-            ],
-            'donor_type_id' => [
-                'required', 'integer'
-            ],
-            'donor_id' => [
-                'required', 'integer'
-            ],
-            'gender' => [
-                'required', 'string', 'max:255'
-            ],
-            'age' => [
-                'required', 'string', 'max:255'
-            ],
-            'donor_reaction' => [
-                'required', 'string', 'max:255'
-            ],
-            'retrieval_process' => [
-                'required', 'string', 'max:255'
-            ],
-            'donor_status' => [
-                'required', 'string', 'max:255'
+                'nullable', 'integer'
             ]
         ];
     }

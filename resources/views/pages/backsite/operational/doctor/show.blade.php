@@ -1,31 +1,18 @@
 <table class="table table-bordered">
     <tr>
-        <th>User Account</th>
+        <th>Akun User</th>
         <td>{{ isset($doctor->user->name) ? $doctor->user->name : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Name</th>
+        <th>Nama</th>
         <td>{{ isset($doctor->name) ? $doctor->name : 'N/A' }}</td>
     </tr>
     <tr>
-    <tr>
-        <th>Specialist</th>
-        <td>{{ isset($doctor->specialist->name) ? $doctor->specialist->name : 'N/A' }}</td>
-    </tr>
-    <tr>
-        <th>Birth Place</th>
-        <td>{{ isset($doctor->birth_place) ? $doctor->birth_place : 'N/A' }}</td>
-    </tr>
-    <tr>
-        <th>Birth Date</th>
-        <td>{{ isset($doctor->birth_date) ? $doctor->birth_date : 'N/A' }}</td>
-    </tr>
-    <tr>
-        <th>Gender</th>
+        <th>Jenis Kelamin</th>
         <td>
-            @if($doctor->gender == 1)
+            @if($doctor->gender == 'laki-laki')
                 <span>{{ 'Laki-laki' }}</span>
-            @elseif($doctor->gender == 2)
+            @elseif($doctor->gender == 'perempuan')
                 <span>{{ 'Perempuan' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -33,19 +20,31 @@
         </td>
     </tr>
     <tr>
-        <th>Contact</th>
-        <td>{{ isset($doctor->contact) ? $doctor->contact : 'N/A' }}</td>
+        <th>Tempat Lahir</th>
+        <td>{{ isset($doctor->birth_place) ? $doctor->birth_place : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Address</th>
+        <th>Tanggal Lahir</th>
+        <td>{{ isset($doctor->birth_date) ? $doctor->birth_date : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Alamat</th>
         <td>{{ isset($doctor->address) ? $doctor->address : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Age</th>
+        <th>Kontak</th>
+        <td>{{ isset($doctor->contact) ? $doctor->contact : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Umur</th>
         <td>{{ isset($doctor->age) ? $doctor->age . ' Tahun' : 'N/A' }}</td>
     </tr>
     <tr>
-        <th>Blood Type</th>
+        <th>Golongan Darah</th>
         <td>{{ isset($doctor->blood_type->name) ? $doctor->blood_type->name : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Spesialis</th>
+        <td>{{ isset($doctor->specialist->name) ? $doctor->specialist->name : 'N/A' }}</td>
     </tr>
 </table>

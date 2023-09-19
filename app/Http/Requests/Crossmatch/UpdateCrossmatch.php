@@ -32,12 +32,6 @@ class UpdateCrossmatch extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'nullable', 'integer',
-            ],
-            'blood_type_id' => [
-                'nullable', 'integer'
-            ],
             'fase1' => [
                 'nullable', 'string', 'max:255'
             ],
@@ -50,6 +44,12 @@ class UpdateCrossmatch extends FormRequest
             'result' => [
                 'nullable', 'string', 'max:255'
             ],
+            'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'screening_id' => [
+                'nullable', 'integer',
+            ]
         ];
     }
 }

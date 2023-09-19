@@ -32,51 +32,51 @@ class StoreBloodRequest extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'required', 'integer',
-            ],
-            'doctor_id' => [
-                'required', 'integer',
-            ],
-            'patient_id' => [
-                'required', 'integer',
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
-            ],
             'wb' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'we' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'prc' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'tc' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'ffp' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'cry' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'plasma' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'prp' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
             ],
             'total' => [
-                'required', 'string', 'max:255'
+                'nullable', 'string', 'max:255'
+            ],
+            'info' => [
+                'nullable', 'string', 'max:255'
             ],
             'fulfilled' => [
                 'nullable', 'string', 'max:255'
             ],
             'status' => [
                 'nullable', 'string', 'max:255'
-            ]
+            ],
+            'patient_id' => [
+                'nullable', 'integer',
+            ],
+            'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'doctor_id' => [
+                'nullable', 'integer',
+            ],
         ];
     }
 }

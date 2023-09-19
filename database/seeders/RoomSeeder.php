@@ -17,27 +17,27 @@ class RoomSeeder extends Seeder
     {
         $room = [
             [
-                'name'      => 'Anggrek',
+                'name'      => 'Anggrek',           //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Mawar',
+                'name'      => 'Mawar',             //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Melati',
+                'name'      => 'Melati',            //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Kemboja',
+                'name'      => 'Kemboja',           //4
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Kemuning',
+                'name'      => 'Kemuning',          //5
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]

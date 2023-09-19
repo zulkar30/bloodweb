@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('screening', function (Blueprint $table) {
             $table->id();
-            $table->string('hiv')->nullable();
-            $table->string('hcv')->nullable();
-            $table->string('hbsag')->nullable();
-            $table->string('vdrl')->nullable();
-            $table->string('result')->nullable();
+            $table->string('no_sc')->nullable();
+            $table->enum('hiv', ['positif', 'negatif'])->nullable();
+            $table->enum('hcv', ['positif', 'negatif'])->nullable();
+            $table->enum('hbsag', ['positif', 'negatif'])->nullable();
+            $table->enum('vdrl', ['positif', 'negatif'])->nullable();
+            $table->enum('result', ['reaktif', 'non-reaktif'])->nullable();
             $table->timestamps();
         });
     }

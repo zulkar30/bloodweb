@@ -48,24 +48,6 @@ class BloodType extends Model
     }
 
     // Relasi one to many
-    public function aftap()
-    {
-        return $this->hasMany('App\Models\Operational\Aftap', 'blood_type_id');
-    }
-
-    // Relasi one to many
-    public function crossmatch()
-    {
-        return $this->hasMany('App\Models\Operational\Crossmatch', 'blood_type_id');
-    }
-
-    // Relasi one to many
-    public function screening()
-    {
-        return $this->hasMany('App\Models\Operational\Screening', 'blood_type_id');
-    }
-
-    // Relasi one to many
     public function blood_donor()
     {
         return $this->hasMany('App\Models\Operational\BloodDonor', 'blood_type_id');

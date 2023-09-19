@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // Library
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 // Request
@@ -15,7 +14,7 @@ use App\Http\Requests\BloodRequest\StoreBloodRequest;
 use App\Http\Requests\BloodRequest\UpdateBloodRequest;
 
 // Everything Else
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Gate;
 
 // Model
@@ -24,8 +23,6 @@ use App\Models\Operational\Doctor;
 use App\Models\Operational\Patient;
 use App\Models\Operational\BloodRequest;
 use App\Models\MasterData\BloodType;
-
-// Third Party
 
 class BloodRequestController extends Controller
 {
@@ -45,17 +42,24 @@ class BloodRequestController extends Controller
         // Middleware Gate
         abort_if(Gate::denies('blood_request_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada table
+        // Model
         $blood_request = BloodRequest::orderBy('created_at', 'desc')->get();
-        // Ditampilkan pada pilihan
         $blood_type = BloodType::orderBy('name', 'asc')->get();
-        $officer = Officer::orderBy('name', 'asc')->get();
         $doctor = Doctor::orderBy('name', 'asc')->get();
-        $patient = Patient::orderBy('name', 'asc')->get();
+        $patient = Patient::orderBy('id', 'desc')->get();
 
-        // dd($blood_request);
+        // Mendapatkan BloodRequestID terakhir
+        $lastBloodRequest = BloodRequest::orderBy('id', 'desc')->first();
+        $lastBloodRequestId = $lastBloodRequest ? $lastBloodRequest->id : 0;
+
+        // Mendapatkan data officer yang login sebagai officer
+        $loggedInUser = Auth::user();
+        $officerForLoggedInUser = $loggedInUser->officer;
+
+        // Mendapatkan OfficerID
+        $officerOptions = Officer::pluck('name', 'id');
         
-        return view('pages.backsite.operational.blood-request.index', compact('blood_request', 'blood_type', 'officer', 'doctor', 'patient'));
+        return view('pages.backsite.operational.blood-request.index', compact('blood_request', 'blood_type', 'officerForLoggedInUser', 'officerOptions', 'lastBloodRequestId', 'doctor', 'patient'));
     }
 
     /**
@@ -81,16 +85,36 @@ class BloodRequestController extends Controller
 
         $data['total'] = str_replace(' Unit', '', $data['total']);
 
-        $data['status'] =  2;
-
-        // Kirim data ke database
-        $blood_request = BloodRequest::create($data);
+        $blood_request = new BloodRequest();
+        $blood_request->no_br = $data['no_br_hidden'];
+        $blood_request->name = $data['name'] ?? null;
+        $blood_request->address = $data['address'] ?? null;
+        $blood_request->contact = $data['contact'] ?? null;
+        $blood_request->gender = $data['gender'] ?? null;
+        $blood_request->age = $data['age'] ?? null;
+        $blood_request->wb = $data['wb'];
+        $blood_request->we = $data['we'];
+        $blood_request->prc = $data['prc'];
+        $blood_request->tc = $data['tc'];
+        $blood_request->ffp = $data['ffp'];
+        $blood_request->cry = $data['cry'];
+        $blood_request->plasma = $data['plasma'];
+        $blood_request->prp = $data['prp'];
+        $blood_request->total = $data['total'];
+        $blood_request->info = $data['info'] ?? null;
+        $blood_request->fulfilled = $data['fulfilled'] ?? null;
+        $blood_request->doctor_id = $data['doctor_id'];
+        $blood_request->officer_id = $data['officer_id'];
+        $blood_request->patient_id = $data['patient_id_hidden'];
+        $blood_request->blood_type_id = $data['blood_type_id'] ?? null;
+        $blood_request->status =  2;
+        $blood_request->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Blood Request');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Permintaan Darah Baru');
         return redirect()->route('backsite.blood_request.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -100,6 +124,7 @@ class BloodRequestController extends Controller
      */
     public function show(BloodRequest $blood_request)
     {
+        // Middleware Gate
         abort_if(Gate::denies('blood_request_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('pages.backsite.operational.blood-request.show', compact('blood_request'));
@@ -113,9 +138,10 @@ class BloodRequestController extends Controller
      */
     public function edit(BloodRequest $blood_request)
     {
+        // Middleware Gate
         abort_if(Gate::denies('blood_request_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada form sebagai pilihan
+        // Model
         $officer = Officer::orderBy('name', 'asc')->get();
         $doctor = Doctor::orderBy('name', 'asc')->get();
         $patient = Patient::orderBy('name', 'asc')->get();
@@ -140,8 +166,7 @@ class BloodRequestController extends Controller
         $blood_request->update($data);
 
         // Sweetalert
-        alert()->success('Success Update Message', 'Successfully updated Blood Request');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Mengubah Data Permintaan Darah');
         return redirect()->route('backsite.blood_request.index');
     }
 
@@ -153,39 +178,40 @@ class BloodRequestController extends Controller
      */
     public function destroy(BloodRequest $blood_request)
     {
+        // Middleware Gate
         abort_if(Gate::denies('blood_request_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        // Fungsi hapus
         $blood_request->delete();
 
         // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Blood Request');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menghapus Data Permintaan Darah');
         return back();
     }
 
     public function accept(Request $request, $id)
     {
+        // Mencari data berdasarkan id yang dipilih atau diklik
         $blood_request = BloodRequest::findOrFail($id);
         $blood_request->status = 1; // Set status menjadi "Diterima"
         $blood_request->fulfilled = $request->input('fulfilled'); // Ambil nilai fulfilled dari input form
         $blood_request->save();
 
         // Sweetalert
-        alert()->success('Success Message', 'Successfully accept Blood Request');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menerima Permintaan Darah');
         return back();
     }
 
     public function reject($id)
     {
+        // Mencari data berdasarkan id yang dipilih atau diklik
         $blood_request = BloodRequest::findOrFail($id);
-        $blood_request->status = 3; // Set status menjadi "Rejected"
+        $blood_request->status = 3; // Set status menjadi "Ditolak"
         $blood_request->fulfilled = 0; // Set nilai fulfilled menjadi 0
         $blood_request->save();
 
         // Sweetalert
-        alert()->success('Success Message', 'Successfully reject Blood Request');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menolak Permintaan Darah');
         return back();
     }
 }

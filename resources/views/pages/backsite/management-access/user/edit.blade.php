@@ -60,8 +60,8 @@
                                 <div class="card-content collpase show">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>Please complete the input <code>required</code>, before you click the submit
-                                                button.</p>
+                                            <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                anda menekan tombol submit.</p>
                                         </div>
                                         <form class="form form-horizontal"
                                             action="{{ route('backsite.user.update', [$user->id]) }}" method="POST"
@@ -75,11 +75,11 @@
                                                 <h4 class="form-section"><i class="fa fa-edit"></i> Form User</h4>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="name">Name <code
+                                                    <label class="col-md-3 label-control" for="name">Nama <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="name" name="name"
-                                                            class="form-control" placeholder="example John Doe or Jane"
+                                                            class="form-control" placeholder="Nama Lengkap"
                                                             value="{{ old('name', isset($user) ? $user->name : '') }}"
                                                             autocomplete="off" required>
 
@@ -95,8 +95,7 @@
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="email" name="email"
-                                                            class="form-control"
-                                                            placeholder="example People@mail.com or Human@mail.com"
+                                                            class="form-control" placeholder="Email valid"
                                                             value="{{ old('email', isset($user) ? $user->email : '') }}"
                                                             autocomplete="off" data-inputmask="'alias': 'email'" required>
 
@@ -108,14 +107,14 @@
                                                 </div>
 
                                                 <div class="form-group row {{ $errors->has('role') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Role <code
+                                                    <label class="col-md-3 label-control">Peran <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <label for="role">
                                                             <span
-                                                                class="btn btn-warning btn-sm select-all">{{ 'Select all' }}</span>
+                                                                class="btn btn-warning btn-sm select-all">{{ 'Pilih Semua' }}</span>
                                                             <span
-                                                                class="btn btn-warning btn-sm deselect-all">{{ 'Deselect all' }}</span>
+                                                                class="btn btn-warning btn-sm deselect-all">{{ 'Hapus Semua' }}</span>
                                                         </label>
 
                                                         <select name="role[]" id="role"
@@ -138,12 +137,13 @@
 
                                                 <div
                                                     class="form-group row {{ $errors->has('type_user_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Type User <code
+                                                    <label class="col-md-3 label-control">Jenis User <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="type_user_id" id="type_user_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ '' }}" disabled selected>Choose
+                                                            <option value="{{ '' }}" disabled selected>Pilih
+                                                                Jenis User
                                                             </option>
                                                             @foreach ($type_user as $key => $type_user_item)
                                                                 <option value="{{ $type_user_item->id }}"
@@ -160,7 +160,7 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="photo">Photo <code
+                                                    <label class="col-md-3 label-control" for="photo">Foto <code
                                                             style="color:green;">optional</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <div class="custom-file">
@@ -168,12 +168,13 @@
                                                                 accept="image/png, image/svg, image/jpeg"
                                                                 class="custom-file-input" id="photo" name="photo">
                                                             <label class="custom-file-label" for="photo"
-                                                                aria-describedby="photo">Choose File</label>
+                                                                aria-describedby="photo">{{ isset($user->photo) ? basename($user->photo) : 'Pilih Foto' }}</label>
                                                         </div>
 
                                                         <p class="text-muted"><small class="text-danger">Hanya dapat
                                                                 mengunggah 1 file</small><small> dan yang dapat digunakan
-                                                                JPEG, SVG, PNG & Maksimal ukuran file hanya 10
+                                                                JPEG, SVG, PNG & resolusi harus 100x100, Maksimal ukuran
+                                                                file hanya 10
                                                                 MegaBytes</small></p>
 
                                                         @if ($errors->has('photo'))
@@ -190,7 +191,7 @@
                                                 <a href="{{ route('backsite.user.index') }}" style="width:120px;"
                                                     class="btn bg-blue-grey text-white mr-1"
                                                     onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
-                                                    <i class="ft-x"></i> Cancel
+                                                    <i class="ft-x"></i> Batal
                                                 </a>
                                                 <button type="submit" style="width:120px;" class="btn btn-cyan"
                                                     onclick="return confirm('Are you sure want to save this data ?')">

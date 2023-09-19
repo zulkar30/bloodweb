@@ -18,9 +18,6 @@ class Officer extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'user_id',
-        'position_id',
-        'blood_type_id',
         'name',
         'birth_place',
         'birth_date',
@@ -31,6 +28,9 @@ class Officer extends Model
         'photo',
         'created_at',
         'updated_at',
+        'user_id',
+        'position_id',
+        'blood_type_id',
     ];
 
     // Relasi one to one

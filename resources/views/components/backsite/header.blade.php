@@ -10,7 +10,7 @@
                 <li class="nav-item"><a class="navbar-brand" href="{{ route('backsite.dashboard.index') }}"><img
                             class="brand-logo" alt="modern admin logo"
                             src="{{ asset('/assets/backsite/app-assets/images/logo/logo.png') }}">
-                        <h3 class="brand-text">BWA Office</h3>
+                        <h3 class="brand-text">BWA Dashboard</h3>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
                         data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a></li>
@@ -31,16 +31,16 @@
 
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
                             href="#" data-toggle="dropdown"><span
-                                class="mr-1 user-name text-bold-700">{{ Auth::user()->name }}</span><span
-                                class="avatar avatar-online"><img
-                                    src="{{ asset('/assets/backsite/app-assets/images/portrait/small/avatar-s-19.png') }}"
+                                class="mr-1 user-name text-bold-700">{{ Auth::user()->name }}</span>
+                            <span class="avatar avatar-online">
+                                <img class="h-100 w-100" src="{{ Auth::user()->photo ? url(Storage::url(Auth::user()->photo)) : asset('/assets/backsite/app-assets/images/portrait/small/avatar-s-19.png') }}"
                                     alt="avatar"><i></i></span></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{{ route('index') }}"><i class="ft-home"></i> Home</a>
+                            <a class="dropdown-item" href="{{ route('index') }}"><i class="ft-home"></i> Beranda</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="ft-power"></i> Logout
+                                <i class="ft-power"></i> Keluar
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf

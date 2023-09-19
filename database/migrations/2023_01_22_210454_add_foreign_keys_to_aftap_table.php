@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('aftap', function (Blueprint $table) {
+            $table->foreignId('patient_id', 'fk_aftap_to_patient')
+                ->references('id')->on('patient')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreignId('officer_id', 'fk_aftap_to_officer')
                 ->references('id')->on('officer')->onUpdate('CASCADE')->onDelete('CASCADE');
+            
             $table->foreignId('donor_id', 'fk_aftap_to_donor')
                 ->references('id')->on('donor')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreignId('pouch_type_id', 'fk_aftap_to_pouch_type')->references('id')->on('pouch_type')->onUpdate('CASCADE')->onDelete('CASCADE');    
-            $table->foreignId('blood_type_id', 'fk_aftap_to_blood_type')->references('id')->on('blood_type')->onUpdate('CASCADE')->onDelete('CASCADE');    
+            $table->foreignId('pouch_type_id', 'fk_aftap_to_pouch_type')        ->references('id')->on('pouch_type')->onUpdate('CASCADE')->onDelete('CASCADE');    
         });
     }
 
@@ -32,9 +34,9 @@ return new class extends Migration
     {
         Schema::table('aftap', function (Blueprint $table) {
             $table->dropForeign('fk_aftap_to_officer');
+            $table->dropForeign('fk_aftap_to_patient');
             $table->dropForeign('fk_aftap_to_donor');
             $table->dropForeign('fk_aftap_to_pouch_type');
-            $table->dropForeign('fk_aftap_to_blood_type');
         });
     }
 };

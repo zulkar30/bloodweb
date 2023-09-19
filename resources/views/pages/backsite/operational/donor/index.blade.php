@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Donor')
+@section('title', 'Pendonor')
 
 @section('content')
 
@@ -28,13 +28,13 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Donor</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Pendonor</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Donor</li>
+                                <li class="breadcrumb-item active">Pendonor</li>
                             </ol>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <div class="card">
                                     <div class="card-header bg-success text-white">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="card-title text-white">Tambah Data</h4>
                                             <a class="heading-elements-toggle"><i
                                                     class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
@@ -73,16 +73,31 @@
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the
-                                                            submit button.</p>
+                                                        <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                            anda menekan tombol submit.</p>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="name">Name <code
+                                                        <label class="col-md-3 label-control" for="no_reg">No REG <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="no_reg" name="no_reg"
+                                                                class="form-control col-md-3" value="{{ old('no_reg') }}"
+                                                                autocomplete="off" disabled>
+
+                                                            @if ($errors->has('no_reg'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('no_reg') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="name">Nama <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="name" name="name"
-                                                                class="form-control" placeholder="example john doe or jane doe"
+                                                                class="form-control" placeholder="contoh. john doe or jane doe"
                                                                 value="{{ old('name') }}" autocomplete="off" required>
 
                                                             @if ($errors->has('name'))
@@ -92,43 +107,14 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="birth_place">Birth Place
-                                                            <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="birth_place" name="birth_place"
-                                                                class="form-control" placeholder="example Bengkalis"
-                                                                value="{{ old('birth_place') }}" autocomplete="off" required>
-
-                                                            @if ($errors->has('birth_place'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('birth_place') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="birth_date">Birth Date <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <input type="date" id="birth_date" name="birth_date"
-                                                                class="form-control" value="{{ old('birth_date') }}"
-                                                                autocomplete="off" required>
-
-                                                            @if ($errors->has('birth_date'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('birth_date') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
                                                     <div class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Gender <code
+                                                        <label class="col-md-3 label-control">Jenis Kelamin <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="gender" id="gender" class="form-control select2"
                                                                 required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Jenis Kelamin
                                                                 </option>
                                                                 <option value="1">Laki-laki</option>
                                                                 <option value="2">Perempuan</option>
@@ -142,12 +128,73 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="contact">Contact <code
+                                                        <label class="col-md-3 label-control" for="birth_place">Tempat Lahir
+                                                            <code style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="birth_place" name="birth_place"
+                                                                class="form-control" placeholder="contoh. Bengkalis"
+                                                                value="{{ old('birth_place') }}" autocomplete="off" required>
+
+                                                            @if ($errors->has('birth_place'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('birth_place') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="birth_date">Tanggal Lahir
+                                                            <code style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="date" id="birth_date" name="birth_date"
+                                                                class="form-control" value="{{ old('birth_date') }}"
+                                                                autocomplete="off" required>
+
+                                                            @if ($errors->has('birth_date'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('birth_date') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="nik">NIK <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="nik" name="nik"
+                                                                class="form-control" value="{{ old('nik') }}"
+                                                                autocomplete="off" required>
+
+                                                            @if ($errors->has('nik'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('nik') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="address">Alamat <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="address" name="address"
+                                                                class="form-control" value="{{ old('address') }}"
+                                                                autocomplete="off"
+                                                                placeholder="contoh. Jalan Pramuka Gang Haji Ilyas" required>
+
+                                                            @if ($errors->has('address'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('address') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="contact">Kontak <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="contact" name="contact"
                                                                 class="form-control" value="{{ old('contact') }}"
-                                                                autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                                autocomplete="off" placeholder="contoh. +628xxxxxxxxxx"
                                                                 required>
 
                                                             @if ($errors->has('contact'))
@@ -158,28 +205,12 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="address">Address <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="address" name="address"
-                                                                class="form-control" value="{{ old('address') }}"
-                                                                autocomplete="off" placeholder="example Jalan xxxxxxxxxxxx"
-                                                                required>
-
-                                                            @if ($errors->has('address'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('address') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="age">Age <code
+                                                        <label class="col-md-3 label-control" for="age">Umur <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="age" name="age"
                                                                 class="form-control" value="{{ old('age') }}"
-                                                                autocomplete="off" placeholder="example 23 Tahun" required>
+                                                                autocomplete="off" readonly>
 
                                                             @if ($errors->has('age'))
                                                                 <p style="font-style: bold; color: red;">
@@ -189,13 +220,38 @@
                                                     </div>
 
                                                     <div
+                                                        class="form-group row {{ $errors->has('profession_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Pekerjaan <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="profession_id" id="profession_id"
+                                                                class="form-control select2" required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Pekerjaan
+                                                                </option>
+                                                                @foreach ($profession as $key => $profession_item)
+                                                                    <option value="{{ $profession_item->id }}">
+                                                                        {{ $profession_item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if ($errors->has('profession_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('profession_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
                                                         class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Blood Type <code
+                                                        <label class="col-md-3 label-control">Golongan Darah <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="blood_type_id" id="blood_type_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Golongan Darah
                                                                 </option>
                                                                 @foreach ($blood_type as $key => $blood_type_item)
                                                                     <option value="{{ $blood_type_item->id }}">
@@ -213,12 +269,13 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('donor_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Donor Type <code
+                                                        <label class="col-md-3 label-control">Jenis Pendonor <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="donor_type_id" id="donor_type_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Jenis Pendonor
                                                                 </option>
                                                                 @foreach ($donor_type as $key => $donor_type_item)
                                                                     <option value="{{ $donor_type_item->id }}">
@@ -234,40 +291,16 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('profession_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Profession <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="profession_id" id="profession_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($profession as $key => $profession_item)
-                                                                    <option value="{{ $profession_item->id }}">
-                                                                        {{ $profession_item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if ($errors->has('profession_id'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('profession_id') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="photo">Photo <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="photo">Foto <code
+                                                                style="color:green;">opsional</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <div class="custom-file">
                                                                 <input type="file"
                                                                     accept="image/png, image/svg, image/jpeg"
-                                                                    class="custom-file-input" id="photo" name="photo"
-                                                                    required>
+                                                                    class="custom-file-input" id="photo" name="photo">
                                                                 <label class="custom-file-label" for="photo"
-                                                                    aria-describedby="photo">Choose File</label>
+                                                                    aria-describedby="photo">Pilih File</label>
                                                             </div>
 
                                                             <p class="text-muted"><small class="text-danger">Hanya dapat
@@ -279,11 +312,14 @@
                                                                 <p style="font-style: bold; color: red;">
                                                                     {{ $errors->first('photo') }}</p>
                                                             @endif
-
                                                         </div>
                                                     </div>
-
                                                 </div>
+
+                                                <input type="hidden" name="last_reg_number" id="last_reg_number"
+                                                    value="{{ $lastDonorId }}">
+                                                <input type="hidden" name="no_reg_hidden" id="no_reg_hidden"
+                                                    value="">
 
                                                 <div class="form-actions text-right">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan"
@@ -312,7 +348,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Donor List</h4>
+                                        <h4 class="card-title">Pendonor List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -331,29 +367,28 @@
                                                     class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
-                                                            <th>Blood Type</th>
-                                                            <th>Photo</th>
+                                                            <th>No Reg</th>
+                                                            <th>Nama</th>
+                                                            <th>Golongan Darah</th>
+                                                            <th>Foto</th>
                                                             <th>Status</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @forelse($donor as $key => $donor_item)
                                                             <tr data-entry-id="{{ $donor_item->id }}">
-                                                                <td>{{ isset($donor_item->created_at) ? date('d/m/Y H:i:s', strtotime($donor_item->created_at)) : '' }}
-                                                                </td>
+                                                                <td>{{ $donor_item->no_reg ?? '' }}</td>
                                                                 <td>{{ $donor_item->name ?? '' }}</td>
                                                                 <td>{{ $donor_item->blood_type->name ?? '' }}</td>
                                                                 <td><a data-fancybox="gallery"
                                                                         data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $donor_item->photo }}"
-                                                                        class="blue accent-4">Show</a></td>
+                                                                        class="blue accent-4">Lihat</a></td>
                                                                 <td>
-                                                                    @if ($donor_item->status == 2)
+                                                                    @if ($donor_item->status == 'menunggu')
                                                                         <span
                                                                             class="badge badge-warning">{{ 'Menunggu' }}</span>
-                                                                    @elseif($donor_item->status == 3)
+                                                                    @elseif($donor_item->status == 'ditolak')
                                                                         <span
                                                                             class="badge badge-danger">{{ 'Ditolak' }}</span>
                                                                     @else
@@ -367,16 +402,16 @@
                                                                         <button type="button"
                                                                             class="btn btn-info btn-sm dropdown-toggle"
                                                                             data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">Action</button>
+                                                                            aria-expanded="false">Aksi</button>
                                                                         <div class="dropdown-menu">
 
                                                                             @can('donor_show')
                                                                                 <a href="#mymodal"
                                                                                     data-remote="{{ route('backsite.donor.show', $donor_item->id) }}"
                                                                                     data-toggle="modal" data-target="#mymodal"
-                                                                                    data-title="Donor Detail"
+                                                                                    data-title="Pendonor Detail"
                                                                                     class="dropdown-item">
-                                                                                    Show
+                                                                                    Lihat
                                                                                 </a>
                                                                             @endcan
 
@@ -397,18 +432,18 @@
                                                                                     <input type="hidden" name="_token"
                                                                                         value="{{ csrf_token() }}">
                                                                                     <input type="submit" class="dropdown-item"
-                                                                                        value="Delete">
+                                                                                        value="Hapus">
                                                                                 </form>
                                                                             @endcan
 
-                                                                            @if ($donor_item->status == 2)
+                                                                            @if ($donor_item->status == 'menunggu')
                                                                                 @can('donor_accept')
                                                                                     <form
                                                                                         action="{{ route('backsite.donor.accept', $donor_item->id) }}"
                                                                                         method="POST">
                                                                                         @csrf
-                                                                                        <input type="submit" class="dropdown-item"
-                                                                                        value="Accept">
+                                                                                        <input type="submit"
+                                                                                            class="dropdown-item" value="Terima">
                                                                                     </form>
                                                                                 @endcan
 
@@ -417,8 +452,8 @@
                                                                                         action="{{ route('backsite.donor.reject', $donor_item->id) }}"
                                                                                         method="POST">
                                                                                         @csrf
-                                                                                        <input type="submit" class="dropdown-item"
-                                                                                        value="Reject">
+                                                                                        <input type="submit"
+                                                                                            class="dropdown-item" value="Tolak">
                                                                                     </form>
                                                                                 @endcan
                                                                             @endif
@@ -433,12 +468,12 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
-                                                            <th>Blood Type</th>
-                                                            <th>Photo</th>
+                                                            <th>No Reg</th>
+                                                            <th>Nama</th>
+                                                            <th>Golongan Darah</th>
+                                                            <th>Foto</th>
                                                             <th>Status</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -483,6 +518,24 @@
     </script>
 
     <script>
+        // Calculate age based on birth date
+        function calculateAge() {
+            var birthDate = document.getElementById("birth_date").value;
+            var today = new Date();
+            var birthDate = new Date(birthDate);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById("age").value = age + " Tahun";
+        }
+
+        // Attach the calculateAge function to the birth_date input
+        document.getElementById("birth_date").addEventListener("change", calculateAge);
+    </script>
+
+    <script>
         jQuery(document).ready(function($) {
             $('#mymodal').on('show.bs.modal', function(e) {
                 var button = $(e.relatedTarget);
@@ -517,6 +570,19 @@
 
         $(function() {
             $(":input").inputmask();
+        });
+
+        $(document).ready(function() {
+            var noRegInput = $('#no_reg');
+            var lastRegNumberInput = $('#last_reg_number');
+
+            var lastDonorId = parseInt(lastRegNumberInput.val());
+            var newRegNumber = lastDonorId + 1;
+            var formattedRegNumber = 'REG' + newRegNumber.toString().padStart(5, '0');
+
+            noRegInput.val(formattedRegNumber);
+            lastRegNumberInput.val(newRegNumber);
+            $('#no_reg_hidden').val(formattedRegNumber);
         });
 
         // fancybox

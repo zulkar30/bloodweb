@@ -32,20 +32,23 @@ class StoreAftap extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'required', 'integer',
-            ],
-            'donor_id' => [
-                'required', 'integer',
-            ],
-            'pouch_type_id' => [
-                'required', 'integer',
-            ],
-            'blood_type_id' => [
-                'required', 'integer'
+            'no_labu' => [
+                'nullable'
             ],
             'volume' => [
                 'required', 'string', 'max:255'
+            ],
+            'officer_id' => [
+                'required', 'integer',
+            ],
+            'patient_id' => [
+                'nullable', 'integer',
+            ],
+            'donor_id' => [
+                'nullable', 'integer',
+            ],
+            'pouch_type_id' => [
+                'required', 'integer',
             ]
         ];
     }

@@ -1,12 +1,12 @@
 @extends('layouts.default')
 
-@section('title', 'About')
+@section('title', 'Tentang Kami')
 
 @section('content')
 
     <!-- Content -->
     <main class="min-h-screen">
-        <!-- ====== About Section Start -->
+        <!-- ====== Tentang Kami Section Start -->
         <section class="overflow-hidden pb-12  lg:pb-[90px]">
             <div class="mx-4 flex flex-wrap items-center justify-between">
                 <div class="w-full px-4 lg:w-6/12">
@@ -32,22 +32,22 @@
                 <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
                     <div class="mt-10 lg:mt-0">
                         <span class="text-primary mb-2 block text-lg font-semibold">
-                            About Us
+                            Tentang Kami
                         </span>
                         <h2 class="text-dark mb-8 text-3xl font-bold sm:text-4xl">
-                            How BloodWeb Can Be Created.
+                            Bagaimana BloodWeb Tercipta.
                         </h2>
                         <p class="text-body-color mb-8 text-base">
-                            BloodWeb is an information application related to blood donation which has standard features such as blood stock information, a donor registration feature and a blood request feature.
+                            BloodWeb merupakan aplikasi informasi terkait donor darah yang memiliki fitur standar seperti informasi stok darah, fitur pendaftaran donor dan fitur permintaan darah.
                         </p>
                         <p class="text-body-color mb-12 text-base">
-                            This application was made based on a case study obtained at the blood transfusion unit of the Bengkalis Regency Hospital as the final assignment for a student majoring in informatics engineering named Zulkarnain.
+                            Aplikasi ini dibuat berdasarkan studi kasus yang diperoleh pada unit transfusi darah RSUD Kabupaten Bengkalis sebagai tugas akhir mahasiswa jurusan teknik informatika bernama Zulkarnain.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- ====== About Section End -->
+        <!-- ====== Tentang Kami Section End -->
 
     </main>
     <!-- End Content -->

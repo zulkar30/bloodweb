@@ -14,13 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::table('blood_request', function (Blueprint $table) {
-            $table->foreignId('doctor_id', 'fk_blood_request_to_doctor')
+            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->foreign('doctor_id', 'fk_blood_request_to_doctor')
             ->references('id')->on('doctor')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreignId('officer_id', 'fk_blood_request_to_officer')
+            $table->unsignedBigInteger('officer_id')->nullable();
+            $table->foreign('officer_id', 'fk_blood_request_to_officer')
             ->references('id')->on('officer')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreignId('patient_id', 'fk_blood_request_to_patient')
+            $table->unsignedBigInteger('patient_id')->nullable();
+            $table->foreign('patient_id', 'fk_blood_request_to_patient')
             ->references('id')->on('patient')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreignId('blood_type_id', 'fk_blood_request_to_blood_type')
+            $table->unsignedBigInteger('blood_type_id')->nullable();
+            $table->foreign('blood_type_id', 'fk_blood_request_to_blood_type')
             ->references('id')->on('blood_type')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }

@@ -18,14 +18,21 @@ class Aftap extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'officer_id',
+        'no_labu',
+        'patient_id',
         'donor_id',
         'pouch_type_id',
-        'blood_type_id',
         'volume',
+        'officer_id',
         'created_at',
         'updated_at',
     ];
+    
+    // Relasi one to many
+    public function patient()
+    {
+        return $this->belongsTo('App\Models\Operational\Patient', 'patient_id', 'id');
+    }
     
     // Relasi one to many
     public function donor()
@@ -34,20 +41,20 @@ class Aftap extends Model
     }
     
     // Relasi one to many
+    public function pouch_type()
+    {
+        return $this->belongsTo('App\Models\MasterData\PouchType', 'pouch_type_id', 'id');
+    }
+
+    // Relasi one to many
     public function officer()
     {
         return $this->belongsTo('App\Models\Operational\Officer', 'officer_id', 'id');
     }
     
     // Relasi one to many
-    public function pouch_type()
+    public function screening()
     {
-        return $this->belongsTo('App\Models\MasterData\PouchType', 'pouch_type_id', 'id');
-    }
-    
-    // Relasi one to many
-    public function blood_type()
-    {
-        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
+        return $this->hasMany('App\Models\Operational\Screening', 'aftap_id');
     }
 }

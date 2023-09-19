@@ -3,25 +3,24 @@
 namespace App\Http\Controllers\Backsite;
 
 // Default
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-// Library
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
-
-// Request
-use App\Http\Requests\Crossmatch\StoreCrossmatch;
-use App\Http\Requests\Crossmatch\UpdateCrossmatch;
-
-// Everything Else
-use Auth;
 use Gate;
 
-// Model
+// Library
 use App\Models\Operational\Officer;
-use App\Models\Operational\Crossmatch;
+
+// Request
+use App\Http\Controllers\Controller;
 use App\Models\MasterData\BloodType;
+
+// Everything Else
+use Illuminate\Support\Facades\Auth;
+use App\Models\Operational\Screening;
+
+// Model
+use App\Models\Operational\Crossmatch;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Crossmatch\StoreCrossmatch;
+use App\Http\Requests\Crossmatch\UpdateCrossmatch;
 
 // Third Party
 
@@ -43,13 +42,25 @@ class CrossmatchController extends Controller
         // Middleware Gate
         abort_if(Gate::denies('crossmatch_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada table
+        // Model
         $crossmatch = Crossmatch::orderBy('created_at', 'desc')->get();
-        // Ditampilkan pada pilihan
         $blood_type = BloodType::orderBy('name', 'asc')->get();
-        $officer = Officer::orderBy('name', 'asc')->get();
+
+        // Menampilkan data skrinning yang hanya result nya non-reaktif
+        $screening = Screening::where('result', 'non-reaktif')->orderBy('id', 'desc')->get();
+
+        // Mendapatkan CrossmatchID terakhir
+        $lastCrossmatch = Crossmatch::orderBy('id', 'desc')->first();
+        $lastCrossmatchId = $lastCrossmatch ? $lastCrossmatch->id : 0;
+
+        // Mendapatkan data officer yang login sebagai officer
+        $loggedInUser = Auth::user();
+        $officerForLoggedInUser = $loggedInUser->officer;
+
+        // Mendapatkan OfficerID
+        $officerOptions = Officer::pluck('name', 'id');
         
-        return view('pages.backsite.operational.crossmatch.index', compact('crossmatch', 'blood_type', 'officer'));
+        return view('pages.backsite.operational.crossmatch.index', compact('crossmatch', 'blood_type', 'officerForLoggedInUser', 'officerOptions', 'screening' , 'lastCrossmatchId'));
     }
 
     /**
@@ -73,12 +84,18 @@ class CrossmatchController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
-        // Kirim data ke database
-        $crossmatch = Crossmatch::create($data);
+        $crossmatch = new Crossmatch();
+        $crossmatch->no_cm = $data['no_cm'];
+        $crossmatch->fase1 = $data['fase1'] ?? null;
+        $crossmatch->fase2 = $data['fase2'] ?? null;
+        $crossmatch->fase3 = $data['fase3'] ?? null;
+        $crossmatch->result = $data['result'] ?? null;
+        $crossmatch->officer_id = $data['officer_id'] ?? null;
+        $crossmatch->screening_id = $data['screening_id'] ?? null;
+        $crossmatch->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Crossmatch');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Crossmatch Baru');
         return redirect()->route('backsite.crossmatch.index');
     }
 
@@ -108,8 +125,18 @@ class CrossmatchController extends Controller
         // Ditampilkan pada form sebagai pilihan
         $officer = Officer::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
+        
+        // Menampilkan data skrinning yang hanya result nya non-reaktif
+        $screening = Screening::where('result', 'non-reaktif')->orderBy('id', 'desc')->get();
 
-        return view('pages.backsite.operational.crossmatch.edit', compact('crossmatch', 'officer', 'blood_type'));
+        // Mendapatkan data officer yang login sebagai officer
+        $loggedInUser = Auth::user();
+        $officerForLoggedInUser = $loggedInUser->officer;
+
+        // Mendapatkan OfficerID
+        $officerOptions = Officer::pluck('name', 'id');
+
+        return view('pages.backsite.operational.crossmatch.edit', compact('crossmatch', 'officerForLoggedInUser', 'officerOptions', 'blood_type', 'screening'));
     }
 
     /**
@@ -124,12 +151,18 @@ class CrossmatchController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
-        // Update data ke database
-        $crossmatch->update($data);
+        $crossmatch->no_cm = $data['no_cm'];
+        $crossmatch->fase1 = $data['fase1'] ?? null;
+        $crossmatch->fase2 = $data['fase2'] ?? null;
+        $crossmatch->fase3 = $data['fase3'] ?? null;
+        $crossmatch->result = $data['result'] ?? null;
+        $crossmatch->officer_id = $data['officer_id'] ?? null;
+        $crossmatch->screening_id = $data['screening_id'] ?? null;
+        // dd($crossmatch);
+        $crossmatch->save();
 
         // Sweetalert
-        alert()->success('Success Update Message', 'Successfully updated Crossmatch');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Melakukan Perubahan Data Crossmatch');
         return redirect()->route('backsite.crossmatch.index');
     }
 
@@ -146,8 +179,7 @@ class CrossmatchController extends Controller
         $crossmatch->delete();
 
         // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Crossmatch');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menghapus Data Crossmatch');
         return back();
     }
 }

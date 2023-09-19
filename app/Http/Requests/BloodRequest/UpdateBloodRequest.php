@@ -32,18 +32,6 @@ class UpdateBloodRequest extends FormRequest
     public function rules()
     {
         return [
-            'officer_id' => [
-                'nullable', 'integer',
-            ],
-            'doctor_id' => [
-                'nullable', 'integer',
-            ],
-            'patient_id' => [
-                'nullable', 'integer',
-            ],
-            'blood_type_id' => [
-                'nullable', 'integer'
-            ],
             'wb' => [
                 'nullable', 'string', 'max:255'
             ],
@@ -71,12 +59,24 @@ class UpdateBloodRequest extends FormRequest
             'total' => [
                 'nullable', 'string', 'max:255'
             ],
+            'info' => [
+                'nullable', 'string', 'max:255'
+            ],
             'fulfilled' => [
                 'nullable', 'string', 'max:255'
             ],
             'status' => [
                 'nullable', 'string', 'max:255'
-            ]
+            ],
+            'patient_id' => [
+                'nullable', 'integer',
+            ],
+            'officer_id' => [
+                'nullable', 'integer',
+            ],
+            'doctor_id' => [
+                'nullable', 'integer',
+            ],
         ];
     }
 }

@@ -17,6 +17,7 @@ class PatientSeeder extends Seeder
     {
         $patient = [
             [
+                'no_mr'                     => 'MR00001',
                 'name'                      => 'Syaifuddin Rambe',
                 'birth_place'               => 'Kisaran',
                 'birth_date'                => '2010-12-12',
@@ -33,6 +34,7 @@ class PatientSeeder extends Seeder
                 'updated_at'                => date('Y-m-d H:i:s')
             ],
             [
+                'no_mr'                     => 'MR00002',
                 'name'                      => 'Suryadi',
                 'birth_place'               => 'Siak',
                 'birth_date'                => '2002-12-12',
@@ -49,6 +51,7 @@ class PatientSeeder extends Seeder
                 'updated_at'                => date('Y-m-d H:i:s')
             ],
             [
+                'no_mr'                     => 'MR00003',
                 'name'                      => 'Augie Darminra',
                 'birth_place'               => 'Duri',
                 'birth_date'                => '2001-12-12',
@@ -65,6 +68,7 @@ class PatientSeeder extends Seeder
                 'updated_at'                => date('Y-m-d H:i:s')
             ],
             [
+                'no_mr'                     => 'MR00004',
                 'name'                      => 'Villi Syahfila',
                 'birth_place'               => 'Kisaran',
                 'birth_date'                => '2001-12-12',
@@ -81,6 +85,7 @@ class PatientSeeder extends Seeder
                 'updated_at'                => date('Y-m-d H:i:s')
             ],
             [
+                'no_mr'                     => 'MR00005',
                 'name'                      => 'Oxyta Sri Giyanto',
                 'birth_place'               => 'Dumai',
                 'birth_date'                => '2001-12-12',

@@ -51,7 +51,7 @@
                                 <div class="card">
                                     <div class="card-header bg-success text-white">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="card-title text-white">Tambah Data</h4>
                                             <a class="heading-elements-toggle"><i
                                                     class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
@@ -73,17 +73,97 @@
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the
-                                                            submit button.</p>
+                                                        <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                            anda menekan tombol submit.</p>
                                                     </div>
 
-                                                    <div class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Donor <code
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="no_labu">No Labu <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="no_labu" name="no_labu"
+                                                                class="form-control col-md-3" value="{{ old('no_labu') }}"
+                                                                autocomplete="off" readonly>
+
+                                                            @if ($errors->has('no_labu'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('no_labu') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row {{ $errors->has('no_mr') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">NO MR <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="no_mr" id="no_mr" class="form-control select2"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih NO
+                                                                    MR</option>
+                                                                @foreach ($patient as $key => $patient_item)
+                                                                    <option value="{{ $patient_item->id }}"
+                                                                        data-patient-name="{{ $patient_item->name }}">
+                                                                        {{ $patient_item->no_mr }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @if ($errors->has('no_mr'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('no_mr') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('patient_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Pasien <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="patient_id" id="patient_id"
+                                                                class="form-control select2" disabled>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Pasien
+                                                                </option>
+                                                            </select>
+                                                            @if ($errors->has('patient_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('patient_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('no_reg') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">NO REG <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="no_reg" id="no_reg" class="form-control select2"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih NO
+                                                                    REG</option>
+                                                                @foreach ($donor as $key => $donor_item)
+                                                                    <option value="{{ $donor_item->id }}"
+                                                                        data-donor-name="{{ $donor_item->name }}">
+                                                                        {{ $donor_item->no_reg }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                            @if ($errors->has('no_reg'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('no_reg') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Pendonor <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="donor_id" id="donor_id" class="form-control select2"
                                                                 required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Pendonor
                                                                 </option>
                                                                 @foreach ($donor as $key => $donor_item)
                                                                     <option value="{{ $donor_item->id }}">
@@ -91,7 +171,7 @@
                                                                     </option>
                                                                 @endforeach
                                                             </select>
-    
+
                                                             @if ($errors->has('donor_id'))
                                                                 <p style="font-style: bold; color: red;">
                                                                     {{ $errors->first('donor_id') }}</p>
@@ -100,36 +180,14 @@
                                                     </div>
 
                                                     <div
-                                                        class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Blood Type <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="blood_type_id" id="blood_type_id"
-                                                                class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                @foreach ($blood_type as $key => $blood_type_item)
-                                                                    <option value="{{ $blood_type_item->id }}">
-                                                                        {{ $blood_type_item->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if ($errors->has('blood_type_id'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('blood_type_id') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div
                                                         class="form-group row {{ $errors->has('pouch_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Pouch Type <code
+                                                        <label class="col-md-3 label-control">Jenis Kantong <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="pouch_type_id" id="pouch_type_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Jenis Kantong
                                                                 </option>
                                                                 @foreach ($pouch_type as $key => $pouch_type_item)
                                                                     <option value="{{ $pouch_type_item->id }}">
@@ -146,13 +204,12 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="volume">Volume <code
+                                                        <label class="col-md-3 label-control" for="volume">Jumlah <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="volume" name="volume"
-                                                                class="form-control" placeholder="example volume 10 Kantong"
-                                                                value="{{ old('volume') }}" autocomplete="off"
-                                                                data-inputmask="'alias': 'numeric', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': ' Kantong', 'placeholder': '0'"
+                                                            <input type="number" id="volume" name="volume"
+                                                                class="form-control" value="{{ old('volume') }}"
+                                                                autocomplete="off" placeholder="Jumlah Darah yang Diambil"
                                                                 required>
 
                                                             @if ($errors->has('volume'))
@@ -161,34 +218,41 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Officer <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="officer_id" id="officer_id" class="form-control select2"
-                                                            required>
-                                                            <option value="{{ '' }}" disabled selected>Choose
-                                                            </option>
-                                                            @foreach ($officer as $key => $officer_item)
-                                                                <option value="{{ $officer_item->id }}">
-                                                                    {{ $officer_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div
+                                                        class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Petugas <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="officer_id" id="officer_id"
+                                                                class="form-control select2">
+                                                                <option value="" disabled selected>Choose</option>
+                                                                @foreach ($officerOptions as $officerId => $officerName)
+                                                                    <option value="{{ $officerId }}"
+                                                                        {{ $officerForLoggedInUser && $officerForLoggedInUser->id === $officerId ? 'selected' : '' }}>
+                                                                        {{ $officerName }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
 
-                                                        @if ($errors->has('officer_id'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('officer_id') }}</p>
-                                                        @endif
+                                                            @if ($errors->has('officer_id'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('officer_id') }}</p>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
 
+                                                <input type="hidden" name="last_labu_number" id="last_labu_number"
+                                                    value="{{ $lastAftapId }}">
+                                                <input type="hidden" name="patient_id_hidden" id="patient_id_hidden"
+                                                    value="">
+                                                <input type="hidden" name="donor_id_hidden" id="donor_id_hidden"
+                                                    value="">
+
                                                 <div class="form-actions text-right">
                                                     <button type="submit" style="width:120px;" class="btn btn-cyan"
-                                                        onclick="return confirm('Are you sure want to save this data ?')">
+                                                        onclick="return confirm('Anda yakin ingin menyimpan data ini ?')">
                                                         <i class="la la-check-square-o"></i> Submit
                                                     </button>
                                                 </div>
@@ -219,7 +283,6 @@
                                         <ul class="list-inline mb-0">
                                             <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                            <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -232,61 +295,40 @@
                                                 class="table table-striped table-bordered text-inputs-searching default-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Date</th>
-                                                        <th>Name</th>
-                                                        <th>Blood Type</th>
-                                                        <th style="text-align:center; width:150px;">Action</th>
+                                                        <th>No Labu</th>
+                                                        <th>Pasien</th>
+                                                        <th>Pendonor</th>
+                                                        <th>Jenis Kantong</th>
+                                                        <th>Jumlah</th>
+                                                        <th>Petugas</th>
+                                                        <th style="text-align:center; width:150px;">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @forelse($aftap as $key => $aftap_item)
                                                         <tr data-entry-id="{{ $aftap_item->id }}">
-                                                            <td>{{ isset($aftap_item->created_at) ? date('d/m/Y H:i:s', strtotime($aftap_item->created_at)) : '' }}
-                                                            </td>
+                                                            <td>{{ $aftap_item->no_labu ?? '' }}</td>
+                                                            <td>{{ $aftap_item->patient->name ?? '' }}</td>
                                                             <td>{{ $aftap_item->donor->name ?? '' }}</td>
-                                                            <td>{{ $aftap_item->blood_type->name ?? '' }}</td>
+                                                            <td>{{ $aftap_item->pouch_type->name ?? '' }}</td>
+                                                            <td>{{ $aftap_item->volume . ' Kantong' ?? '' }}</td>
+                                                            <td>{{ $aftap_item->officer->name ?? '' }}</td>
                                                             <td class="text-center">
-
-                                                                <div class="btn-group mr-1 mb-1">
-                                                                    <button type="button"
-                                                                        class="btn btn-info btn-sm dropdown-toggle"
-                                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                                        aria-expanded="false">Action</button>
-                                                                    <div class="dropdown-menu">
-
-                                                                        @can('aftap_show')
-                                                                            <a href="#mymodal"
-                                                                                data-remote="{{ route('backsite.aftap.show', $aftap_item->id) }}"
-                                                                                data-toggle="modal" data-target="#mymodal"
-                                                                                data-title="Aftap Detail"
-                                                                                class="dropdown-item">
-                                                                                Show
-                                                                            </a>
-                                                                        @endcan
-
-                                                                        @can('aftap_edit')
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('backsite.aftap.edit', $aftap_item->id) }}">
-                                                                                Edit
-                                                                            </a>
-                                                                        @endcan
-
-                                                                        @can('aftap_delete')
-                                                                            <form
-                                                                                action="{{ route('backsite.aftap.destroy', $aftap_item->id) }}"
-                                                                                method="POST"
-                                                                                onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                <input type="hidden" name="_method"
-                                                                                    value="DELETE">
-                                                                                <input type="hidden" name="_token"
-                                                                                    value="{{ csrf_token() }}">
-                                                                                <input type="submit" class="dropdown-item"
-                                                                                    value="Delete">
-                                                                            </form>
-                                                                        @endcan
-
-                                                                    </div>
-                                                                </div>
+                                                                @can('aftap_show')
+                                                                    <a href="#mymodal"
+                                                                        data-remote="{{ route('backsite.aftap.show', $aftap_item->id) }}"
+                                                                        data-toggle="modal" data-target="#mymodal"
+                                                                        data-title="Aftap Detail"
+                                                                        class="badge badge-info" data-tooltip="Tooltip on top" title="Lihat"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z"></path><path d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z"></path></svg></a>
+                                                                @endcan
+                                                                @can('aftap_edit')
+                                                                    <a href="{{ route('backsite.aftap.edit', $aftap_item->id) }}"
+                                                                        class="badge badge-warning" data-tooltip="Tooltip on top" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg></a>
+                                                                @endcan
+                                                                @can('aftap_delete')
+                                                                    <a href="#" class="badge badge-danger" data-tooltip="Tooltip on top" title="Hapus"
+                                                                        onclick="deleteAftap({{ $aftap_item->id }})"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg></a>
+                                                                @endcan
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -295,10 +337,13 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <th>Date</th>
-                                                        <th>Name</th>
-                                                        <th>Blood Type</th>
-                                                        <th style="text-align:center; width:150px;">Action</th>
+                                                        <th>No Labu</th>
+                                                        <th>Pasien</th>
+                                                        <th>Pendonor</th>
+                                                        <th>Jenis Kantong</th>
+                                                        <th>Jumlah</th>
+                                                        <th>Petugas</th>
+                                                        <th style="text-align:center; width:150px;">Aksi</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -316,7 +361,6 @@
         </div>
     </div>
     <!-- END: Content-->
-
 @endsection
 
 @push('after-script')
@@ -334,18 +378,6 @@
                 modal.find('.modal-body').load(button.data("remote"));
                 modal.find('.modal-title').html(button.data("title"));
             });
-
-            $('.select-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', 'selected')
-                $select2.trigger('change')
-            })
-
-            $('.deselect-all').click(function() {
-                let $select2 = $(this).parent().siblings('.select2-full-bg')
-                $select2.find('option').prop('selected', '')
-                $select2.trigger('change')
-            })
         });
 
         $('.default-table').DataTable({
@@ -360,6 +392,105 @@
 
         $(function() {
             $(":input").inputmask();
+        });
+
+        $(document).ready(function() {
+            var noLabuInput = $('#no_labu');
+            var lastLabuNumberInput = $('#last_labu_number');
+
+            var lastAftapId = parseInt(lastLabuNumberInput.val());
+            var newLabuNumber = lastAftapId + 1;
+            var formattedLabuNumber = 'LABU' + newLabuNumber.toString().padStart(5, '0');
+
+            noLabuInput.val(formattedLabuNumber);
+            lastLabuNumberInput.val(newLabuNumber);
+        });
+
+        function togglePatientBasedOnNoMR() {
+            var noMrSelect = $('#no_mr');
+            var patientSelect = $('#patient_id');
+            var selectedOptionValue = noMrSelect.val();
+            var selectedOption = noMrSelect.find('option:selected');
+            var patientName = selectedOption.data('patient-name');
+            var patientId = selectedOptionValue;
+
+            if (patientName !== null && patientId !== '') {
+                patientSelect.empty();
+                patientSelect.prop('disabled', true);
+                var option = new Option(patientName, patientId);
+                patientSelect.append(option);
+                $('#patient_id_hidden').val(patientId);
+            } else {
+                patientSelect.empty();
+                patientSelect.append('<option value="" disabled selected>Data tidak ditemukan</option>');
+                patientSelect.prop('disabled', true);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            togglePatientBasedOnNoMR();
+        });
+
+        $('#no_mr').on('change', function() {
+            togglePatientBasedOnNoMR();
+        });
+
+        function togglePendonorBasedOnNoReg() {
+            var noRegSelect = $('#no_reg');
+            var donorSelect = $('#donor_id');
+            var selectedOptionValue = noRegSelect.val();
+            var selectedOption = noRegSelect.find('option:selected');
+            var donorName = selectedOption.data('donor-name');
+            var donorId = selectedOptionValue;
+
+            if (donorName !== null && donorId !== '') {
+                donorSelect.empty();
+                donorSelect.prop('disabled', true);
+                var option = new Option(donorName, donorId);
+                donorSelect.append(option);
+                $('#donor_id_hidden').val(donorId);
+            } else {
+                donorSelect.empty();
+                donorSelect.append('<option value="" disabled selected>Data tidak ditemukan</option>');
+                donorSelect.prop('disabled', true);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            togglePendonorBasedOnNoReg();
+        });
+
+        $('#no_reg').on('change', function() {
+            togglePendonorBasedOnNoReg();
+        });
+
+        function deleteAftap(aftapId) {
+            if (confirm('Anda yakin ingin menghapus data Aftap ini?')) {
+                var form = document.createElement('form');
+                form.action = '{{ route('backsite.aftap.destroy', '__id') }}'.replace('__id', aftapId);
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = '_token';
+                tokenInput.value = '{{ csrf_token() }}';
+
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+
+                form.appendChild(tokenInput);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+
+                form.submit();
+            }
+        }
+
+        $(document).ready(function() {
+            $('[data-tooltip]').tooltip();
         });
     </script>
 

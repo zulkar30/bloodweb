@@ -18,14 +18,15 @@ class Crossmatch extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'officer_id',
-        'blood_type_id',
+        'no_cm',
         'fase1',
         'fase2',
         'fase3',
         'result',
         'created_at',
         'updated_at',
+        'officer_id',
+        'screening_id',
     ];
 
     // Relasi one to many
@@ -33,10 +34,11 @@ class Crossmatch extends Model
     {
         return $this->belongsTo('App\Models\Operational\Officer', 'officer_id', 'id');
     }
-
+    
     // Relasi one to many
-    public function blood_type()
+    public function screening()
     {
-        return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
+        return $this->belongsTo('App\Models\Operational\Screening', 'screening_id', 'id');
     }
+
 }

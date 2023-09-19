@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Type User')
+@section('title', 'Jenis User')
 
 @section('content')
 
@@ -13,12 +13,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Type User</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Jenis User</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item active">Type User</li>
+                                <li class="breadcrumb-item active">Jenis User</li>
                             </ol>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Type User List</h4>
+                                        <h4 class="card-title">Jenis User List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Doctor')
+@section('title', 'Dokter')
 
 @section('content')
 
@@ -28,13 +28,13 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Doctor</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Dokter</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Doctor</li>
+                                <li class="breadcrumb-item active">Dokter</li>
                             </ol>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <div class="card">
                                     <div class="card-header bg-success text-white">
                                         <a data-action="collapse">
-                                            <h4 class="card-title text-white">Add Data</h4>
+                                            <h4 class="card-title text-white">Tambah Data</h4>
                                             <a class="heading-elements-toggle"><i
                                                     class="la la-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
@@ -73,18 +73,19 @@
 
                                                 <div class="form-body">
                                                     <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the
-                                                            submit button.</p>
+                                                        <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                            anda menekan tombol submit.</p>
                                                     </div>
 
                                                     <div
                                                         class="form-group row {{ $errors->has('user_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">User Account <code
+                                                        <label class="col-md-3 label-control">Akun User <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="user_id" id="user_id" class="form-control select2"
                                                                 required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih Akun
+                                                                    User
                                                                 </option>
                                                                 @foreach ($user as $key => $user_item)
                                                                     <option value="{{ $user_item->id }}">{{ $user_item->name }}
@@ -100,7 +101,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="name">Name <code
+                                                        <label class="col-md-3 label-control" for="name">Nama <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="name" name="name"
@@ -114,8 +115,29 @@
                                                         </div>
                                                     </div>
 
+                                                    <div
+                                                        class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">Jenis Kelamin <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="gender" id="gender" class="form-control select2"
+                                                                required>
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Jenis Kelamin
+                                                                </option>
+                                                                <option value="1">Laki-laki</option>
+                                                                <option value="2">Perempuan</option>
+                                                            </select>
+
+                                                            @if ($errors->has('gender'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('gender') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="birth_place">Birth Place
+                                                        <label class="col-md-3 label-control" for="birth_place">Tempat Lahir
                                                             <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="birth_place" name="birth_place"
@@ -130,8 +152,8 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="birth_date">Birth Date <code
-                                                                style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="birth_date">Tanggal Lahir
+                                                            <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="date" id="birth_date" name="birth_date"
                                                                 class="form-control" value="{{ old('birth_date') }}"
@@ -144,44 +166,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Gender <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="gender" id="gender" class="form-control select2"
-                                                                required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
-                                                                </option>
-                                                                <option value="1">Laki-laki</option>
-                                                                <option value="2">Perempuan</option>
-                                                            </select>
-
-                                                            @if ($errors->has('gender'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('gender') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="contact">Contact <code
-                                                                style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="contact" name="contact"
-                                                                class="form-control" value="{{ old('contact') }}"
-                                                                autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                                required>
-
-                                                            @if ($errors->has('contact'))
-                                                                <p style="font-style: bold; color: red;">
-                                                                    {{ $errors->first('contact') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="address">Address <code
+                                                        <label class="col-md-3 label-control" for="address">Alamat <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="address" name="address"
@@ -197,12 +183,28 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="age">Age <code
+                                                        <label class="col-md-3 label-control" for="contact">Kontak <code
+                                                                style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="contact" name="contact"
+                                                                class="form-control" value="{{ old('contact') }}"
+                                                                autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                                required>
+
+                                                            @if ($errors->has('contact'))
+                                                                <p style="font-style: bold; color: red;">
+                                                                    {{ $errors->first('contact') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="age">Umur <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <input type="text" id="age" name="age"
                                                                 class="form-control" value="{{ old('age') }}"
-                                                                autocomplete="off" placeholder="example 23 Tahun" required>
+                                                                autocomplete="off" readonly>
 
                                                             @if ($errors->has('age'))
                                                                 <p style="font-style: bold; color: red;">
@@ -213,12 +215,13 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Blood Type <code
+                                                        <label class="col-md-3 label-control">Golongan Darah <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="blood_type_id" id="blood_type_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Golongan Darah
                                                                 </option>
                                                                 @foreach ($blood_type as $key => $blood_type_item)
                                                                     <option value="{{ $blood_type_item->id }}">
@@ -236,12 +239,13 @@
 
                                                     <div
                                                         class="form-group row {{ $errors->has('specialist_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Specialist <code
+                                                        <label class="col-md-3 label-control">Spesialis <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="specialist_id" id="specialist_id"
                                                                 class="form-control select2" required>
-                                                                <option value="{{ '' }}" disabled selected>Choose
+                                                                <option value="{{ '' }}" disabled selected>Pilih
+                                                                    Spesialis
                                                                 </option>
                                                                 @foreach ($specialist as $key => $specialist_item)
                                                                     <option value="{{ $specialist_item->id }}">
@@ -258,7 +262,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="photo">Photo <code
+                                                        <label class="col-md-3 label-control" for="photo">Foto <code
                                                                 style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <div class="custom-file">
@@ -267,7 +271,7 @@
                                                                     class="custom-file-input" id="photo" name="photo"
                                                                     required>
                                                                 <label class="custom-file-label" for="photo"
-                                                                    aria-describedby="photo">Choose File</label>
+                                                                    aria-describedby="photo">Pilih File</label>
                                                             </div>
 
                                                             <p class="text-muted"><small class="text-danger">Hanya dapat
@@ -312,7 +316,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Doctor List</h4>
+                                        <h4 class="card-title">Dokter List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -331,11 +335,11 @@
                                                     class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
-                                                            <th>Specialist</th>
-                                                            <th>Photo</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th>Tanggal</th>
+                                                            <th>Nama</th>
+                                                            <th>Spesialis</th>
+                                                            <th>Foto</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -347,49 +351,50 @@
                                                                 <td>{{ $doctor_item->specialist->name ?? '' }}</td>
                                                                 <td><a data-fancybox="gallery"
                                                                         data-src="{{ request()->getSchemeAndHttpHost() . '/storage' . '/' . $doctor_item->photo }}"
-                                                                        class="blue accent-4">Show</a></td>
+                                                                        class="blue accent-4">Lihat</a></td>
                                                                 <td class="text-center">
-
-                                                                    <div class="btn-group mr-1 mb-1">
-                                                                        <button type="button"
-                                                                            class="btn btn-info btn-sm dropdown-toggle"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">Action</button>
-                                                                        <div class="dropdown-menu">
-
-                                                                            @can('doctor_show')
-                                                                                <a href="#mymodal"
-                                                                                    data-remote="{{ route('backsite.doctor.show', $doctor_item->id) }}"
-                                                                                    data-toggle="modal" data-target="#mymodal"
-                                                                                    data-title="Doctor Detail"
-                                                                                    class="dropdown-item">
-                                                                                    Show
-                                                                                </a>
-                                                                            @endcan
-
-                                                                            @can('doctor_edit')
-                                                                                <a class="dropdown-item"
-                                                                                    href="{{ route('backsite.doctor.edit', $doctor_item->id) }}">
-                                                                                    Edit
-                                                                                </a>
-                                                                            @endcan
-
-                                                                            @can('doctor_delete')
-                                                                                <form
-                                                                                    action="{{ route('backsite.doctor.destroy', $doctor_item->id) }}"
-                                                                                    method="POST"
-                                                                                    onsubmit="return confirm('Are you sure want to delete this data ?');">
-                                                                                    <input type="hidden" name="_method"
-                                                                                        value="DELETE">
-                                                                                    <input type="hidden" name="_token"
-                                                                                        value="{{ csrf_token() }}">
-                                                                                    <input type="submit" class="dropdown-item"
-                                                                                        value="Delete">
-                                                                                </form>
-                                                                            @endcan
-
-                                                                        </div>
-                                                                    </div>
+                                                                    @can('doctor_show')
+                                                                        <a href="#mymodal"
+                                                                            data-remote="{{ route('backsite.doctor.show', $doctor_item->id) }}"
+                                                                            data-toggle="modal" data-target="#mymodal"
+                                                                            data-title="Doctor Detail" class="badge badge-info"
+                                                                            data-tooltip="Tooltip on top" title="Lihat"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z">
+                                                                                </path>
+                                                                                <path
+                                                                                    d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z">
+                                                                                </path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @can('doctor_edit')
+                                                                        <a href="{{ route('backsite.doctor.edit', $doctor_item->id) }}"
+                                                                            class="badge badge-warning"
+                                                                            data-tooltip="Tooltip on top" title="Edit"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z">
+                                                                                </path>
+                                                                            </svg></a>
+                                                                    @endcan
+                                                                    @can('doctor_delete')
+                                                                        <a href="#" class="badge badge-danger"
+                                                                            data-tooltip="Tooltip on top" title="Hapus"
+                                                                            onclick="deleteDoctor({{ $doctor_item->id }})"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                                height="20" viewBox="0 0 24 24"
+                                                                                style="fill: rgb(255, 255, 255);transform: ;msFilter:;">
+                                                                                <path
+                                                                                    d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z">
+                                                                                </path>
+                                                                                <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
+                                                                            </svg></a>
+                                                                    @endcan
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -398,11 +403,11 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Name</th>
-                                                            <th>Specialist</th>
-                                                            <th>Photo</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th>Tanggal</th>
+                                                            <th>Nama</th>
+                                                            <th>Spesialis</th>
+                                                            <th>Foto</th>
+                                                            <th style="text-align:center; width:150px;">Aksi</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -447,6 +452,24 @@
     </script>
 
     <script>
+        // Calculate age based on birth date
+        function calculateAge() {
+            var birthDate = document.getElementById("birth_date").value;
+            var today = new Date();
+            var birthDate = new Date(birthDate);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById("age").value = age + " Tahun";
+        }
+
+        // Attach the calculateAge function to the birth_date input
+        document.getElementById("birth_date").addEventListener("change", calculateAge);
+    </script>
+
+    <script>
         jQuery(document).ready(function($) {
             $('#mymodal').on('show.bs.modal', function(e) {
                 var button = $(e.relatedTarget);
@@ -486,6 +509,35 @@
         // fancybox
         Fancybox.bind('[data-fancybox="gallery"]', {
             infinite: false
+        });
+
+        function deleteDoctor(doctorId) {
+            if (confirm('Anda yakin ingin menghapus data ini?')) {
+                var form = document.createElement('form');
+                form.action = '{{ route('backsite.doctor.destroy', '__id') }}'.replace('__id', doctorId);
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = '_token';
+                tokenInput.value = '{{ csrf_token() }}';
+
+                var methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+
+                form.appendChild(tokenInput);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+
+                form.submit();
+            }
+        }
+
+        $(document).ready(function() {
+            $('[data-tooltip]').tooltip();
         });
     </script>
 

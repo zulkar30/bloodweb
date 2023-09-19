@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Blood Request Success')
+@section('title', 'Berhasil Permintaan Darah')
 
 @section('content')
 
@@ -12,146 +12,159 @@
                     <thead class="text-xl border text-gray-50 uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" colspan="2" class="px-6 py-3 text-center">
-                                Blood Request Receipt
+                                Bukti Permintaan Darah
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="border-b">
                             <th scope="row" class="px-6 py-4 font-medium bg-gray-50 dark:bg-gray-800 whitespace-nowrap">
-                                Name
+                                Nomor Permintaan Darah
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->name }}
+                                {{ $blood_request->no_br }}
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Gender
+                                Nama
                             </th>
                             <td class="px-6 py-4">
-                                @if ($blood_request->gender == 1)
+                                {{ $blood_request->name }}
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
+                                Jenis Kelamin
+                            </th>
+                            <td class="px-6 py-4">
+                                @if ($blood_request->gender == 'laki-laki')
                                     <span>{{ 'Laki-laki' }}</span>
-                                @elseif($blood_request->gender == 2)
+                                @elseif($blood_request->gender == 'perempuan')
                                     <span>{{ 'Perempuan' }}</span>
                                 @else
                                     <span>{{ 'N/A' }}</span>
                                 @endif
                             </td>
                         </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
-                                Address
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Alamat
                             </th>
                             <td class="px-6 py-4">
                                 {{ $blood_request->address }}
                             </td>
                         </tr>
-                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Contact
+                        <tr class="border-b">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
+                                Kontak
                             </th>
                             <td class="px-6 py-4">
                                 {{ $blood_request->contact }}
                             </td>
                         </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
-                                Age
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Umur
                             </th>
                             <td class="px-6 py-4">
                                 {{ $blood_request->age }}
                             </td>
                         </tr>
-                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Blood Type Request
+                        <tr class="border-b">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
+                                Golongan Darah Permintaan
                             </th>
                             <td class="px-6 py-4">
                                 {{ $blood_request->blood_type->name }}
                             </td>
                         </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
-                                Whole Blood
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Darah Lengkap
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->wb . ' Komponen' }}
+                                {{ isset($blood_request->wb) ? $blood_request->wb . ' Komponen' : 'Tidak' }}
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
+                                Darah Cuci
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ isset($blood_request->we) ? $blood_request->we . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Washed Red Cell
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Sel Darah Merah
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->we . ' Komponen' }}
+                                {{ isset($blood_request->prc) ? $blood_request->prc . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="border-b">
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
-                                Packed Red Cell
+                                Trombosit
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->prc . ' Komponen' }}
+                                {{ isset($blood_request->tc) ? $blood_request->tc . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Thrombocyt Concentrate
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Plasma Segar Beku
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->tc . ' Komponen' }}
+                                {{ isset($blood_request->ffp) ? $blood_request->ffp . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="border-b">
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
-                                Fresh Frozen Plasma
+                                Kriosipitat
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->ffp . ' Komponen' }}
+                                {{ isset($blood_request->cry) ? $blood_request->cry . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Cryocipitate
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $blood_request->cry . ' Komponen' }}
-                            </td>
-                        </tr>
-                        <tr class="border-b">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Plasma
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->plasma . ' Komponen' }}
-                            </td>
-                        </tr>
-                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Plate Rich Plasma
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $blood_request->prp . ' Komponen' }}
+                                {{ isset($blood_request->plasma) ? $blood_request->plasma . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="border-b">
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
-                                Total
+                                Plasma Kaya Trombosit
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->total . ' Komponen' }}
+                                {{ isset($blood_request->prp) ? $blood_request->prp . ' Komponen' : 'Tidak' }}
                             </td>
                         </tr>
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Total
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ isset($blood_request->total) ? $blood_request->total . ' Komponen' : 'Tidak' }}
+                            </td>
+                        </tr>
+                        <tr class="border-b">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap bg-gray-50 dark:bg-gray-800">
                                 Keterangan
                             </th>
                             <td class="px-6 py-4">
-                                {{ $blood_request->info }}
+                                {{ isset($blood_request->info) ? $blood_request->info : 'Tidak ada keterangan' }}
                             </td>
                         </tr>
                     </tbody>
@@ -163,9 +176,9 @@
                 <p class="text-[#AFAEC3] mt-4">Silahkan Datang ke UTD RSUD Bengkalis dengan membawa bukti untuk konfirmasi
                     selanjutnya</p>
                 <button class="inline-block mt-10 bg-[#0D63F3] text-white rounded-full px-14 py-3"
-                    onclick="printTable()">Print</button>
+                    onclick="printTable()">Cetak</button>
                 <a href="{{ route('index') }}"
-                    class="inline-block mt-10 bg-[#0D63F3] text-white rounded-full px-14 py-3">Home</a>
+                    class="inline-block mt-10 bg-[#0D63F3] text-white rounded-full px-14 py-3">Beranda</a>
             </div>
         </div>
     </div>

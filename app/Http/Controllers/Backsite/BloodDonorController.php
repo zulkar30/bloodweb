@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Backsite;
 
 // Default
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 // Library
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 // Request
@@ -15,7 +13,7 @@ use App\Http\Requests\BloodDonor\StoreBloodDonor;
 use App\Http\Requests\BloodDonor\UpdateBloodDonor;
 
 // Everything Else
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Gate;
 
 // Model
@@ -24,9 +22,8 @@ use App\Models\Operational\BloodDonor;
 use App\Models\MasterData\BloodType;
 use App\Models\MasterData\DonorType;
 use App\Models\MasterData\PouchType;
+use App\Models\Operational\BloodRequest;
 use App\Models\Operational\Donor;
-
-// Third Party
 
 class BloodDonorController extends Controller
 {
@@ -46,16 +43,26 @@ class BloodDonorController extends Controller
         // Middleware Gate
         abort_if(Gate::denies('blood_donor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada table
+        // Model
         $blood_donor = BloodDonor::orderBy('created_at', 'desc')->get();
-        // Ditampilkan pada pilihan
         $blood_type = BloodType::orderBy('name', 'asc')->get();
         $pouch_type = PouchType::orderBy('name', 'asc')->get();
         $donor_type = DonorType::orderBy('name', 'asc')->get();
         $donor = Donor::orderBy('name', 'asc')->get();
-        $officer = Officer::orderBy('name', 'asc')->get();
+        $blood_request = BloodRequest::orderBy('id', 'desc')->get();
+
+        // Mendapatkan BloodDonorID terakhir
+        $lastBloodDonor = BloodDonor::orderBy('id', 'desc')->first();
+        $lastBloodDonorId = $lastBloodDonor ? $lastBloodDonor->id : 0;
+
+        // Mendapatkan data officer yang login sebagai officer
+        $loggedInUser = Auth::user();
+        $officerForLoggedInUser = $loggedInUser->officer;
+
+        // Mendapatkan OfficerID
+        $officerOptions = Officer::pluck('name', 'id');
         
-        return view('pages.backsite.operational.blood-donor.index', compact('blood_donor', 'blood_type', 'officer', 'pouch_type', 'donor_type', 'donor'));
+        return view('pages.backsite.operational.blood-donor.index', compact('blood_donor', 'blood_type', 'officerForLoggedInUser', 'officerOptions', 'pouch_type', 'donor_type', 'donor', 'blood_request', 'lastBloodDonorId'));
     }
 
     /**
@@ -79,14 +86,20 @@ class BloodDonorController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
-        $data['age'] = str_replace(' Tahun', '', $data['age']);
-
-        // Kirim data ke database
-        $blood_donor = BloodDonor::create($data);
+        $blood_donor = new BloodDonor();
+        $blood_donor->no_bd= $data['no_bd'];
+        $blood_donor->name= $data['name'];
+        $blood_donor->hb= $data['hb'];
+        $blood_donor->t_meter= $data['t_meter'];
+        $blood_donor->bb= $data['bb'];
+        $blood_donor->result= 2;
+        $blood_donor->officer_id= $data['officer_id'];
+        $blood_donor->blood_request_id= $data['blood_request_id'];
+        $blood_donor->blood_type_id= $data['blood_type_id'];
+        $blood_donor->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Blood Donor');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Donor Darah Baru');
         return redirect()->route('backsite.blood_donor.index');
     }
 
@@ -98,6 +111,7 @@ class BloodDonorController extends Controller
      */
     public function show(BloodDonor $blood_donor)
     {
+        // Middleware Gate
         abort_if(Gate::denies('blood_donor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('pages.backsite.operational.blood-donor.show', compact('blood_donor'));
@@ -111,16 +125,18 @@ class BloodDonorController extends Controller
      */
     public function edit(BloodDonor $blood_donor)
     {
+        // Middleware Gate
         abort_if(Gate::denies('blood_donor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada form sebagai pilihan
+        // Model
         $officer = Officer::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
         $pouch_type = PouchType::orderBy('name', 'asc')->get();
         $donor_type = DonorType::orderBy('name', 'asc')->get();
         $donor = Donor::orderBy('name', 'asc')->get();
+        $blood_request = BloodRequest::orderBy('id', 'desc')->get();
 
-        return view('pages.backsite.operational.blood-donor.edit', compact('blood_donor', 'officer', 'blood_type', 'pouch_type', 'donor_type', 'donor'));
+        return view('pages.backsite.operational.blood-donor.edit', compact('blood_donor', 'officer', 'blood_type', 'pouch_type', 'donor_type', 'donor', 'blood_request'));
     }
 
     /**
@@ -135,14 +151,11 @@ class BloodDonorController extends Controller
         // Ambil semua data dari frontsite
         $data = $request->all();
 
-        $data['age'] = str_replace(' Tahun', '', $data['age']);
-
         // Update data ke database
         $blood_donor->update($data);
 
         // Sweetalert
-        alert()->success('Success Update Message', 'Successfully updated Blood Donor');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Mengubah Data Donor Darah');
         return redirect()->route('backsite.blood_donor.index');
     }
 
@@ -159,8 +172,7 @@ class BloodDonorController extends Controller
         $blood_donor->delete();
 
         // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Blood Donor');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menghapus Data Donor Darah');
         return back();
     }
 }

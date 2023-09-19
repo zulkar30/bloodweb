@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Edit - Doctor')
+@section('title', 'Edit - Dokter')
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -27,12 +27,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Edit Doctor</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Edit Dokter</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Dashboard</li>
-                                <li class="breadcrumb-item">Doctor</li>
+                                <li class="breadcrumb-item">Dokter</li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
@@ -60,8 +60,8 @@
                                 <div class="card-content collpase show">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>Please complete the input <code>required</code>, before you click the submit
-                                                button.</p>
+                                            <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                anda menekan tombol submit.</p>
                                         </div>
                                         <form class="form form-horizontal"
                                             action="{{ route('backsite.doctor.update', [$doctor->id]) }}" method="POST"
@@ -72,16 +72,17 @@
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="fa fa-edit"></i> Form Doctor</h4>
+                                                <h4 class="form-section"><i class="fa fa-edit"></i> Form Dokter</h4>
 
                                                 <div
                                                     class="form-group row {{ $errors->has('user_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">User Account <code
+                                                    <label class="col-md-3 label-control">Akun User <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="user_id" id="user_id" class="form-control select2"
                                                             required>
-                                                            <option value="{{ '' }}" disabled selected>Choose
+                                                            <option value="{{ '' }}" disabled selected>Pilih Akun
+                                                                User
                                                             </option>
                                                             @foreach ($user as $key => $user_item)
                                                                 <option value="{{ $user_item->id }}"
@@ -98,7 +99,7 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="name">Name <code
+                                                    <label class="col-md-3 label-control" for="name">Nama <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="name" name="name"
@@ -114,45 +115,17 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="birth_place">Birth Place
-                                                        <code style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="birth_place" name="birth_place"
-                                                            class="form-control" placeholder="example Bengkalis"
-                                                            value="{{ old('birth_place', isset($doctor) ? $doctor->birth_place : '') }}" autocomplete="off" required>
-
-                                                        @if ($errors->has('birth_place'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('birth_place') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="birth_date">Birth Date <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <input type="date" id="birth_date" name="birth_date"
-                                                            class="form-control" value="{{ old('birth_date', isset($doctor) ? $doctor->birth_date : '') }}"
-                                                            autocomplete="off" required>
-
-                                                        @if ($errors->has('birth_date'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('birth_date') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
                                                 <div
                                                     class="form-group row {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Gender <code
+                                                    <label class="col-md-3 label-control">Jenis Kelamin <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="gender" id="gender" class="form-control select2"
                                                             required>
-                                                            <option value="{{ old('gender', isset($doctor) ? $doctor->gender : '') }}" disabled selected>
-                                                                @if ($doctor->gender ==1)
+                                                            <option
+                                                                value="{{ old('gender', isset($doctor) ? $doctor->gender : '') }}"
+                                                                disabled selected>
+                                                                @if ($doctor->gender == 'laki-laki')
                                                                     <span>Laki-laki</span>
                                                                 @else
                                                                     <span>Perempuan</span>
@@ -170,27 +143,44 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="contact">Contact <code
-                                                            style="color:red;">required</code></label>
+                                                    <label class="col-md-3 label-control" for="birth_place">Tempat Lahir
+                                                        <code style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="contact" name="contact"
-                                                            class="form-control" value="{{ old('contact', isset($doctor) ? $doctor->contact : '') }}"
-                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
-                                                            required>
+                                                        <input type="text" id="birth_place" name="birth_place"
+                                                            class="form-control" placeholder="example Bengkalis"
+                                                            value="{{ old('birth_place', isset($doctor) ? $doctor->birth_place : '') }}"
+                                                            autocomplete="off" required>
 
-                                                        @if ($errors->has('contact'))
+                                                        @if ($errors->has('birth_place'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('contact') }}</p>
+                                                                {{ $errors->first('birth_place') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="address">Address <code
+                                                    <label class="col-md-3 label-control" for="birth_date">Tanggal Lahir
+                                                        <code style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="date" id="birth_date" name="birth_date"
+                                                            class="form-control"
+                                                            value="{{ old('birth_date', isset($doctor) ? $doctor->birth_date : '') }}"
+                                                            autocomplete="off" required>
+
+                                                        @if ($errors->has('birth_date'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('birth_date') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="address">Alamat <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="address" name="address"
-                                                            class="form-control" value="{{ old('address', isset($doctor) ? $doctor->address : '') }}"
+                                                            class="form-control"
+                                                            value="{{ old('address', isset($doctor) ? $doctor->address : '') }}"
                                                             autocomplete="off"
                                                             placeholder="example Jalan Pramuka Gang Haji Ilyas" required>
 
@@ -202,12 +192,30 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="age">Age <code
+                                                    <label class="col-md-3 label-control" for="contact">Kontak <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <input type="text" id="contact" name="contact"
+                                                            class="form-control"
+                                                            value="{{ old('contact', isset($doctor) ? $doctor->contact : '') }}"
+                                                            autocomplete="off" placeholder="example +628xxxxxxxxxx"
+                                                            required>
+
+                                                        @if ($errors->has('contact'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('contact') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="age">Umur <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <input type="text" id="age" name="age"
-                                                            class="form-control" value="{{ old('age', isset($doctor) ? $doctor->age : '') }}"
-                                                            autocomplete="off" placeholder="example 23 Tahun" required>
+                                                            class="form-control"
+                                                            value="{{ old('age', isset($doctor) ? $doctor->age . ' Tahun' : '') }}"
+                                                            autocomplete="off" readonly>
 
                                                         @if ($errors->has('age'))
                                                             <p style="font-style: bold; color: red;">
@@ -218,12 +226,14 @@
 
                                                 <div
                                                     class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Blood Type <code
+                                                    <label class="col-md-3 label-control">Golongan Darah <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="blood_type_id" id="blood_type_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('blood_type_id', isset($doctor) ? $doctor->blood_type_id : '') }}" disabled selected>{{ $doctor->blood_type->name }}
+                                                            <option
+                                                                value="{{ old('blood_type_id', isset($doctor) ? $doctor->blood_type_id : '') }}"
+                                                                disabled selected>{{ $doctor->blood_type->name }}
                                                             </option>
                                                             @foreach ($blood_type as $key => $blood_type_item)
                                                                 <option value="{{ $blood_type_item->id }}">
@@ -241,12 +251,14 @@
 
                                                 <div
                                                     class="form-group row {{ $errors->has('specialist_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Specialist <code
+                                                    <label class="col-md-3 label-control">Spesialis <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="specialist_id" id="specialist_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('specialist_id', isset($doctor) ? $doctor->specialist_id : '') }}" disabled selected>{{ $doctor->specialist->name }}
+                                                            <option
+                                                                value="{{ old('specialist_id', isset($doctor) ? $doctor->specialist_id : '') }}"
+                                                                disabled selected>{{ $doctor->specialist->name }}
                                                             </option>
                                                             @foreach ($specialist as $key => $specialist_item)
                                                                 <option value="{{ $specialist_item->id }}">
@@ -263,14 +275,15 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="photo">Photo <code
-                                                            style="color:green;">optional</code></label>
+                                                    <label class="col-md-3 label-control" for="photo">Foto <code
+                                                            style="color:green;">opsional</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <div class="custom-file">
-                                                            <input type="file" accept="image/png, image/svg, image/jpeg"
+                                                            <input type="file"
+                                                                accept="image/png, image/svg, image/jpeg"
                                                                 class="custom-file-input" id="photo" name="photo">
                                                             <label class="custom-file-label" for="photo"
-                                                                aria-describedby="photo">Choose File</label>
+                                                                aria-describedby="photo">Pilih File</label>
                                                         </div>
 
                                                         <p class="text-muted"><small class="text-danger">Hanya dapat
@@ -292,7 +305,7 @@
                                                 <a href="{{ route('backsite.doctor.index') }}" style="width:120px;"
                                                     class="btn bg-blue-grey text-white mr-1"
                                                     onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
-                                                    <i class="ft-x"></i> Cancel
+                                                    <i class="ft-x"></i> Batal
                                                 </a>
                                                 <button type="submit" style="width:120px;" class="btn btn-cyan"
                                                     onclick="return confirm('Are you sure want to save this data ?')">
@@ -320,6 +333,24 @@
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/jquery.inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/inputmask.js') }}"></script>
     <script src="{{ asset('/assets/backsite/third-party/inputmask/dist/bindings/inputmask.binding.js') }}"></script>
+
+    <script>
+        // Calculate age based on birth date
+        function calculateAge() {
+            var birthDate = document.getElementById("birth_date").value;
+            var today = new Date();
+            var birthDate = new Date(birthDate);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById("age").value = age + " Tahun";
+        }
+
+        // Attach the calculateAge function to the birth_date input
+        document.getElementById("birth_date").addEventListener("change", calculateAge);
+    </script>
 
     <script>
         $(function() {

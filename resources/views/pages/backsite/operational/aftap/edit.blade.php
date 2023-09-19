@@ -60,8 +60,8 @@
                                 <div class="card-content collpase show">
                                     <div class="card-body">
                                         <div class="card-text">
-                                            <p>Please complete the input <code>required</code>, before you click the submit
-                                                button.</p>
+                                            <p>Silahkan masukkan data dengan benar <code>required</code>, sebelum
+                                                anda menekan tombol submit.</p>
                                         </div>
                                         <form class="form form-horizontal"
                                             action="{{ route('backsite.aftap.update', [$aftap->id]) }}" method="POST"
@@ -74,14 +74,56 @@
 
                                                 <h4 class="form-section"><i class="fa fa-edit"></i> Form Aftap</h4>
 
-                                                <div
-                                                    class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Donor <code
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 label-control" for="no_labu">No Labu <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <select name="donor_id" id="donor_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('donor_id', isset($aftap) ? $aftap->donor_id : '') }}" disabled selected>{{ $aftap->donor->name }}
+                                                        <input type="text" id="no_labu" name="no_labu"
+                                                            class="form-control col-md-3"
+                                                            value="{{ old('no_labu', isset($aftap) ? $aftap->no_labu : '') }}"
+                                                            autocomplete="off" readonly>
+
+                                                        @if ($errors->has('no_labu'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('no_labu') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row {{ $errors->has('patient_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Pasien <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="patient_id" id="patient_id" class="form-control select2"
+                                                            required>
+                                                            <option
+                                                                value="{{ old('patient_id', isset($aftap) ? $aftap->patient_id : '') }}"
+                                                                disabled selected>{{ $aftap->patient->name }}
+                                                            </option>
+                                                            @foreach ($patient as $key => $patient_item)
+                                                                <option value="{{ $patient_item->id }}">
+                                                                    {{ $patient_item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('patient_id'))
+                                                            <p style="font-style: bold; color: red;">
+                                                                {{ $errors->first('patient_id') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    class="form-group row {{ $errors->has('donor_id') ? 'has-error' : '' }}">
+                                                    <label class="col-md-3 label-control">Pendonor <code
+                                                            style="color:red;">required</code></label>
+                                                    <div class="col-md-9 mx-auto">
+                                                        <select name="donor_id" id="donor_id" class="form-control select2"
+                                                            required>
+                                                            <option
+                                                                value="{{ old('donor_id', isset($aftap) ? $aftap->donor_id : '') }}"
+                                                                disabled selected>{{ $aftap->donor->name }}
                                                             </option>
                                                             @foreach ($donor as $key => $donor_item)
                                                                 <option value="{{ $donor_item->id }}">
@@ -90,44 +132,23 @@
                                                             @endforeach
                                                         </select>
 
-                                                        @if ($errors->has('blood_type_id'))
+                                                        @if ($errors->has('donor_id'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type_id') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="form-group row {{ $errors->has('blood_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Blood Type <code
-                                                            style="color:red;">required</code></label>
-                                                    <div class="col-md-9 mx-auto">
-                                                        <select name="blood_type_id" id="blood_type_id"
-                                                            class="form-control select2" required>
-                                                            <option value="{{ old('blood_type_id', isset($aftap) ? $aftap->blood_type_id : '') }}" disabled selected>{{ $aftap->blood_type->name }}
-                                                            </option>
-                                                            @foreach ($blood_type as $key => $blood_type_item)
-                                                                <option value="{{ $blood_type_item->id }}">
-                                                                    {{ $blood_type_item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-
-                                                        @if ($errors->has('blood_type_id'))
-                                                            <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type_id') }}</p>
+                                                                {{ $errors->first('donor_id') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div
                                                     class="form-group row {{ $errors->has('pouch_type_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Pouch Type <code
+                                                    <label class="col-md-3 label-control">Jenis Kantong <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="pouch_type_id" id="pouch_type_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('pouch_type_id', isset($aftap) ? $aftap->pouch_type_id : '') }}" disabled selected>{{ $aftap->pouch_type->name }}
+                                                            <option
+                                                                value="{{ old('pouch_type_id', isset($aftap) ? $aftap->pouch_type_id : '') }}"
+                                                                disabled selected>{{ $aftap->pouch_type->name }}
                                                             </option>
                                                             @foreach ($pouch_type as $key => $pouch_type_item)
                                                                 <option value="{{ $pouch_type_item->id }}">
@@ -136,21 +157,20 @@
                                                             @endforeach
                                                         </select>
 
-                                                        @if ($errors->has('blood_type_id'))
+                                                        @if ($errors->has('pouch_type_id'))
                                                             <p style="font-style: bold; color: red;">
-                                                                {{ $errors->first('blood_type_id') }}</p>
+                                                                {{ $errors->first('pouch_type_id') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-md-3 label-control" for="volume">Volume <code
+                                                    <label class="col-md-3 label-control" for="volume">Jumlah <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
-                                                        <input type="text" id="volume" name="volume"
+                                                        <input type="number" id="volume" name="volume"
                                                             class="form-control"
-                                                            placeholder="example dentist or dermatology"
-                                                            value="{{ old('volume', isset($aftap) ? $aftap->volume . ' Kantong' : '') }}"
+                                                            value="{{ old('volume', isset($aftap) ? $aftap->volume : '') }}"
                                                             autocomplete="off" required>
 
                                                         @if ($errors->has('volume'))
@@ -162,12 +182,14 @@
 
                                                 <div
                                                     class="form-group row {{ $errors->has('officer_id') ? 'has-error' : '' }}">
-                                                    <label class="col-md-3 label-control">Officer <code
+                                                    <label class="col-md-3 label-control">Petugas <code
                                                             style="color:red;">required</code></label>
                                                     <div class="col-md-9 mx-auto">
                                                         <select name="officer_id" id="officer_id"
                                                             class="form-control select2" required>
-                                                            <option value="{{ old('officer_id', isset($aftap) ? $aftap->officer_id : '') }}" disabled selected>{{ $aftap->officer->name }}
+                                                            <option
+                                                                value="{{ old('officer_id', isset($aftap) ? $aftap->officer_id : '') }}"
+                                                                disabled selected>{{ $aftap->officer->name }}
                                                             </option>
                                                             @foreach ($officer as $key => $officer_item)
                                                                 <option value="{{ $officer_item->id }}">
@@ -188,11 +210,11 @@
                                             <div class="form-actions text-right">
                                                 <a href="{{ route('backsite.aftap.index') }}" style="width:120px;"
                                                     class="btn bg-blue-grey text-white mr-1"
-                                                    onclick="return confirm('Are you sure want to close this page? , Any changes you make will not be saved.')">
-                                                    <i class="ft-x"></i> Cancel
+                                                    onclick="return confirm('Anda yakin ingin membatalkan perubahan ini? Semua perubahan yang Anda lakukan akan hilang.')">
+                                                    <i class="ft-x"></i> Batal
                                                 </a>
                                                 <button type="submit" style="width:120px;" class="btn btn-cyan"
-                                                    onclick="return confirm('Are you sure want to save this data ?')">
+                                                    onclick="return confirm('Anda yakin ingin melakukan perubahan pada data Aftap ini ?')">
                                                     <i class="la la-check-square-o"></i> Submit
                                                 </button>
                                             </div>

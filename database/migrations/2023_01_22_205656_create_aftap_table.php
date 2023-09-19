@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('aftap', function (Blueprint $table) {
             $table->id();
-            $table->string('volume')->nullable();
+            $table->string('no_labu')->nullable();
+            $table->integer('volume')->nullable();
             $table->timestamps();
         });
     }

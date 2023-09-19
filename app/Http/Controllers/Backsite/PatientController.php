@@ -51,7 +51,10 @@ class PatientController extends Controller
         $blood_type = BloodType::orderBy('name', 'asc')->get();
         $maintenance_section = MaintenanceSection::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.patient.index', compact('patient', 'room', 'blood_type', 'maintenance_section'));
+        $lastPatient = Patient::orderBy('id', 'desc')->first();
+        $lastPatientId = $lastPatient ? $lastPatient->id : 0;
+
+        return view('pages.backsite.operational.patient.index', compact('patient', 'room', 'blood_type', 'maintenance_section', 'lastPatientId'));
     }
 
     /**
@@ -72,32 +75,48 @@ class PatientController extends Controller
      */
     public function store(StorePatient $request)
     {
-        // Ambil semua data dari frontsite
-        $data = $request->all();
-
-        $data['age'] = str_replace(' Tahun', '', $data['age']);
-
-        // upload process here
+        // Upload process here
         $path = public_path('app/public/assets/file-patient');
-        if(!File::isDirectory($path)){
+        if (!File::isDirectory($path)) {
             $response = Storage::makeDirectory('public/assets/file-patient');
         }
 
-        // change file locations
-        if(isset($data['photo'])){
-            $data['photo'] = $request->file('photo')->store(
+        // Change file locations
+        $photoPath = "";
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store(
                 'assets/file-patient', 'public'
             );
-        }else{
-            $data['photo'] = "";
         }
 
-        // Kirim data ke database
-        $patient = Patient::create($data);
+        // Prepare data for database insertion
+        $patient_data = [
+            'no_mr' => $request->input('no_mr_hidden'),
+            'name' => $request->input('name'),
+            'gender' => $request->input('gender'),
+            'birth_place' => $request->input('birth_place'),
+            'birth_date' => $request->input('birth_date'),
+            'nik' => $request->input('nik'),
+            'address' => $request->input('address'),
+            'contact' => $request->input('contact'),
+            'age' => str_replace(' Tahun', '', $request->input('age')),
+            'diagnosa' => $request->input('diagnosa'),
+            'blood_type_id' => $request->input('blood_type_id'),
+            'maintenance_section_id' => $request->input('maintenance_section_id'),
+            'room_id' => $request->input('room_id'),
+            'photo' => $photoPath,
+            'status' => 'menunggu',
+        ];
+
+        // Insert data into the database
+        $patient = new Patient();
+        $patient->fill($patient_data);
+        $patient->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Patient');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Pasien Baru');
+
+        // Redirect to the appropriate route
         return redirect()->route('backsite.patient.index');
     }
 

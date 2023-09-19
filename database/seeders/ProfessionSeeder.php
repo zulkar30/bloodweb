@@ -17,42 +17,42 @@ class ProfessionSeeder extends Seeder
     {
         $profession = [
             [
-                'name'      => 'TNI/POLRI',
+                'name'      => 'TNI/POLRI',         //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'PNS/Swasta',
+                'name'      => 'PNS/Swasta',        //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Wiraswasta',
+                'name'      => 'Wiraswasta',        //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Honorer/Karyawan',
+                'name'      => 'Honorer/Karyawan',  //4
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Petani/Buruh',
+                'name'      => 'Petani/Buruh',      //5
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Mahasiswa/Pelajar',
+                'name'      => 'Mahasiswa/Pelajar', //6
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'IRT',
+                'name'      => 'IRT',               //7
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Lain-lain',
+                'name'      => 'Lainnya',           //8
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]

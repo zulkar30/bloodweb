@@ -18,10 +18,8 @@ class BloodRequest extends Model
 
     // Kolom tabel yang boleh diisi
     protected $fillable = [
-        'doctor_id',
-        'officer_id',
         'patient_id',
-        'blood_type_id',
+        'no_br',
         'name',
         'address',
         'contact',
@@ -36,12 +34,22 @@ class BloodRequest extends Model
         'plasma',
         'prp',
         'total',
+        'info',
         'fulfilled',
         'status',
         'created_at',
         'updated_at',
+        'doctor_id',
+        'officer_id',
+        'blood_type_id',
     ];
 
+    // Relasi one to many
+    public function patient()
+    {
+        return $this->belongsTo('App\Models\Operational\Patient', 'patient_id', 'id');
+    }
+    
     // Relasi one to many
     public function doctor()
     {
@@ -55,14 +63,16 @@ class BloodRequest extends Model
     }
 
     // Relasi one to many
-    public function patient()
-    {
-        return $this->belongsTo('App\Models\Operational\Patient', 'patient_id', 'id');
-    }
-
-    // Relasi one to many
     public function blood_type()
     {
         return $this->belongsTo('App\Models\MasterData\BloodType', 'blood_type_id', 'id');
     }
+
+    // Relasi one to many
+    public function blood_donor()
+    {
+        return $this->hasMany('App\Models\Operational\BloodDonor', 'blood_request_id');
+    }
+
+    
 }

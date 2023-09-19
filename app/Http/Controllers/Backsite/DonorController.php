@@ -45,13 +45,16 @@ class DonorController extends Controller
     {
         abort_if(Gate::denies('donor_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Ditampilkan pada tabel
         $donor = Donor::orderBy('created_at', 'desc')->get();
         $profession = Profession::orderBy('name', 'asc')->get();
         $blood_type = BloodType::orderBy('name', 'asc')->get();
         $donor_type = DonorType::orderBy('name', 'asc')->get();
 
-        return view('pages.backsite.operational.donor.index', compact('donor', 'profession', 'blood_type', 'donor_type'));
+        // Mendapatkan DonorID terakhir
+        $lastDonor = Donor::orderBy('id', 'desc')->first();
+        $lastDonorId = $lastDonor ? $lastDonor->id : 0;
+
+        return view('pages.backsite.operational.donor.index', compact('donor', 'profession', 'blood_type', 'donor_type', 'lastDonorId'));
     }
 
     /**
@@ -72,32 +75,48 @@ class DonorController extends Controller
      */
     public function store(StoreDonor $request)
     {
-        // Ambil semua data dari frontsite
-        $data = $request->all();
-
-        // upload process here
+        // Upload process here
         $path = public_path('app/public/assets/file-donor');
-        if(!File::isDirectory($path)){
+        if (!File::isDirectory($path)) {
             $response = Storage::makeDirectory('public/assets/file-donor');
         }
 
-        // change file locations
-        if(isset($data['photo'])){
-            $data['photo'] = $request->file('photo')->store(
+        // Change file locations
+        $photoPath = "";
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store(
                 'assets/file-donor', 'public'
             );
-        }else{
-            $data['photo'] = "";
         }
 
-        // Kirim data ke database
-        $donor = Donor::create($data);
+        // Prepare data for database insertion
+        $blood_donor_data = [
+            'no_reg' => $request->input('no_reg_hidden'),
+            'name' => $request->input('name'),
+            'gender' => $request->input('gender'),
+            'birth_place' => $request->input('birth_place'),
+            'birth_date' => $request->input('birth_date'),
+            'nik' => $request->input('nik'),
+            'address' => $request->input('address'),
+            'contact' => $request->input('contact'),
+            'age' => str_replace(' Tahun', '', $request->input('age')),
+            'profession_id' => $request->input('profession_id'),
+            'blood_type_id' => $request->input('blood_type_id'),
+            'donor_type_id' => $request->input('donor_type_id'),
+            'photo' => $photoPath,
+            'status' => 'menunggu',
+        ];
+
+        // Insert data into the database
+        $blood_donor = new Donor;
+        $blood_donor->fill($blood_donor_data);
+        $blood_donor->save();
 
         // Sweetalert
-        alert()->success('Success Create Message', 'Successfully added new Donor');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menambahkan Data Pendonor Baru');
         return redirect()->route('backsite.donor.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -170,8 +189,7 @@ class DonorController extends Controller
         $donor->update($data);
 
         // Sweetalert
-        alert()->success('Success Update Message', 'Successfully updated Donor');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Melakukan Perubahan Data');
         return redirect()->route('backsite.donor.index');
     }
 
@@ -198,32 +216,29 @@ class DonorController extends Controller
         $donor->delete();
 
         // Sweetalert
-        alert()->success('Success Delete Message', 'Successfully deleted Donor');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menghapus Data');
         return back();
     }
 
     public function accept(Request $request, $id)
     {
         $donor = Donor::findOrFail($id);
-        $donor->status = 1; // Set the status to "Diterima"
+        $donor->status = 'diterima'; // Set the status to "Diterima"
         $donor->save();
 
         // Sweetalert
-        alert()->success('Success Message', 'Successfully Accept');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menerima Pendaftaran Pendonor');
         return back();
     }
 
     public function reject(Request $request, $id)
     {
         $donor = Donor::findOrFail($id);
-        $donor->status = 3; // Set the status to "Ditolak"
+        $donor->status = 'ditolak'; // Set the status to "Ditolak"
         $donor->save();
 
         // Sweetalert
-        alert()->success('Success Message', 'Successfully Reject');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Menolak Pendaftaran Pendonor');
         return back();
     }
 }

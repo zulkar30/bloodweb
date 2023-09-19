@@ -1,14 +1,22 @@
 <table class="table table-bordered">
     <tr>
-        <th>Blood Type</th>
-        <td>{{ isset($screening->blood_type->name) ? $screening->blood_type->name : 'N/A' }}</td>
+        <th>No Labu</th>
+        <td>{{ isset($screening->aftap->no_labu) ? $screening->aftap->no_labu : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Pendonor</th>
+        <td>{{ isset($screening->aftap->donor->name) ? $screening->aftap->donor->name : 'N/A' }}</td>
+    </tr>
+    <tr>
+        <th>Golongan Darah</th>
+        <td>{{ isset($screening->aftap->donor->blood_type->name) ? $screening->aftap->donor->blood_type->name : 'N/A' }}</td>
     </tr>
     <tr>
         <th>HIV</th>
         <td>
-            @if ($screening->hiv == 1)
+            @if ($screening->hiv == 'positif')
                 <span >{{ 'Positif' }}</span>
-            @elseif($screening->hiv == 2)
+            @elseif($screening->hiv == 'negatif')
                 <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -18,9 +26,9 @@
     <tr>
         <th>HCV</th>
         <td>
-            @if ($screening->hcv == 1)
+            @if ($screening->hcv == 'positif')
                 <span >{{ 'Positif' }}</span>
-            @elseif($screening->hcv == 2)
+            @elseif($screening->hcv == 'negatif')
                 <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -30,9 +38,9 @@
     <tr>
         <th>HBSAG</th>
         <td>
-            @if ($screening->hbsag == 1)
+            @if ($screening->hbsag == 'positif')
                 <span >{{ 'Positif' }}</span>
-            @elseif($screening->hbsag == 2)
+            @elseif($screening->hbsag == 'negatif')
                 <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -42,9 +50,9 @@
     <tr>
         <th>VDRl</th>
         <td>
-            @if ($screening->vdrl == 1)
+            @if ($screening->vdrl == 'positif')
                 <span >{{ 'Positif' }}</span>
-            @elseif($screening->vdrl == 2)
+            @elseif($screening->vdrl == 'negatif')
                 <span >{{ 'Negatif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -52,11 +60,11 @@
         </td>
     </tr>
     <tr>
-        <th>Result</th>
+        <th>Hasil</th>
         <td>
-            @if ($screening->result == 1)
+            @if ($screening->result == 'reaktif')
                 <span class="badge badge-danger">{{ 'Reaktif' }}</span>
-            @elseif($screening->result == 2)
+            @elseif($screening->result == 'non-reaktif')
                 <span class="badge badge-success">{{ 'Non-Reaktif' }}</span>
             @else
                 <span>{{ 'N/A' }}</span>
@@ -64,7 +72,7 @@
         </td>
     </tr>
     <tr>
-        <th>Officer</th>
+        <th>Petugas</th>
         <td>{{ isset($screening->officer->name) ? $screening->officer->name : 'N/A' }}</td>
     </tr>
 </table>

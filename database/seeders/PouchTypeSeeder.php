@@ -17,17 +17,17 @@ class PouchTypeSeeder extends Seeder
     {
         $pouch_type = [
             [
-                'name'      => 'Single',
+                'name'      => 'Single',        //1
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Double',
+                'name'      => 'Double',        //2
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
-                'name'      => 'Triple',
+                'name'      => 'Triple',        //3
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

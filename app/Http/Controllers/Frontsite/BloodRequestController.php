@@ -20,54 +20,46 @@ class BloodRequestController extends Controller
         $doctor = Doctor::all();
         $officer = Officer::all();
 
-        return view('pages.frontsite.blood_request', compact('blood_type', 'patient', 'doctor', 'officer'));
+        $lastBloodRequest = BloodRequest::orderBy('id', 'desc')->first();
+        $lastBloodRequestId = $lastBloodRequest ? $lastBloodRequest->id : 0;
+
+        return view('pages.frontsite.blood_request', compact('blood_type', 'patient', 'doctor', 'officer', 'lastBloodRequestId'));
     }
 
-    public function store(Request $request){
-        // Ambil semua data dari frontsite
-        $data = $request->all();
+    public function store(Request $request)
+    {
+        // Mengambil data dari frontsite
+        $blood_request_data = [
+            'no_br' => $request->input('no_br') ?? null,
+            'name' => $request->input('name') ?? null,
+            'address' => $request->input('address') ?? null,
+            'contact' => $request->input('contact') ?? null,
+            'gender' => $request->input('gender') ?? null,
+            'age' => str_replace(' Tahun', '', $request->input('age')) ?? null,
+            'wb' => $request->input('wb') ?? null,
+            'we' => $request->input('we') ?? null,
+            'prc' => $request->input('prc') ?? null,
+            'tc' => $request->input('tc') ?? null,
+            'ffp' => $request->input('ffp') ?? null,
+            'cry' => $request->input('cry') ?? null,
+            'plasma' => $request->input('plasma') ?? null,
+            'prp' => $request->input('prp') ?? null,
+            'total' => str_replace(' Komponen', '', $request->input('total')) ?? null,
+            'info' => $request->input('info') ?? null,
+            'fulfilled' => $request->input('fulfilled') ?? null,
+            'doctor_id' => $request->input('doctor_id') ?? null,
+            'officer_id' => $request->input('officer_id') ?? null,
+            'patient_id' => $request->input('patient_id') ?? null,
+            'blood_type_id' => $request->input('blood_type_id') ?? null,
+            'status' => 'menunggu',
+        ];
 
-        $data['total'] = str_replace(' Komponen', '', $data['total']);
-        $data['age'] = str_replace(' Tahun', '', $data['age']);
-
-        // upload process here
-        $path = public_path('app/public/assets/file-donor');
-        if(!File::isDirectory($path)){
-            $response = Storage::makeDirectory('public/assets/file-donor');
-        }
-
-        // change file locations
-        if(isset($data['photo'])){
-            $data['photo'] = $request->file('photo')->store(
-                'assets/file-blood_request', 'public'
-            );
-        }else{
-            $data['photo'] = "";
-        }
-
+        // Mengirim data ke database
         $blood_request = new BloodRequest();
-        $blood_request->name = $data['name'];
-        $blood_request->address = $data['address'];
-        $blood_request->contact = $data['contact'];
-        $blood_request->gender = $data['gender'];
-        $blood_request->age = $data['age'];
-        $blood_request->blood_type_id = $data['blood_type_id'];
-        $blood_request->wb = $data['wb'];
-        $blood_request->we = $data['we'];
-        $blood_request->prc = $data['prc'];
-        $blood_request->tc = $data['tc'];
-        $blood_request->ffp = $data['ffp'];
-        $blood_request->cry = $data['cry'];
-        $blood_request->plasma = $data['plasma'];
-        $blood_request->prp = $data['prp'];
-        $blood_request->total = $data['total'];
-        $blood_request->info = $data['info'];
-        $blood_request->status = 2;
+        $blood_request->fill($blood_request_data);
         $blood_request->save();
 
-        // Sweetalert
-        alert()->success('Success Create Message', 'Successfully Register for Blood Request');
-        // Tempat akan ditampilkannya Sweetalert
+        alert()->success('Berhasil', 'Berhasil Melakukan Pendaftaran');
         return redirect()->route('blood_request.success');
     }
 

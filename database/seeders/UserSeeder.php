@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $user = [
             [
-                'name'           => 'Zulkarnain',
+                'name'           => 'Zulkarnain',               //1
                 'email'          => 'zulkar300300@gmail.com',
                 'password'       => Hash::make('ZulKarNain30'),
                 'remember_token' => null,
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Dwicky Wahyudi',
+                'name'           => 'Dwicky Wahyudi',           
                 'email'          => 'diki@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Safrizon',
+                'name'           => 'Safrizon',                 
                 'email'          => 'izon@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Gustian Haska',
+                'name'           => 'Gustian Haska',            
                 'email'          => 'tian@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Firman Arobi',
+                'name'           => 'Firman Arobi',             
                 'email'          => 'firman@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'M.Azmi',
+                'name'           => 'M.Azmi',                   
                 'email'          => 'azmi@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Andre Saputra',
+                'name'           => 'Andre Saputra',            
                 'email'          => 'andre@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Aan Nasution',
+                'name'           => 'Aan Nasution',             
                 'email'          => 'aan@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -82,7 +82,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Muhammad Assyafikri',
+                'name'           => 'Muhammad Assyafikri',      
                 'email'          => 'safik@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,
@@ -90,7 +90,7 @@ class UserSeeder extends Seeder
                 'updated_at'     => date('Y-m-d H:i:s'),
             ],
             [
-                'name'           => 'Fitrah Desmalini',
+                'name'           => 'Fitrah Desmalini',         
                 'email'          => 'fitrah@gmail.com',
                 'password'       => Hash::make('admin12345'),
                 'remember_token' => null,

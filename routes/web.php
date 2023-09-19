@@ -86,6 +86,7 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     
     // Aftap Page
     Route::resource('aftap', AftapController::class);
+    Route::get('export/aftap', [AftapController::class, 'exportAftap'])->name('export.aftap');
 
     // Blood Donor Page
     Route::resource('blood_donor', BloodDonorController::class);
